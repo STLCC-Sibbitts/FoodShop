@@ -78,6 +78,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="DatabaseProcess.cs" />
+    <Compile Include="DatabaseUser.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
