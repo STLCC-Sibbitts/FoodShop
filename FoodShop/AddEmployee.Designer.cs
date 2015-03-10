@@ -41,6 +41,8 @@
             this.positionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hireDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salaryMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,12 +113,14 @@
             this.positionID,
             this.positionTitle,
             this.shiftID,
+            this.hireDate,
+            this.isActive,
             this.salary,
             this.fullTime,
             this.salaryMode});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 91);
+            this.dataGridView1.Location = new System.Drawing.Point(2, 91);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(934, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(1050, 297);
             this.dataGridView1.TabIndex = 6;
             // 
             // employeeID
@@ -150,6 +154,16 @@
             this.shiftID.HeaderText = "Shift";
             this.shiftID.Name = "shiftID";
             // 
+            // hireDate
+            // 
+            this.hireDate.HeaderText = "Hire Date";
+            this.hireDate.Name = "hireDate";
+            // 
+            // isActive
+            // 
+            this.isActive.HeaderText = "Is Active";
+            this.isActive.Name = "isActive";
+            // 
             // salary
             // 
             this.salary.HeaderText = "Salary";
@@ -169,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 486);
+            this.ClientSize = new System.Drawing.Size(1055, 486);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lbl_productList);
             this.Controls.Add(this.txt_searchBox);
@@ -200,6 +214,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn positionID;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiftID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hireDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn salary;
         private System.Windows.Forms.DataGridViewTextBoxColumn fullTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn salaryMode;

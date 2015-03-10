@@ -6,6 +6,14 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
+/*******************************************************************
+ * 
+ * This Class was constructed by following this tutorial:
+ * 
+ * http://www.codeproject.com/Articles/690207/Csharp-Project-on-Database-for-Beginners
+ * 
+ *******************************************************************/
+
 namespace FoodShop
 {
     public abstract class DatabaseConnection
@@ -15,7 +23,7 @@ namespace FoodShop
 
         public DatabaseConnection()
         {
-            string strProject = "";
+            string strProject = "grass.arvixe.com";
             string dbName = "BreadProjectJr";
             string userID = "IS283_kmne68";
             string userPassword = "zookie321";
@@ -70,6 +78,23 @@ namespace FoodShop
         }
 
 
+        protected DataSet FillDataSet(DataSet dset, string sSQL, string sTable)
+        {
+            SqlCommand cmd = new SqlCommand(sSQL, sqlCon);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+            try
+            {
+                adapter.Fill(dset, sTable);
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+            return dset;
+        }
+
+
         protected DataSet FillData(string sSQL, string sTable)
         {
             SqlCommand cmd = new SqlCommand(sSQL, sqlCon, sqlTrans);
@@ -88,9 +113,5 @@ namespace FoodShop
             returnReader = cmd.ExecuteReader();
             return returnReader;
         }
-
-
-
-
     }
 }
