@@ -11,7 +11,7 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        DatabaseServices dbs = new DatabaseServices();
+   /*     DatabaseServices dbs = new DatabaseServices();
         string conString;
         string testString = "";
 
@@ -43,7 +43,7 @@ namespace FoodShop
           //  employee.hireDate = txt_hireDate.ToString();
             
 
-            MessageBox.Show(conString + "/n/n" + testString);
-        }
-    }
+            MessageBox.Show(conString + "/n/n" + testString); 
+        }*/
+    } 
 }
