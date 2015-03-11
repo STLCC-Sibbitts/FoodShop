@@ -94,7 +94,7 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageEmployees.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ManageEmployees.Designer.cs">
       <DependentUpon>ManageEmployees.cs</DependentUpon>

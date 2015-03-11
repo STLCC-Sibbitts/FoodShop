@@ -5,18 +5,24 @@ using System.Text;
 
 namespace FoodShop
 {
-    class Employee
+    public class Employee
     {
-        private int employeeID { get; set; }
-        private string employeeLast { get; set; }
-        private string employeeFirst { get; set; }
-        private string hireDate { get; set; }
-        private int positionID { get; set; }
-        private int shiftID { get; set; }
-        private double salary { get; set; }
-        private bool isActive { get; set; }
-        private bool fullTime { get; set; }
-        private bool hourly { get; set; }
+        public int employeeID { get; set; }
+        public string employeeLast { get; set; }
+        public string employeeFirst { get; set; }
+        public string hireDate { get; set; }
+        public int positionID { get; set; }
+        public int shiftID { get; set; }
+        public double salary { get; set; }
+        public bool isActive { get; set; }
+        public bool fullTime { get; set; }
+        public bool hourly { get; set; }
+
+        // Parameterless constructor
+        public Employee()
+        {
+            // default
+        }
 
         // Constructor
         public Employee (int empID, string lastName, string firstName, int posID, string hired,

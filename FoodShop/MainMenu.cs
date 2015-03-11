@@ -22,5 +22,11 @@ namespace FoodShop
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainMenu());
         }
+
+        private void btn_employees_Click(object sender, EventArgs e)
+        {
+            frm_ManageEmployees formManageEmployees = new frm_ManageEmployees();
+            formManageEmployees.Show();
+        }
     }
 }

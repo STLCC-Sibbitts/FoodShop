@@ -66,6 +66,7 @@
             this.btn_employees.TabIndex = 2;
             this.btn_employees.Text = "Employees";
             this.btn_employees.UseVisualStyleBackColor = true;
+            this.btn_employees.Click += new System.EventHandler(this.btn_employees_Click);
             // 
             // btn_exit
             // 
@@ -99,13 +100,13 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // windowToolStripMenuItem

@@ -1,6 +1,6 @@
 ﻿namespace FoodShop
 {
-    partial class ManageEmployees
+    partial class frm_ManageEmployees
     {
         /// <summary>
         /// Required designer variable.
@@ -48,7 +48,7 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_exitToMenu = new System.Windows.Forms.Button();
             this.rdo_isActive = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_hireDate = new System.Windows.Forms.TextBox();
             this.lbl_hireDate = new System.Windows.Forms.Label();
             this.lbl_id = new System.Windows.Forms.Label();
             this.txt_id = new System.Windows.Forms.TextBox();
@@ -250,12 +250,12 @@
             this.rdo_isActive.Text = "Is Active?";
             this.rdo_isActive.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txt_hireDate
             // 
-            this.textBox1.Location = new System.Drawing.Point(416, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 25;
+            this.txt_hireDate.Location = new System.Drawing.Point(416, 71);
+            this.txt_hireDate.Name = "txt_hireDate";
+            this.txt_hireDate.Size = new System.Drawing.Size(100, 20);
+            this.txt_hireDate.TabIndex = 25;
             // 
             // lbl_hireDate
             // 
@@ -283,12 +283,13 @@
             this.txt_id.Size = new System.Drawing.Size(100, 20);
             this.txt_id.TabIndex = 23;
             // 
-            // ManageEmployees
+            // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(718, 447);
             this.Controls.Add(this.rdo_isActive);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_hireDate);
             this.Controls.Add(this.lbl_hireDate);
             this.Controls.Add(this.lbl_id);
             this.Controls.Add(this.txt_id);
@@ -305,8 +306,8 @@
             this.Controls.Add(this.txt_lastName);
             this.Controls.Add(this.txt_firstName);
             this.Controls.Add(this.btn_exitApplication);
-            this.Name = "ManageEmployees";
-            this.Size = new System.Drawing.Size(734, 486);
+            this.Name = "frm_ManageEmployees";
+            this.Text = "Manage Employee";
             this.Load += new System.EventHandler(this.ManageEmployees_Load);
             this.pnl_salary.ResumeLayout(false);
             this.pnl_salary.PerformLayout();
@@ -337,7 +338,7 @@
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_exitToMenu;
         private System.Windows.Forms.RadioButton rdo_isActive;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_hireDate;
         private System.Windows.Forms.Label lbl_hireDate;
         private System.Windows.Forms.Label lbl_id;
         private System.Windows.Forms.TextBox txt_id;
