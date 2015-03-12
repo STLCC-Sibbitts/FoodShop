@@ -6,6 +6,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
+using System.Windows.Forms;
+
 namespace FoodShop
 {
     public class DatabaseServices
@@ -95,6 +97,9 @@ namespace FoodShop
             sqlCMD.Connection = sqlCON;
             sqlCMD.CommandType = CommandType.Text;
             sqlCMD.CommandText = pSqlToExecute;
+
+            MessageBox.Show(pSqlToExecute);
+
             sqlCMD.CommandTimeout = 300;
 
             sqlCON.Open();

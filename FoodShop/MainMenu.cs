@@ -56,16 +56,39 @@ namespace FoodShop
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            string first = "";
-            string last = "";
             employee.employeeLast = txt_lastName.Text;
             employee.employeeFirst = txt_firstName.Text;
-            first = employee.employeeFirst;
-            last = employee.employeeLast;
-            //  employee.hireDate = txt_hireDate.ToString();
-            tab_mainMenu.Show();
+            employee.hireDate = txt_hireDate.Text;
+            // employee.positionID = TODO
+            // employee.shiftID = TODO
+            employee.salary = float.Parse(txt_rateOfPay.Text);
+            // employee.isActive = TODO
+            // employee.fullTime = TODO
+            // employee.hourly = TODO
+            
+            MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
 
-            MessageBox.Show(first + last);
+            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, isActive, fullTime, hourly) VALUES (" +
+                employee.employeeLast + ", " +
+
+                employee.employeeFirst + ", " +
+
+                employee.hireDate + ", " +
+                
+                employee.positionID + ", " +
+                
+                employee.shiftID + ", " +
+                
+                employee.salary + ", " +
+                
+                employee.isActive + ", " +
+                
+                employee.fullTime + ", " +
+                
+                employee.hourly + ");";
+
+            dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
+
         }
 
         private void MainMenu_Load(object sender, EventArgs e)

@@ -25,7 +25,7 @@ namespace FoodShop
         }
 
         // Constructor
-        public Employee (int empID, string lastName, string firstName, int posID, string hired,
+        public Employee (int empID, string lastName, string firstName, string hired, int posID,
             int shift, double pay, bool active, bool fullPart, bool perHour)
         {
             employeeID = empID;
