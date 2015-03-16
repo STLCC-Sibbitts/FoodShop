@@ -68,7 +68,7 @@ namespace FoodShop
             
             MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
 
-            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, isActive, fullTime, hourly) VALUES (" +
+            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
                 employee.employeeLast + ", " +
 
                 employee.employeeFirst + ", " +
@@ -81,11 +81,11 @@ namespace FoodShop
                 
                 employee.salary + ", " +
                 
-                employee.isActive + ", " +
-                
                 employee.fullTime + ", " +
                 
-                employee.hourly + ");";
+                employee.hourly + ", " +
+                
+                employee.isActive + ");";
 
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
 
