@@ -68,24 +68,17 @@ namespace FoodShop
             
             MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
 
-            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-                employee.employeeLast + ", " +
+            // string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
+            // removed extra variables, hard-coded a shiftID to avoid true/false errors.
 
-                employee.employeeFirst + ", " +
+            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, shiftID, salary) VALUES (" +
+                "'" + employee.employeeLast + "'" + ", " +
 
-                employee.hireDate + ", " +
-                
-                employee.positionID + ", " +
-                
-                employee.shiftID + ", " +
-                
-                employee.salary + ", " +
-                
-                employee.fullTime + ", " +
-                
-                employee.hourly + ", " +
-                
-                employee.isActive + ");";
+                "'" + employee.employeeFirst + "'" + ", " +
+
+                "'" + 2 + "'" + ", " +
+
+                "'" + employee.salary + "'"  + ");";
 
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
 
