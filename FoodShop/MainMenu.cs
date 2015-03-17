@@ -11,11 +11,11 @@ namespace FoodShop
 {
     public partial class MainMenu : Form
     {
-        DatabaseServices dbs = new DatabaseServices();
+     /*   DatabaseServices dbs = new DatabaseServices();
         string conString;
         string testString = "";
 
-        Employee employee = new Employee();
+        Employee employee = new Employee(); */
 
 
         public MainMenu()
@@ -46,15 +46,8 @@ namespace FoodShop
             } 
         } */
 
-        private void btn_employees_Click(object sender, EventArgs e)
-        {
- //           frm_ManageEmployees formManageEmployees = new frm_ManageEmployees();
- //           formManageEmployees.Show();
-        }
 
-
-
-        private void btn_save_Click(object sender, EventArgs e)
+/*        private void btn_save_Click(object sender, EventArgs e)
         {
             employee.employeeLast = txt_lastName.Text;
             employee.employeeFirst = txt_firstName.Text;
@@ -82,11 +75,11 @@ namespace FoodShop
 
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
 
-        }
+        } */
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            try
+         /*   try
             {
                 conString = dbs.DbConnectionString;
                 testString = dbs.TestConnection();
@@ -96,7 +89,13 @@ namespace FoodShop
             catch (Exception err)
             {
                 MessageBox.Show(err.Message);
-            } 
+            } */
         }
+
+        private void btn_employees_Click_1(object sender, EventArgs e)
+        {
+            frm_ManageEmployees formManageEmployees = new frm_ManageEmployees();
+            formManageEmployees.Show();
+        }  
     }
 }
