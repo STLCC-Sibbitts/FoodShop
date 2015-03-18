@@ -30,8 +30,7 @@
         {
             this.tab_Employee = new System.Windows.Forms.TabControl();
             this.tab_Employees = new System.Windows.Forms.TabPage();
-            this.tab_manageEmployees = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grd_employees = new System.Windows.Forms.DataGridView();
             this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +48,8 @@
             this.btn_select = new System.Windows.Forms.Button();
             this.btn_exitToMenu = new System.Windows.Forms.Button();
             this.btn_exitApplication = new System.Windows.Forms.Button();
+            this.tab_manageEmployees = new System.Windows.Forms.TabPage();
+            this.btn_save = new System.Windows.Forms.Button();
             this.rdo_isActive = new System.Windows.Forms.RadioButton();
             this.txt_hireDate = new System.Windows.Forms.TextBox();
             this.lbl_hireDate = new System.Windows.Forms.Label();
@@ -72,11 +73,10 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.btn_save = new System.Windows.Forms.Button();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
             this.tab_manageEmployees.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnl_salary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +92,7 @@
             // 
             // tab_Employees
             // 
-            this.tab_Employees.Controls.Add(this.dataGridView1);
+            this.tab_Employees.Controls.Add(this.grd_employees);
             this.tab_Employees.Controls.Add(this.lbl_productList);
             this.tab_Employees.Controls.Add(this.txt_searchBox);
             this.tab_Employees.Controls.Add(this.btn_addNew);
@@ -107,38 +107,10 @@
             this.tab_Employees.Text = "View Employees";
             this.tab_Employees.UseVisualStyleBackColor = true;
             // 
-            // tab_manageEmployees
+            // grd_employees
             // 
-            this.tab_manageEmployees.Controls.Add(this.btn_save);
-            this.tab_manageEmployees.Controls.Add(this.rdo_isActive);
-            this.tab_manageEmployees.Controls.Add(this.txt_hireDate);
-            this.tab_manageEmployees.Controls.Add(this.lbl_hireDate);
-            this.tab_manageEmployees.Controls.Add(this.txt_id);
-            this.tab_manageEmployees.Controls.Add(this.button1);
-            this.tab_manageEmployees.Controls.Add(this.btn_delete);
-            this.tab_manageEmployees.Controls.Add(this.pnl_salary);
-            this.tab_manageEmployees.Controls.Add(this.lbl_id);
-            this.tab_manageEmployees.Controls.Add(this.cmb_shift);
-            this.tab_manageEmployees.Controls.Add(this.lbl_shift);
-            this.tab_manageEmployees.Controls.Add(this.lbl_position);
-            this.tab_manageEmployees.Controls.Add(this.cmb_position);
-            this.tab_manageEmployees.Controls.Add(this.lbl_Last);
-            this.tab_manageEmployees.Controls.Add(this.lbl_first);
-            this.tab_manageEmployees.Controls.Add(this.txt_lastName);
-            this.tab_manageEmployees.Controls.Add(this.txt_firstName);
-            this.tab_manageEmployees.Controls.Add(this.button2);
-            this.tab_manageEmployees.Location = new System.Drawing.Point(4, 22);
-            this.tab_manageEmployees.Name = "tab_manageEmployees";
-            this.tab_manageEmployees.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_manageEmployees.Size = new System.Drawing.Size(1128, 479);
-            this.tab_manageEmployees.TabIndex = 2;
-            this.tab_manageEmployees.Text = "Manage Employees";
-            this.tab_manageEmployees.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grd_employees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grd_employees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.employeeID,
             this.employeeLast,
             this.employeeFirst,
@@ -150,10 +122,10 @@
             this.salary,
             this.fullTime,
             this.salaryMode});
-            this.dataGridView1.Location = new System.Drawing.Point(39, 89);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1050, 297);
-            this.dataGridView1.TabIndex = 20;
+            this.grd_employees.Location = new System.Drawing.Point(6, 89);
+            this.grd_employees.Name = "grd_employees";
+            this.grd_employees.Size = new System.Drawing.Size(1083, 297);
+            this.grd_employees.TabIndex = 20;
             // 
             // employeeID
             // 
@@ -264,6 +236,44 @@
             this.btn_exitApplication.TabIndex = 14;
             this.btn_exitApplication.Text = "Exit Application";
             this.btn_exitApplication.UseVisualStyleBackColor = true;
+            // 
+            // tab_manageEmployees
+            // 
+            this.tab_manageEmployees.Controls.Add(this.btn_save);
+            this.tab_manageEmployees.Controls.Add(this.rdo_isActive);
+            this.tab_manageEmployees.Controls.Add(this.txt_hireDate);
+            this.tab_manageEmployees.Controls.Add(this.lbl_hireDate);
+            this.tab_manageEmployees.Controls.Add(this.txt_id);
+            this.tab_manageEmployees.Controls.Add(this.button1);
+            this.tab_manageEmployees.Controls.Add(this.btn_delete);
+            this.tab_manageEmployees.Controls.Add(this.pnl_salary);
+            this.tab_manageEmployees.Controls.Add(this.lbl_id);
+            this.tab_manageEmployees.Controls.Add(this.cmb_shift);
+            this.tab_manageEmployees.Controls.Add(this.lbl_shift);
+            this.tab_manageEmployees.Controls.Add(this.lbl_position);
+            this.tab_manageEmployees.Controls.Add(this.cmb_position);
+            this.tab_manageEmployees.Controls.Add(this.lbl_Last);
+            this.tab_manageEmployees.Controls.Add(this.lbl_first);
+            this.tab_manageEmployees.Controls.Add(this.txt_lastName);
+            this.tab_manageEmployees.Controls.Add(this.txt_firstName);
+            this.tab_manageEmployees.Controls.Add(this.button2);
+            this.tab_manageEmployees.Location = new System.Drawing.Point(4, 22);
+            this.tab_manageEmployees.Name = "tab_manageEmployees";
+            this.tab_manageEmployees.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_manageEmployees.Size = new System.Drawing.Size(1128, 479);
+            this.tab_manageEmployees.TabIndex = 2;
+            this.tab_manageEmployees.Text = "Manage Employees";
+            this.tab_manageEmployees.UseVisualStyleBackColor = true;
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(437, 423);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(75, 23);
+            this.btn_save.TabIndex = 63;
+            this.btn_save.Text = "Save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click_1);
             // 
             // rdo_isActive
             // 
@@ -483,16 +493,6 @@
             this.button2.Text = "Exit Application";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(437, 423);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(75, 23);
-            this.btn_save.TabIndex = 63;
-            this.btn_save.Text = "Save";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click_1);
-            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,9 +504,9 @@
             this.tab_Employee.ResumeLayout(false);
             this.tab_Employees.ResumeLayout(false);
             this.tab_Employees.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).EndInit();
             this.tab_manageEmployees.ResumeLayout(false);
             this.tab_manageEmployees.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.pnl_salary.ResumeLayout(false);
             this.pnl_salary.PerformLayout();
             this.ResumeLayout(false);
@@ -518,7 +518,7 @@
         private System.Windows.Forms.TabControl tab_Employee;
         private System.Windows.Forms.TabPage tab_Employees;
         private System.Windows.Forms.TabPage tab_manageEmployees;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grd_employees;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeLast;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeFirst;
