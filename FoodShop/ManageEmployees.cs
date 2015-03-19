@@ -117,12 +117,38 @@ namespace FoodShop
         }
 
 
-        public void sqlGetTable(Employee emp)
+        public void sqlGetTable()           // (Employee emp)
         {
-            string sqlSelect = "SELECT * FROM Employees LIMIT 1;";
+            string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
 
             DataTable dataTable = new DataTable();
+
             dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+              //  int id = Convert.ToInt16(row["'employeeID'"]);
+                string lastName = row["employeeLast"].ToString();
+                string firstName = row["employeeFirst"].ToString();
+                string hired = row["hireDate"].ToString();
+         //       int posID = Convert.ToInt32(row["positionID"]);
+         //       int shift = Convert.ToInt32(row["shiftID"]);
+                double compensation = Convert.ToDouble(row["salary"]);
+         //       bool active = Convert.ToBoolean(row["isActive"]);
+         //       bool status = Convert.ToBoolean(row["fullTime"]);
+         //       bool paid = Convert.ToBoolean(row["hourly"]);
+            MessageBox.Show("employee name: " + lastName +  firstName);
+
+            grd_employees.Rows.Add(lastName, firstName, compensation);
+
+//            this.dataGridView1.Rows.Add("1", "XX");
+            }
+
+        }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            sqlGetTable();
         }
   /*            {/*
                 grd_employees.Rows.Add()

@@ -218,6 +218,7 @@
             this.btn_select.TabIndex = 16;
             this.btn_select.Text = "Select";
             this.btn_select.UseVisualStyleBackColor = true;
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
             // btn_exitToMenu
             // 
