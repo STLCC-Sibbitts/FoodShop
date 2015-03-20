@@ -422,6 +422,7 @@
             this.cmb_shift.Name = "cmb_shift";
             this.cmb_shift.Size = new System.Drawing.Size(121, 21);
             this.cmb_shift.TabIndex = 53;
+            this.cmb_shift.SelectedIndexChanged += new System.EventHandler(this.cmb_shift_SelectedIndexChanged);
             // 
             // lbl_shift
             // 
@@ -450,6 +451,7 @@
             this.cmb_position.Name = "cmb_position";
             this.cmb_position.Size = new System.Drawing.Size(121, 21);
             this.cmb_position.TabIndex = 50;
+            this.cmb_position.SelectedIndexChanged += new System.EventHandler(this.cmb_position_SelectedIndexChanged);
             // 
             // lbl_Last
             // 
@@ -502,6 +504,7 @@
             this.Controls.Add(this.tab_Employee);
             this.Name = "frm_ManageEmployees";
             this.Text = "Manage Employee";
+            this.Load += new System.EventHandler(this.frm_ManageEmployees_Load);
             this.tab_Employee.ResumeLayout(false);
             this.tab_Employees.ResumeLayout(false);
             this.tab_Employees.PerformLayout();
