@@ -15,16 +15,6 @@ namespace FoodShop
         string conString;
         string testString = "";
 
-        // Employee employee = new Employee();
-
-/*      enum ShiftType
-        {
-            FullTime, PartTime
-        }
- */
-        
-        //        Employee employee = new Employee();
-
         public frm_ManageEmployees()
         {
             InitializeComponent();
@@ -55,6 +45,10 @@ namespace FoodShop
         }
 
 
+        /**
+         * Initializes the ManageEmployees form and connects to the database
+         * 
+         * */
         private void frm_ManageEmployees_Load(object sender, EventArgs e)
         {
             MessageBox.Show(conString + "/n/n" + testString);
@@ -84,8 +78,8 @@ namespace FoodShop
             employee.employeeLast = txt_lastName.Text;
             employee.employeeFirst = txt_firstName.Text;
             employee.hireDate = txt_hireDate.Text;
-            employee.positionID = Convert.ToInt16(cmb_position.SelectedValue);
-            employee.shiftID = Convert.ToInt16(cmb_shift.SelectedValue);
+            employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
+            employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             employee.salary = float.Parse(txt_rateOfPay.Text);
             // employee.isActive = TODO
             employee.fullTime = getShiftType(employee);
@@ -94,7 +88,6 @@ namespace FoodShop
             insertEmployee(employee);
 
             MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
-
         }
 
 
@@ -114,6 +107,7 @@ namespace FoodShop
         }
 
 
+        // Retrieve values for the data table.
         public void sqlGetTable()           // (Employee emp)
         {
             string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
@@ -147,33 +141,31 @@ namespace FoodShop
             // sqlGetTable();
         }
 
+
+
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             // Display the Value property
-            Item positionItem = (Item)cmb_position.SelectedItem;
-            Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
+ //           Item positionItem = (Item)cmb_position.SelectedItem;
+ //           Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Display the Value property
-            Item positionItem = (Item)cmb_position.SelectedItem;
-            Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
+//            Item positionItem = (Item)cmb_position.SelectedItem;
+//            Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
 
         }
 
+
+        
         private void gbx_workerType_Enter(object sender, EventArgs e)
-        {
-
-        /*    if (rdo_fullTime.Checked)
-                employee.fullTime = 0;
-            else employee.fullTime = 1;
-
-            MessageBox.Show("Shift type: {0}" + employee.fullTime); */
-            
+        {            
         } 
 
+
+        // Return the employee's shift type (full or part-time).
         public int getShiftType(Employee emp)
         {
             foreach (RadioButton rb in this.gbx_shiftType.Controls)
@@ -187,6 +179,7 @@ namespace FoodShop
         }
 
 
+        // Return the employee's salary type (paid hourly or salary).
         public int getSalaryType(Employee emp)
         {
             foreach (RadioButton rb in this.gbx_payType.Controls)
@@ -198,10 +191,10 @@ namespace FoodShop
             }
             return emp.hourly;
         }
-
-
     }
-    // Content item for the combo box
+
+
+    // Content items for the combo box
     public class Item
     {
         public string Name;
