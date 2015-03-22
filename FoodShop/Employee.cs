@@ -15,8 +15,8 @@ namespace FoodShop
         public int shiftID { get; set; }
         public double salary { get; set; }
         public bool isActive { get; set; }
-        public bool fullTime { get; set; }
-        public bool hourly { get; set; }
+        public int fullTime { get; set; }
+        public int hourly { get; set; }
 
         // Parameterless constructor
         public Employee()
@@ -26,7 +26,7 @@ namespace FoodShop
 
         // Constructor
         public Employee (int empID, string lastName, string firstName, string hired, int posID,
-            int shift, double pay, bool active, bool fullPart, bool perHour)
+            int shift, double pay, bool active, int fullPart, int paidPerHour)
         {
             employeeID = empID;
             employeeLast = lastName;
@@ -37,7 +37,7 @@ namespace FoodShop
             salary = pay;
             isActive = active;
             fullTime = fullPart;
-            hourly = perHour;
+            hourly = paidPerHour;
         }
     }
 }

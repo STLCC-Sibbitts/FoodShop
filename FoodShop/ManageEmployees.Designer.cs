@@ -57,12 +57,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.pnl_salary = new System.Windows.Forms.Panel();
-            this.lbl_rateOfPay = new System.Windows.Forms.Label();
+            this.gbx_shiftType = new System.Windows.Forms.GroupBox();
             this.rdo_fullTime = new System.Windows.Forms.RadioButton();
-            this.txt_rateOfPay = new System.Windows.Forms.TextBox();
-            this.rdo_hourly = new System.Windows.Forms.RadioButton();
             this.rdo_partTime = new System.Windows.Forms.RadioButton();
-            this.rdo_salaried = new System.Windows.Forms.RadioButton();
+            this.gbx_payType = new System.Windows.Forms.GroupBox();
+            this.rdo_hourly = new System.Windows.Forms.RadioButton();
+            this.rdo_salary = new System.Windows.Forms.RadioButton();
+            this.lbl_rateOfPay = new System.Windows.Forms.Label();
+            this.txt_rateOfPay = new System.Windows.Forms.TextBox();
             this.lbl_id = new System.Windows.Forms.Label();
             this.cmb_shift = new System.Windows.Forms.ComboBox();
             this.lbl_shift = new System.Windows.Forms.Label();
@@ -78,6 +80,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
             this.tab_manageEmployees.SuspendLayout();
             this.pnl_salary.SuspendLayout();
+            this.gbx_shiftType.SuspendLayout();
+            this.gbx_payType.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab_Employee
@@ -333,17 +337,86 @@
             // 
             this.pnl_salary.AccessibleDescription = "Options to determine ";
             this.pnl_salary.AccessibleName = "Salary";
+            this.pnl_salary.Controls.Add(this.gbx_shiftType);
+            this.pnl_salary.Controls.Add(this.gbx_payType);
             this.pnl_salary.Controls.Add(this.lbl_rateOfPay);
-            this.pnl_salary.Controls.Add(this.rdo_fullTime);
             this.pnl_salary.Controls.Add(this.txt_rateOfPay);
-            this.pnl_salary.Controls.Add(this.rdo_hourly);
-            this.pnl_salary.Controls.Add(this.rdo_partTime);
-            this.pnl_salary.Controls.Add(this.rdo_salaried);
-            this.pnl_salary.Location = new System.Drawing.Point(159, 229);
+            this.pnl_salary.Location = new System.Drawing.Point(159, 212);
             this.pnl_salary.Name = "pnl_salary";
-            this.pnl_salary.Size = new System.Drawing.Size(480, 133);
+            this.pnl_salary.Size = new System.Drawing.Size(480, 137);
             this.pnl_salary.TabIndex = 54;
             this.pnl_salary.Tag = "";
+            // 
+            // gbx_shiftType
+            // 
+            this.gbx_shiftType.Controls.Add(this.rdo_fullTime);
+            this.gbx_shiftType.Controls.Add(this.rdo_partTime);
+            this.gbx_shiftType.Location = new System.Drawing.Point(23, 14);
+            this.gbx_shiftType.Name = "gbx_shiftType";
+            this.gbx_shiftType.Size = new System.Drawing.Size(95, 100);
+            this.gbx_shiftType.TabIndex = 17;
+            this.gbx_shiftType.TabStop = false;
+            this.gbx_shiftType.Text = "Shift Type";
+            // 
+            // rdo_fullTime
+            // 
+            this.rdo_fullTime.AutoSize = true;
+            this.rdo_fullTime.Location = new System.Drawing.Point(10, 28);
+            this.rdo_fullTime.Name = "rdo_fullTime";
+            this.rdo_fullTime.Size = new System.Drawing.Size(67, 17);
+            this.rdo_fullTime.TabIndex = 12;
+            this.rdo_fullTime.TabStop = true;
+            this.rdo_fullTime.Tag = "";
+            this.rdo_fullTime.Text = "Full Time";
+            this.rdo_fullTime.UseVisualStyleBackColor = true;
+            // 
+            // rdo_partTime
+            // 
+            this.rdo_partTime.AutoSize = true;
+            this.rdo_partTime.Location = new System.Drawing.Point(10, 70);
+            this.rdo_partTime.Name = "rdo_partTime";
+            this.rdo_partTime.Size = new System.Drawing.Size(70, 17);
+            this.rdo_partTime.TabIndex = 13;
+            this.rdo_partTime.TabStop = true;
+            this.rdo_partTime.Tag = "";
+            this.rdo_partTime.Text = "Part Time";
+            this.rdo_partTime.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.rdo_partTime.UseVisualStyleBackColor = true;
+            // 
+            // gbx_payType
+            // 
+            this.gbx_payType.Controls.Add(this.rdo_hourly);
+            this.gbx_payType.Controls.Add(this.rdo_salary);
+            this.gbx_payType.Location = new System.Drawing.Point(200, 14);
+            this.gbx_payType.Name = "gbx_payType";
+            this.gbx_payType.Size = new System.Drawing.Size(100, 100);
+            this.gbx_payType.TabIndex = 16;
+            this.gbx_payType.TabStop = false;
+            this.gbx_payType.Text = "Pay Type";
+            // 
+            // rdo_hourly
+            // 
+            this.rdo_hourly.AutoSize = true;
+            this.rdo_hourly.Location = new System.Drawing.Point(18, 70);
+            this.rdo_hourly.Name = "rdo_hourly";
+            this.rdo_hourly.Size = new System.Drawing.Size(55, 17);
+            this.rdo_hourly.TabIndex = 11;
+            this.rdo_hourly.TabStop = true;
+            this.rdo_hourly.Tag = "hourly";
+            this.rdo_hourly.Text = "Hourly";
+            this.rdo_hourly.UseVisualStyleBackColor = true;
+            // 
+            // rdo_salary
+            // 
+            this.rdo_salary.AutoSize = true;
+            this.rdo_salary.Location = new System.Drawing.Point(18, 28);
+            this.rdo_salary.Name = "rdo_salary";
+            this.rdo_salary.Size = new System.Drawing.Size(54, 17);
+            this.rdo_salary.TabIndex = 10;
+            this.rdo_salary.TabStop = true;
+            this.rdo_salary.Tag = "salary";
+            this.rdo_salary.Text = "Salary";
+            this.rdo_salary.UseVisualStyleBackColor = true;
             // 
             // lbl_rateOfPay
             // 
@@ -354,57 +427,12 @@
             this.lbl_rateOfPay.TabIndex = 14;
             this.lbl_rateOfPay.Text = "Rate of Pay";
             // 
-            // rdo_fullTime
-            // 
-            this.rdo_fullTime.AutoSize = true;
-            this.rdo_fullTime.Location = new System.Drawing.Point(24, 23);
-            this.rdo_fullTime.Name = "rdo_fullTime";
-            this.rdo_fullTime.Size = new System.Drawing.Size(67, 17);
-            this.rdo_fullTime.TabIndex = 12;
-            this.rdo_fullTime.TabStop = true;
-            this.rdo_fullTime.Text = "Full Time";
-            this.rdo_fullTime.UseVisualStyleBackColor = true;
-            // 
             // txt_rateOfPay
             // 
             this.txt_rateOfPay.Location = new System.Drawing.Point(339, 62);
             this.txt_rateOfPay.Name = "txt_rateOfPay";
             this.txt_rateOfPay.Size = new System.Drawing.Size(100, 20);
             this.txt_rateOfPay.TabIndex = 9;
-            // 
-            // rdo_hourly
-            // 
-            this.rdo_hourly.AutoSize = true;
-            this.rdo_hourly.Location = new System.Drawing.Point(179, 65);
-            this.rdo_hourly.Name = "rdo_hourly";
-            this.rdo_hourly.Size = new System.Drawing.Size(55, 17);
-            this.rdo_hourly.TabIndex = 11;
-            this.rdo_hourly.TabStop = true;
-            this.rdo_hourly.Text = "Hourly";
-            this.rdo_hourly.UseVisualStyleBackColor = true;
-            // 
-            // rdo_partTime
-            // 
-            this.rdo_partTime.AutoSize = true;
-            this.rdo_partTime.Location = new System.Drawing.Point(24, 65);
-            this.rdo_partTime.Name = "rdo_partTime";
-            this.rdo_partTime.Size = new System.Drawing.Size(70, 17);
-            this.rdo_partTime.TabIndex = 13;
-            this.rdo_partTime.TabStop = true;
-            this.rdo_partTime.Text = "Part Time";
-            this.rdo_partTime.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.rdo_partTime.UseVisualStyleBackColor = true;
-            // 
-            // rdo_salaried
-            // 
-            this.rdo_salaried.AutoSize = true;
-            this.rdo_salaried.Location = new System.Drawing.Point(179, 23);
-            this.rdo_salaried.Name = "rdo_salaried";
-            this.rdo_salaried.Size = new System.Drawing.Size(63, 17);
-            this.rdo_salaried.TabIndex = 10;
-            this.rdo_salaried.TabStop = true;
-            this.rdo_salaried.Text = "Salaried";
-            this.rdo_salaried.UseVisualStyleBackColor = true;
             // 
             // lbl_id
             // 
@@ -513,6 +541,10 @@
             this.tab_manageEmployees.PerformLayout();
             this.pnl_salary.ResumeLayout(false);
             this.pnl_salary.PerformLayout();
+            this.gbx_shiftType.ResumeLayout(false);
+            this.gbx_shiftType.PerformLayout();
+            this.gbx_payType.ResumeLayout(false);
+            this.gbx_payType.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -552,7 +584,7 @@
         private System.Windows.Forms.TextBox txt_rateOfPay;
         private System.Windows.Forms.RadioButton rdo_hourly;
         private System.Windows.Forms.RadioButton rdo_partTime;
-        private System.Windows.Forms.RadioButton rdo_salaried;
+        private System.Windows.Forms.RadioButton rdo_salary;
         private System.Windows.Forms.Label lbl_id;
         private System.Windows.Forms.ComboBox cmb_shift;
         private System.Windows.Forms.Label lbl_shift;
@@ -564,6 +596,8 @@
         private System.Windows.Forms.TextBox txt_firstName;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.GroupBox gbx_payType;
+        private System.Windows.Forms.GroupBox gbx_shiftType;
 
     }
 }

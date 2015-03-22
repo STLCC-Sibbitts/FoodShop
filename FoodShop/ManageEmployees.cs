@@ -15,13 +15,21 @@ namespace FoodShop
         string conString;
         string testString = "";
 
+        // Employee employee = new Employee();
+
+/*      enum ShiftType
+        {
+            FullTime, PartTime
+        }
+ */
+        
         //        Employee employee = new Employee();
 
         public frm_ManageEmployees()
         {
             InitializeComponent();
 
-            // Consider pulling these into an Initializer Class
+            // Consider pulling these into an Initializer Class if possible
             // Initialize positionID combo box
             cmb_position.Items.Add(new Item("Store Manager", 1));
             cmb_position.Items.Add(new Item("Assistant Manager", 2));
@@ -47,9 +55,6 @@ namespace FoodShop
         }
 
 
-
-
-
         private void frm_ManageEmployees_Load(object sender, EventArgs e)
         {
             MessageBox.Show(conString + "/n/n" + testString);
@@ -69,85 +74,40 @@ namespace FoodShop
             }
         }
 
-        /*
-                private void ManageEmployees_Load(object sender, EventArgs e)
-                {
 
-                } */
-
-        /*     private void btn_save_Click(object sender, EventArgs e)
-             {
-                 employee.employeeLast = txt_lastName.Text;
-                 employee.employeeFirst = txt_firstName.Text;
-                 employee.hireDate = txt_hireDate.Text;
-                 // employee.positionID = TODO
-                 // employee.shiftID = TODO
-                 employee.salary = float.Parse(txt_rateOfPay.Text);
-                 // employee.isActive = TODO
-                 // employee.fullTime = TODO
-                 // employee.hourly = TODO
-            
-                 MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
-
-                 // string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-                 // removed extra variables, hard-coded a shiftID to avoid true/false errors.
-
-                 string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, shiftID, salary) VALUES (" +
-                     "'" + employee.employeeLast + "'" + ", " +
-
-                     "'" + employee.employeeFirst + "'" + ", " +
-
-                     "'" + 2 + "'" + ", " +
-
-                     "'" + employee.salary + "'"  + ");";
-
-                 dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
-             } */
-
+        // On button click, initialize new employee
         private void btn_save_Click_1(object sender, EventArgs e)
         {
+
             Employee employee = new Employee();
 
             employee.employeeLast = txt_lastName.Text;
             employee.employeeFirst = txt_firstName.Text;
             employee.hireDate = txt_hireDate.Text;
-            // employee.positionID = TODO
-            // employee.shiftID = TODO
+            employee.positionID = Convert.ToInt16(cmb_position.SelectedValue);
+            employee.shiftID = Convert.ToInt16(cmb_shift.SelectedValue);
             employee.salary = float.Parse(txt_rateOfPay.Text);
             // employee.isActive = TODO
-            // employee.fullTime = TODO
-            // employee.hourly = TODO
+            employee.fullTime = getShiftType(employee);
+            employee.hourly = getSalaryType(employee);
 
             insertEmployee(employee);
 
             MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
 
-            // string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-            // removed extra variables, hard-coded a shiftID to avoid true/false errors.
-
-            /*          string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, shiftID, salary) VALUES (" +
-                          "'" + employee.employeeLast + "'" + ", " +
-
-                          "'" + employee.employeeFirst + "'" + ", " +
-
-                          "'" + 2 + "'" + ", " +
-
-                          "'" + employee.salary + "'" + ");";
-
-                      dbs.ExecuteNonQueryReturnRowCount(sqlInsert); */
-
         }
 
 
+        // Add employee record to the database
         public void insertEmployee(Employee emp)
         {
-            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, shiftID, salary) VALUES (" +
+            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, positionID, shiftID, fullTime, hourly, salary) VALUES (" +
                 "'" + emp.employeeLast + "'" + ", " +
-
                 "'" + emp.employeeFirst + "'" + ", " +
-
-                "'" + 2 + "'" + ", " +
-
+                "'" + emp.positionID + "'" + ", " +
+                "'" + emp.shiftID + "'" + ", " +
+                "'" + emp.fullTime + "'" + ", " +
+                "'" + emp.hourly + "'" + ", " +
                 "'" + emp.salary + "'" + ");";
 
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
@@ -168,20 +128,19 @@ namespace FoodShop
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
                 string hired = row["hireDate"].ToString();
-                //       int posID = Convert.ToInt32(row["positionID"]);
-                //       int shift = Convert.ToInt32(row["shiftID"]);
+                int posID = Convert.ToInt16(row["positionID"]);
+                int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
                 //       bool active = Convert.ToBoolean(row["isActive"]);
-                //       bool status = Convert.ToBoolean(row["fullTime"]);
-                //       bool paid = Convert.ToBoolean(row["hourly"]);
+                int status = Convert.ToInt16(row["fullTime"]);
+                int howPaid = Convert.ToInt16(row["hourly"]);
+                
                 MessageBox.Show("employee name: " + lastName + firstName);
 
                 grd_employees.Rows.Add(id, lastName, firstName, compensation);
-
-                //            this.dataGridView1.Rows.Add("1", "XX");
             }
-
         }
+
 
         private void btn_select_Click(object sender, EventArgs e)
         {
@@ -204,23 +163,41 @@ namespace FoodShop
 
         }
 
+        private void gbx_workerType_Enter(object sender, EventArgs e)
+        {
+
+        /*    if (rdo_fullTime.Checked)
+                employee.fullTime = 0;
+            else employee.fullTime = 1;
+
+            MessageBox.Show("Shift type: {0}" + employee.fullTime); */
+            
+        } 
+
+        public int getShiftType(Employee emp)
+        {
+            foreach (RadioButton rb in this.gbx_shiftType.Controls)
+            {
+                if (rdo_fullTime.Checked)
+                    emp.fullTime = 1;
+                if (rdo_partTime.Checked)
+                    emp.fullTime = 0;
+            }
+            return emp.fullTime;
+        }
 
 
-
-        /*            {/*
-                      grd_employees.Rows.Add()
-                      textBox.Text = DR1.GetValue(0).ToString();
-                      this.dataGridView1.Rows.Add("1", "XX"); */
-
-        /*               public static void Map<T>(this IEnumerable<T> source, Action<T> func)
-       {
-           foreach (T i in source)
-               func(i);
-       }
-
-       X.Map(item => this.dataGridView1.Rows.Add(item.ID, item.Name)); 
-                   }
-               }*/
+        public int getSalaryType(Employee emp)
+        {
+            foreach (RadioButton rb in this.gbx_payType.Controls)
+            {
+                if (rdo_salary.Checked)
+                    emp.hourly = 1;
+                if (rdo_hourly.Checked)
+                    emp.hourly = 0;
+            }
+            return emp.hourly;
+        }
 
 
     }
