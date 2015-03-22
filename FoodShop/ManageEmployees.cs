@@ -81,9 +81,9 @@ namespace FoodShop
             employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
             employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             employee.salary = float.Parse(txt_rateOfPay.Text);
-            // employee.isActive = TODO
             employee.fullTime = getShiftType(employee);
             employee.hourly = getSalaryType(employee);
+            // employee.isActive = TODO
 
             insertEmployee(employee);
 
@@ -94,21 +94,23 @@ namespace FoodShop
         // Add employee record to the database
         public void insertEmployee(Employee emp)
         {
-            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, positionID, shiftID, fullTime, hourly, salary) VALUES (" +
+            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
                 "'" + emp.employeeLast + "'" + ", " +
                 "'" + emp.employeeFirst + "'" + ", " +
+                "'" + "2015-03-01" + "'" + ", " +
                 "'" + emp.positionID + "'" + ", " +
                 "'" + emp.shiftID + "'" + ", " +
+                "'" + emp.salary + "'" + ", " +
                 "'" + emp.fullTime + "'" + ", " +
                 "'" + emp.hourly + "'" + ", " +
-                "'" + emp.salary + "'" + ");";
+                "'" + 1 + "'" + ");";
 
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
         }
 
 
-        // Retrieve values for the data table.
-        public void sqlGetTable()           // (Employee emp)
+        // Retrieve values for the grid.
+        public void sqlGetTable()
         {
             string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
 
@@ -121,17 +123,18 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                string hired = row["hireDate"].ToString();
-                int posID = Convert.ToInt16(row["positionID"]);
+                string hired = "test"; // row["hireDate"].ToString();
+                int posID = 1; // Convert.ToInt16(row["positionID"]);
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
-                //       bool active = Convert.ToBoolean(row["isActive"]);
-                int status = Convert.ToInt16(row["fullTime"]);
-                int howPaid = Convert.ToInt16(row["hourly"]);
-                
+                int status = 1; // Convert.ToInt16(row["fullTime"]);
+                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
+                bool active = true;
+       //       bool active = Convert.ToBoolean(row["isActive"]);
+
                 MessageBox.Show("employee name: " + lastName + firstName);
 
-                grd_employees.Rows.Add(id, lastName, firstName, compensation);
+                grd_employees.Rows.Add(id, lastName, firstName, hired, posID, shift, compensation, status, howPaid);
             }
         }
 
@@ -145,17 +148,10 @@ namespace FoodShop
 
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Display the Value property
- //           Item positionItem = (Item)cmb_position.SelectedItem;
- //           Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Display the Value property
-//            Item positionItem = (Item)cmb_position.SelectedItem;
-//            Console.WriteLine("{0}, {1}", positionItem.Name, positionItem.Value);
-
         }
 
 
