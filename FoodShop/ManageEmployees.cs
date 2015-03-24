@@ -187,6 +187,11 @@ namespace FoodShop
             }
             return emp.hourly;
         }
+
+        private void btn_addNew_Click(object sender, EventArgs e)
+        {
+            tab_Employee.SelectTab(tab_manageEmployees);
+        }
     }
 
 

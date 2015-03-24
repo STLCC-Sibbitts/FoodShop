@@ -92,7 +92,7 @@
             this.tab_Employee.Name = "tab_Employee";
             this.tab_Employee.SelectedIndex = 0;
             this.tab_Employee.Size = new System.Drawing.Size(1136, 505);
-            this.tab_Employee.TabIndex = 8;
+            this.tab_Employee.TabIndex = 1;
             // 
             // tab_Employees
             // 
@@ -213,6 +213,7 @@
             this.btn_addNew.TabIndex = 17;
             this.btn_addNew.Text = "Add Employee";
             this.btn_addNew.UseVisualStyleBackColor = true;
+            this.btn_addNew.Click += new System.EventHandler(this.btn_addNew_Click);
             // 
             // btn_select
             // 
