@@ -130,7 +130,7 @@ namespace FoodShop
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
-       //       bool active = Convert.ToBoolean(row["isActive"]);
+                //       bool active = Convert.ToBoolean(row["isActive"]);
 
                 MessageBox.Show("employee name: " + lastName + firstName);
 
@@ -139,9 +139,52 @@ namespace FoodShop
         }
 
 
+        // Populate the edit employee tab with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
+            int rowIndex;
+            string sqlQuery;
+            DataTable dataTable = new DataTable();
+
             // sqlGetTable();
+            rowIndex = grd_employees.CurrentCell.RowIndex;
+            MessageBox.Show("rowIndex = " + rowIndex);
+
+            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+
+            dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int id = Convert.ToInt16(row["employeeID"]);
+                string lastName = row["employeeLast"].ToString();
+                string firstName = row["employeeFirst"].ToString();
+                string hired = "test"; // row["hireDate"].ToString();
+                int posID = 1; // Convert.ToInt16(row["positionID"]);
+                int shift = Convert.ToInt16(row["shiftID"]);
+                double compensation = Convert.ToDouble(row["salary"]);
+                int status = 1; // Convert.ToInt16(row["fullTime"]);
+                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
+                bool active = true;
+                //       bool active = Convert.ToBoolean(row["isActive"]);
+                txt_firstName.Text = firstName;
+                txt_lastName.Text = lastName;
+                txt_hireDate.Text = hired;
+                cmb_position.SelectedIndex = posID;
+                cmb_shift.SelectedIndex = shift;
+                txt_rateOfPay.Text = compensation.ToString();
+
+                if (status == 0)
+                    rdo_fullTime.Checked = true;
+                else
+                    rdo_partTime.Checked = true;
+
+                if (howPaid == 0)
+                    rdo_salary.Checked = true;
+                else
+                    rdo_hourly.Checked = true;            
+
+            }
         }
 
 
@@ -155,10 +198,10 @@ namespace FoodShop
         }
 
 
-        
+
         private void gbx_workerType_Enter(object sender, EventArgs e)
-        {            
-        } 
+        {
+        }
 
 
         // Return the employee's shift type (full or part-time).
@@ -174,6 +217,18 @@ namespace FoodShop
             return emp.fullTime;
         }
 
+        // Return the employee's shift type (full or part-time).
+        public RadioButton getShiftType(int shiftID)
+        {
+            RadioButton rdo_selected = new RadioButton();
+
+            if(shiftID == 0)
+                rdo_selected = rdo_fullTime;
+            if (shiftID == 1)
+                rdo_selected = rdo_partTime;
+            return rdo_selected;
+        }
+
 
         // Return the employee's salary type (paid hourly or salary).
         public int getSalaryType(Employee emp)
@@ -186,6 +241,18 @@ namespace FoodShop
                     emp.hourly = 0;
             }
             return emp.hourly;
+        }
+
+        // Return the employee's salary type (paid hourly or salary).
+        public RadioButton getSalaryType(int salaryID)
+        {
+            RadioButton rdo_selected = new RadioButton();
+
+            if (salaryID == 0)
+                rdo_selected = rdo_salary;
+            if (salaryID == 1)
+                rdo_selected = rdo_hourly;
+            return rdo_selected;
         }
 
         private void btn_addNew_Click(object sender, EventArgs e)
