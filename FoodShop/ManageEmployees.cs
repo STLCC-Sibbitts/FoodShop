@@ -126,6 +126,7 @@ namespace FoodShop
                 string firstName = row["employeeFirst"].ToString();
                 string hired = "test"; // row["hireDate"].ToString();
                 int posID = 1; // Convert.ToInt16(row["positionID"]);
+                string title = "test title";
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
@@ -135,7 +136,7 @@ namespace FoodShop
 
                 MessageBox.Show("employee name: " + lastName + firstName);
 
-                grd_employees.Rows.Add(id, lastName, firstName, hired, posID, shift, compensation, status, howPaid);
+                grd_employees.Rows.Add(id, lastName, firstName, posID, title, shift, hired, active, compensation, status, howPaid);
             }
         }
 
