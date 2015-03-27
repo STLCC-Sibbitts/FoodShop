@@ -94,6 +94,7 @@ namespace FoodShop
         // Add employee record to the database
         public void insertEmployee(Employee emp)
         {
+            // create an instance of the employee
             string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
                 "'" + emp.employeeLast + "'" + ", " +
                 "'" + emp.employeeFirst + "'" + ", " +
@@ -104,7 +105,7 @@ namespace FoodShop
                 "'" + emp.fullTime + "'" + ", " +
                 "'" + emp.hourly + "'" + ", " +
                 "'" + 1 + "'" + ");";
-
+            // send the employee instance to Joe's method
             dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
         }
 
@@ -175,14 +176,26 @@ namespace FoodShop
                 txt_rateOfPay.Text = compensation.ToString();
 
                 if (status == 0)
+                {
                     rdo_fullTime.Checked = true;
+                    rdo_partTime.Checked = false;
+                }
                 else
+                {
                     rdo_partTime.Checked = true;
+                    rdo_fullTime.Checked = false;
+                }
 
                 if (howPaid == 0)
+                {
                     rdo_salary.Checked = true;
+                    rdo_hourly.Checked = false;
+                }
                 else
-                    rdo_hourly.Checked = true;            
+                {
+                    rdo_hourly.Checked = true;
+                    rdo_salary.Checked = false;
+                }
 
             }
         }
