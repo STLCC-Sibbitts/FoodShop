@@ -54,7 +54,7 @@
             this.txt_hireDate = new System.Windows.Forms.TextBox();
             this.lbl_hireDate = new System.Windows.Forms.Label();
             this.txt_id = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_tabExitToMenu = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.pnl_salary = new System.Windows.Forms.Panel();
             this.gbx_shiftType = new System.Windows.Forms.GroupBox();
@@ -74,7 +74,7 @@
             this.lbl_first = new System.Windows.Forms.Label();
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_tabExitApp = new System.Windows.Forms.Button();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -233,6 +233,7 @@
             this.btn_exitToMenu.TabIndex = 15;
             this.btn_exitToMenu.Text = "Exit to Menu";
             this.btn_exitToMenu.UseVisualStyleBackColor = true;
+            this.btn_exitToMenu.Click += new System.EventHandler(this.btn_exitToMenu_Click);
             // 
             // btn_exitApplication
             // 
@@ -242,6 +243,7 @@
             this.btn_exitApplication.TabIndex = 14;
             this.btn_exitApplication.Text = "Exit Application";
             this.btn_exitApplication.UseVisualStyleBackColor = true;
+            this.btn_exitApplication.Click += new System.EventHandler(this.btn_exitApplication_Click);
             // 
             // tab_manageEmployees
             // 
@@ -250,7 +252,7 @@
             this.tab_manageEmployees.Controls.Add(this.txt_hireDate);
             this.tab_manageEmployees.Controls.Add(this.lbl_hireDate);
             this.tab_manageEmployees.Controls.Add(this.txt_id);
-            this.tab_manageEmployees.Controls.Add(this.button1);
+            this.tab_manageEmployees.Controls.Add(this.btn_tabExitToMenu);
             this.tab_manageEmployees.Controls.Add(this.btn_delete);
             this.tab_manageEmployees.Controls.Add(this.pnl_salary);
             this.tab_manageEmployees.Controls.Add(this.lbl_id);
@@ -262,7 +264,7 @@
             this.tab_manageEmployees.Controls.Add(this.lbl_first);
             this.tab_manageEmployees.Controls.Add(this.txt_lastName);
             this.tab_manageEmployees.Controls.Add(this.txt_firstName);
-            this.tab_manageEmployees.Controls.Add(this.button2);
+            this.tab_manageEmployees.Controls.Add(this.btn_tabExitApp);
             this.tab_manageEmployees.Location = new System.Drawing.Point(4, 22);
             this.tab_manageEmployees.Name = "tab_manageEmployees";
             this.tab_manageEmployees.Padding = new System.Windows.Forms.Padding(3);
@@ -316,14 +318,15 @@
             this.txt_id.Size = new System.Drawing.Size(100, 20);
             this.txt_id.TabIndex = 59;
             // 
-            // button1
+            // btn_tabExitToMenu
             // 
-            this.button1.Location = new System.Drawing.Point(897, 421);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
-            this.button1.TabIndex = 57;
-            this.button1.Text = "Exit to Menu";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_tabExitToMenu.Location = new System.Drawing.Point(897, 421);
+            this.btn_tabExitToMenu.Name = "btn_tabExitToMenu";
+            this.btn_tabExitToMenu.Size = new System.Drawing.Size(75, 25);
+            this.btn_tabExitToMenu.TabIndex = 57;
+            this.btn_tabExitToMenu.Text = "Exit to Menu";
+            this.btn_tabExitToMenu.UseVisualStyleBackColor = true;
+            this.btn_tabExitToMenu.Click += new System.EventHandler(this.btn_tabExitToMenu_Click);
             // 
             // btn_delete
             // 
@@ -516,14 +519,15 @@
             this.txt_firstName.Size = new System.Drawing.Size(100, 20);
             this.txt_firstName.TabIndex = 46;
             // 
-            // button2
+            // btn_tabExitApp
             // 
-            this.button2.Location = new System.Drawing.Point(762, 421);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 25);
-            this.button2.TabIndex = 45;
-            this.button2.Text = "Exit Application";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_tabExitApp.Location = new System.Drawing.Point(762, 421);
+            this.btn_tabExitApp.Name = "btn_tabExitApp";
+            this.btn_tabExitApp.Size = new System.Drawing.Size(90, 25);
+            this.btn_tabExitApp.TabIndex = 45;
+            this.btn_tabExitApp.Text = "Exit Application";
+            this.btn_tabExitApp.UseVisualStyleBackColor = true;
+            this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
             // frm_ManageEmployees
             // 
@@ -577,7 +581,7 @@
         private System.Windows.Forms.TextBox txt_hireDate;
         private System.Windows.Forms.Label lbl_hireDate;
         private System.Windows.Forms.TextBox txt_id;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_tabExitToMenu;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Panel pnl_salary;
         private System.Windows.Forms.Label lbl_rateOfPay;
@@ -595,7 +599,7 @@
         private System.Windows.Forms.Label lbl_first;
         private System.Windows.Forms.TextBox txt_lastName;
         private System.Windows.Forms.TextBox txt_firstName;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_tabExitApp;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.GroupBox gbx_payType;
         private System.Windows.Forms.GroupBox gbx_shiftType;

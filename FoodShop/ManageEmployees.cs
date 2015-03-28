@@ -19,6 +19,11 @@ namespace FoodShop
         {
             InitializeComponent();
 
+            // Set KeyPreview object to true to allow the form to process  
+            // the key before the control with focus processes it. 
+            this.KeyPreview = true;
+            btn_save.Enabled = false;
+
             // Consider pulling these into an Initializer Class if possible
             // Initialize positionID combo box
             cmb_position.Items.Add(new Item("Store Manager", 1));
@@ -42,6 +47,23 @@ namespace FoodShop
             cmb_shift.Items.Add(new Item("Third Shift/Second Half", 8));
             cmb_shift.Items.Add(new Item("Third Shift", 9));
 
+            // Associate the event-handling method with the 
+            // KeyDown event. 
+            this.KeyDown += new KeyEventHandler(frm_ManageEmployees_KeyDown);
+
+        }
+
+        // The form will handle all key events before the control with   
+        // focus handles them.  Show the keys pressed by adding the 
+        // KeyCode object to ListBox1. Ensure the processing is passed 
+        // to the control with focus by setting the KeyEventArg.Handled 
+        // property to false. 
+        private void frm_ManageEmployees_KeyDown(object sender, KeyEventArgs e)
+        {   
+            e.Handled = true;        
+          //  ListBox1.Items.Add(e.KeyCode);
+            btn_save.Enabled = true;
+            
         }
 
 
@@ -197,7 +219,7 @@ namespace FoodShop
                     rdo_hourly.Checked = true;
                     rdo_salary.Checked = false;
                 }
-
+                tab_Employee.SelectTab(tab_manageEmployees);
                 // Test commit
 
             }
@@ -274,6 +296,26 @@ namespace FoodShop
         private void btn_addNew_Click(object sender, EventArgs e)
         {
             tab_Employee.SelectTab(tab_manageEmployees);
+        }
+
+        private void btn_exitApplication_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_exitToMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void btn_tabExitApp_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_tabExitToMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 
