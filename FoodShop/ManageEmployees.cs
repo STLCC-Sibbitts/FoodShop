@@ -115,16 +115,31 @@ namespace FoodShop
             DateTime dateValue;
             Employee employee = new Employee();
 
-            if(txt_lastName.TextLength <= 20)
+            if (txt_lastName.TextLength <= 20)
                 employee.employeeLast = txt_lastName.Text;
+            else
+                employee.employeeLast = txt_lastName.Text.Substring(0, 20);
+
             if(txt_firstName.TextLength <= 20)
                 employee.employeeFirst = txt_firstName.Text;
+            else
+                employee.employeeFirst = txt_firstName.Text.Substring(0, 20);
+
+
             if(DateTime.TryParseExact(txt_hireDate.Text, "g", enUS, DateTimeStyles.None, out dateValue))
                 employee.hireDate = txt_hireDate.Text;
 
             employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
+
             employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-            employee.salary = float.Parse(txt_rateOfPay.Text);
+
+            if(float.Parse(txt_rateOfPay.Text) < 0)
+            {
+                MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
+            }
+            else
+                employee.salary = float.Parse(txt_rateOfPay.Text);
+
             employee.fullTime = getShiftType(employee);
             employee.hourly = getSalaryType(employee);
             // employee.isActive = TODO
