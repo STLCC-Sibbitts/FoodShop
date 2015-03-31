@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace FoodShop
         DatabaseServices dbs = new DatabaseServices();
         string conString;
         string testString = "";
+        int currentComboIndex = 0;
 
         public frm_ManageEmployees()
         {
@@ -63,7 +65,22 @@ namespace FoodShop
             e.Handled = true;        
           //  ListBox1.Items.Add(e.KeyCode);
             btn_save.Enabled = true;
-            
+
+            // tried this to regiser changes in combo box
+            if (cmb_position.SelectedIndex != currentComboIndex)
+            {
+                //btn_save.Enabled = true;
+            }
+        }
+
+
+        // tried this to regiser changes in combo box
+        private void frm_ManageEmployees_MouseClick(object sender, KeyEventArgs e)
+        {
+            if (cmb_position.SelectedIndex != currentComboIndex)
+            {
+                // btn_save.Enabled = true;
+            }
         }
 
 
@@ -94,12 +111,17 @@ namespace FoodShop
         // On button click, initialize new employee
         private void btn_save_Click_1(object sender, EventArgs e)
         {
-
+            CultureInfo enUS = new CultureInfo("en-US");
+            DateTime dateValue;
             Employee employee = new Employee();
 
-            employee.employeeLast = txt_lastName.Text;
-            employee.employeeFirst = txt_firstName.Text;
-            employee.hireDate = txt_hireDate.Text;
+            if(txt_lastName.TextLength <= 20)
+                employee.employeeLast = txt_lastName.Text;
+            if(txt_firstName.TextLength <= 20)
+                employee.employeeFirst = txt_firstName.Text;
+            if(DateTime.TryParseExact(txt_hireDate.Text, "g", enUS, DateTimeStyles.None, out dateValue))
+                employee.hireDate = txt_hireDate.Text;
+
             employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
             employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             employee.salary = float.Parse(txt_rateOfPay.Text);
@@ -168,6 +190,7 @@ namespace FoodShop
         {
             int rowIndex;
             string sqlQuery;
+
             DataTable dataTable = new DataTable();
 
             // sqlGetTable();
@@ -197,6 +220,9 @@ namespace FoodShop
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
+
+
+                currentComboIndex = cmb_position.SelectedIndex;
 
                 if (status == 0)
                 {
@@ -229,10 +255,12 @@ namespace FoodShop
 
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //btn_save.Enabled = true;
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //btn_save.Enabled = true;
         }
 
 
