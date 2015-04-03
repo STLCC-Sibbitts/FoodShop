@@ -12,11 +12,6 @@ namespace FoodShop
     // All other database related classes will be migrated here....
     class DBServices
     {
-        //TODO: Move this to app.config for security
-        //private String databaseConString
-        //    = @"Server=grass.arvixe.com;Initial Catalog=BreadProjectJr; User Id=is283_kmne68; Password=zookie321;";
-
-
         // Click "+" to view the code on regions
         #region Fields
         // Connection name is set to constant (and can only be viewed within class)
@@ -31,6 +26,7 @@ namespace FoodShop
                 "Salary money, " +
                 "Primary Key (EmployeeID))";
         // Backing field for connection string
+
         private String dbConnString;    // TODO: Evaluate encapsulation property
         #endregion
 
@@ -94,6 +90,60 @@ namespace FoodShop
                 sqlCON.Close();
                 sqlCON.Dispose();
             }
+            return retVal;
+        }
+
+        /// <summary>
+        /// Helper method to add new employee data to database.
+        /// </summary>
+        /// <param name="emp">Employee Object</param>
+        /// <returns> Status </returns>
+        public string SaveData(Employee emp)
+        {
+            string retVal = String.Empty;
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "Employees"; 
+                    string insertStatement = "INSERT INTO " + tableName +
+                        " VALUES(@LastName, @FirstName, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
+                    using (SqlCommand command = new SqlCommand(
+                    insertStatement, sqlCon))
+                    {
+                        //command.Parameters.Add(new SqlParameter("ID", emp.employeeID));
+                        command.Parameters.Add(new SqlParameter("LastName", emp.employeeLast));
+                        command.Parameters.Add(new SqlParameter("FirstName", emp.employeeFirst));
+                        command.Parameters.Add(new SqlParameter("HireDate", emp.hireDate));
+                        command.Parameters.Add(new SqlParameter("PositionID", emp.positionID));
+                        command.Parameters.Add(new SqlParameter("ShiftID", emp.shiftID));
+                        command.Parameters.Add(new SqlParameter("Salary", emp.salary));
+                        command.Parameters.Add(new SqlParameter("FullTime", emp.fullTime));
+                        command.Parameters.Add(new SqlParameter("Hourly", emp.hourly));
+                        command.Parameters.Add(new SqlParameter("IsActive", emp.isActive));
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "Data Successfully Saved!";
+                }
+                catch
+                {
+                    retVal = "Failed to Insert Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
+            return retVal;
+        }
+
+        // TODOs: Overload SaveData Method to accept other objects
+        public string SaveData(Customer cust)
+        {
+            string retVal = String.Empty;
+            // Put the SQL Connection Here
             return retVal;
         }
 

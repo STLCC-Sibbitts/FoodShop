@@ -161,6 +161,7 @@ namespace BreadProjectBetaUno
             }
             return retVal;
         }
+
         /// <summary>
         /// Helper method to add new employee data to database. New employees are given employee ids
         /// starting at 100, and succeeding addition is incremented by 1.
