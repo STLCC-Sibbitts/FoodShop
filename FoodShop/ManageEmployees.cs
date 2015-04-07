@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 
 namespace FoodShop
 {
@@ -32,7 +34,7 @@ namespace FoodShop
 
             // Consider pulling these into an Initializer Class if possible
             // Initialize positionID combo box
-            cmb_position.Items.Add(new Item("Store Manager", 1));
+  /*          cmb_position.Items.Add(new Item("Store Manager", 1));
             cmb_position.Items.Add(new Item("Assistant Manager", 2));
             cmb_position.Items.Add(new Item("Kitchen Manager", 3));
             cmb_position.Items.Add(new Item("Floor Manager", 4));
@@ -40,10 +42,10 @@ namespace FoodShop
             cmb_position.Items.Add(new Item("Cook", 6));
             cmb_position.Items.Add(new Item("Busser", 7));
             cmb_position.Items.Add(new Item("Cashier", 8));
-            cmb_position.Items.Add(new Item("Counter Attendant", 9));
+            cmb_position.Items.Add(new Item("Counter Attendant", 9));       */
 
             // Initialize ShiftID
-            cmb_shift.Items.Add(new Item("First Shift/First Half", 1));
+ /*           cmb_shift.Items.Add(new Item("First Shift/First Half", 1));
             cmb_shift.Items.Add(new Item("First Shift/Second Half", 2));
             cmb_shift.Items.Add(new Item("First Shift", 3));
             cmb_shift.Items.Add(new Item("Second Shift/First Half", 4));
@@ -51,7 +53,7 @@ namespace FoodShop
             cmb_shift.Items.Add(new Item("Second Shift", 6));
             cmb_shift.Items.Add(new Item("Third Shift/First Half", 7));
             cmb_shift.Items.Add(new Item("Third Shift/Second Half", 8));
-            cmb_shift.Items.Add(new Item("Third Shift", 9));
+            cmb_shift.Items.Add(new Item("Third Shift", 9));                */
 
             // Associate the event-handling method with the 
             // KeyDown event. 
@@ -109,6 +111,30 @@ namespace FoodShop
             {
                 MessageBox.Show(err.Message);
             }
+
+            /***************************************************************************************/
+            
+
+           // SqlConnection conn = new SqlConnection(@"Data Source=TOM-PC\sqlexpress;Initial Catalog=Northwind;User ID=sa;Password=xyz") ;
+           // conn.Open();
+           //     SqlCommand sc = new SqlCommand("select positionID, positionTitle from Positions", );
+           //     SqlDataReader reader;
+
+           //     reader = sc.ExecuteReader();
+            string execString = "select positionID, positionTitle from Positions";
+                DataTable dt = new DataTable();
+                dt = dbs.ExecuteSqlReturnTable(execString);
+             dt.Columns.Add("customerid", typeof(string));
+             dt.Columns.Add("contactname", typeof(string));
+          //      dt.Load(reader);
+
+                cmb_position.ValueMember = "positionID";
+                cmb_position.DisplayMember = "positionTitle";
+                cmb_position.DataSource = dt;
+
+          //      conn.Close();
+
+            /***************************************************************************************/
         }
 
 
@@ -313,7 +339,7 @@ namespace FoodShop
 
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //btn_save.Enabled = true;
+            string ID = cmb_position.SelectedValue.ToString();
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
