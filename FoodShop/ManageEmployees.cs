@@ -200,7 +200,7 @@ namespace FoodShop
             var employee = new Employee {
                 employeeLast = lastName,
                 employeeFirst = firstName,
-                hireDate = "4-3-2015",
+                hireDate =  HireDateCal.SelectionStart.ToShortDateString(),            //"4-3-2015",
                 positionID = postID,
                 shiftID = shftID,
                 salary = 18.0,
@@ -292,7 +292,8 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                string hired = "test"; // row["hireDate"].ToString();
+                DateTime hired = Convert.ToDateTime(row["hireDate"]);
+                
                 int posID = 1; // Convert.ToInt16(row["positionID"]);
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
@@ -302,7 +303,7 @@ namespace FoodShop
                 //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
-                txt_hireDate.Text = hired;
+                HireDateCal.BoldedDates.Equals(hired);
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
