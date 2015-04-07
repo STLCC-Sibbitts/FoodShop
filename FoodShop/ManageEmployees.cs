@@ -19,6 +19,7 @@ namespace FoodShop
         string conString;
         string testString = "";
         int currentComboIndex = 0;
+        Boolean isUpdate = false;
 
         public frm_ManageEmployees()
         {
@@ -182,7 +183,14 @@ namespace FoodShop
                 isActive = true 
             };
             // Save employee object to DB
-            MessageBox.Show(db.SaveData(employee));
+            if (isUpdate)
+            {
+                // TODO pass employee to UPDATE function
+            }
+            if (!isUpdate)
+            {
+                MessageBox.Show(db.SaveData(employee));
+            }
         }
 
 
@@ -239,6 +247,7 @@ namespace FoodShop
         // Populate the edit employee tab with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
+            isUpdate = true;
             int rowIndex;
             string sqlQuery;
 
