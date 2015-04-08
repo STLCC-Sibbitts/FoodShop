@@ -49,6 +49,7 @@
             this.btn_exitToMenu = new System.Windows.Forms.Button();
             this.btn_exitApplication = new System.Windows.Forms.Button();
             this.tab_manageEmployees = new System.Windows.Forms.TabPage();
+            this.HireDateCal = new System.Windows.Forms.MonthCalendar();
             this.btn_save = new System.Windows.Forms.Button();
             this.rdo_isActive = new System.Windows.Forms.RadioButton();
             this.lbl_hireDate = new System.Windows.Forms.Label();
@@ -72,7 +73,6 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.HireDateCal = new System.Windows.Forms.MonthCalendar();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -128,6 +128,7 @@
             this.grd_employees.Name = "grd_employees";
             this.grd_employees.Size = new System.Drawing.Size(1083, 297);
             this.grd_employees.TabIndex = 20;
+            //this.grd_employees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_employees_CellContentClick);
             // 
             // employeeID
             // 
@@ -268,6 +269,12 @@
             this.tab_manageEmployees.TabIndex = 2;
             this.tab_manageEmployees.Text = "Manage Employees";
             this.tab_manageEmployees.UseVisualStyleBackColor = true;
+            // 
+            // HireDateCal
+            // 
+            this.HireDateCal.Location = new System.Drawing.Point(728, 33);
+            this.HireDateCal.Name = "HireDateCal";
+            this.HireDateCal.TabIndex = 64;
             // 
             // btn_save
             // 
@@ -500,12 +507,6 @@
             this.btn_tabExitApp.Text = "Exit Application";
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
-            // 
-            // HireDateCal
-            // 
-            this.HireDateCal.Location = new System.Drawing.Point(728, 33);
-            this.HireDateCal.Name = "HireDateCal";
-            this.HireDateCal.TabIndex = 64;
             // 
             // frm_ManageEmployees
             // 

@@ -263,7 +263,7 @@ namespace FoodShop
                 bool active = true;
                 //       bool active = Convert.ToBoolean(row["isActive"]);
 
-                MessageBox.Show("employee name: " + lastName + firstName);
+                //MessageBox.Show("employee name: " + lastName + firstName);
 
                 grd_employees.Rows.Add(id, lastName, firstName, posID, title, shift, hired, active, compensation, status, howPaid);
             }
@@ -274,16 +274,21 @@ namespace FoodShop
         private void btn_select_Click(object sender, EventArgs e)
         {
             isUpdate = true;
-            int rowIndex;
+            int rowIndex; // Initialized to get the exact row
             string sqlQuery;
 
             DataTable dataTable = new DataTable();
 
             // sqlGetTable();
-            rowIndex = grd_employees.CurrentCell.RowIndex;
-            MessageBox.Show("rowIndex = " + rowIndex);
+            rowIndex = grd_employees.CurrentCell.RowIndex;  // This will be inconsistent if an empID is deleted
 
-            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            int columnIndex = 0;
+            // Revised: This returns the value (ID) given column index and row index
+            int index = (int)grd_employees[columnIndex, rowIndex].Value;
+            //MessageBox.Show("rowIndex = " + rowIndex);
+
+            //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
 
             dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
 
@@ -305,7 +310,8 @@ namespace FoodShop
                 txt_lastName.Text = lastName;
                 HireDateCal.BoldedDates.Equals(hired);
                 cmb_position.SelectedIndex = posID;
-                cmb_shift.SelectedIndex = shift;
+                //cmb_shift.SelectedIndex = shift;
+                //cmb_shift.SelectedIndex = 0;
                 txt_rateOfPay.Text = compensation.ToString();
 
 
@@ -452,6 +458,11 @@ namespace FoodShop
         {
             this.Hide();
         }
+
+        //private void grd_employees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+
+        //}
     }
 
 
