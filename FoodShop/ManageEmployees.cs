@@ -55,8 +55,7 @@ namespace FoodShop
             cmb_shift.Items.Add(new Item("Third Shift/Second Half", 8));
             cmb_shift.Items.Add(new Item("Third Shift", 9));                */
 
-            // Associate the event-handling method with the 
-            // KeyDown event. 
+            // Associate the event-handling method with the KeyDown event. 
             this.KeyDown += new KeyEventHandler(frm_ManageEmployees_KeyDown);
 
         }
@@ -69,7 +68,6 @@ namespace FoodShop
         private void frm_ManageEmployees_KeyDown(object sender, KeyEventArgs e)
         {   
             e.Handled = true;        
-          //  ListBox1.Items.Add(e.KeyCode);
             btn_save.Enabled = true;
 
             // tried this to regiser changes in combo box
@@ -111,99 +109,61 @@ namespace FoodShop
             {
                 MessageBox.Show(err.Message);
             }
-
-            /***************************************************************************************/
-            
-
-           // SqlConnection conn = new SqlConnection(@"Data Source=TOM-PC\sqlexpress;Initial Catalog=Northwind;User ID=sa;Password=xyz") ;
-           // conn.Open();
-           //     SqlCommand sc = new SqlCommand("select positionID, positionTitle from Positions", );
-           //     SqlDataReader reader;
-
-           //     reader = sc.ExecuteReader();
+                        
             string execString = "select positionID, positionTitle from Positions";
                 DataTable dt = new DataTable();
                 dt = dbs.ExecuteSqlReturnTable(execString);
-             dt.Columns.Add("customerid", typeof(string));
-             dt.Columns.Add("contactname", typeof(string));
-          //      dt.Load(reader);
+                dt.Columns.Add("customerid", typeof(string));
+                dt.Columns.Add("contactname", typeof(string));
+              //      dt.Load(reader);
 
                 cmb_position.ValueMember = "positionID";
                 cmb_position.DisplayMember = "positionTitle";
                 cmb_position.DataSource = dt;
-
           //      conn.Close();
-
-            /***************************************************************************************/
         }
 
 
         // On button click, initialize new employee
         private void btn_save_Click_1(object sender, EventArgs e)
         {
-            //CultureInfo enUS = new CultureInfo("en-US");
-            //DateTime dateValue;
-            //Employee employee = new Employee();
             string lastName = String.Empty;
             string firstName = String.Empty;
             int postID = 0;
             int shftID = 10;
             int empType = 0;
             int payType = 0;
+            decimal rateOfPay = 0.0m;
 
-            // You could use the one helper method to validate the first and last name
-            if (txt_lastName.TextLength <= 20)
-                //employee.employeeLast = txt_lastName.Text;
-                lastName = txt_lastName.Text;
-            else
-                //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
-                lastName = txt_lastName.Text.Substring(0, 20);
-            if(txt_firstName.TextLength <= 20)
-                //employee.employeeFirst = txt_firstName.Text;
-                firstName = txt_firstName.Text;
-            else
-                //employee.employeeFirst = txt_firstName.Text.Substring(0, 20);
-                firstName = txt_firstName.Text.Substring(0, 20);
-            /*
-            // Try using the MonthCalendar Control so the user can just pick a date, then revise the data type in Employee class to Date/DateTime
-            if(DateTime.TryParseExact(txt_hireDate.Text, "g", enUS, DateTimeStyles.None, out dateValue))
-                employee.hireDate = txt_hireDate.Text;
-            */
+            lastName = stringValidator(txt_lastName.Text);
+            firstName = stringValidator(txt_firstName.Text);
 
             //employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
             postID = Convert.ToInt16(cmb_position.SelectedIndex);
             //employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-            /*
+            
             // How about using decimal for money stuff? It seems to be compatible with "money" datatype in SQL
-            if(float.Parse(txt_rateOfPay.Text) < 0)
+            if(decimal.Parse(txt_rateOfPay.Text) < 0)
             {
                 MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
             }
             else
-                employee.salary = float.Parse(txt_rateOfPay.Text);
-            */
-
-            //employee.fullTime = getShiftType(employee);
+                rateOfPay = decimal.Parse(txt_rateOfPay.Text);
+            
             empType = getShiftType(); // this is revised method
-            //employee.hourly = getSalaryType(employee);
             payType = getSalaryType(); // this is a revised method
             // employee.isActive = TODO
-            //insertEmployee(employee);
 
-            //MessageBox.Show(employee.employeeLast + " " + employee.employeeFirst + " " + employee.hireDate);
-            
-            //MessageBox.Show(db.TestConnection());
-            //var employee = new Employee(0, employeeLast, employeeFirst, "4-3-2015", 12, 50, 18.0, 15, 1, true);
 
             // Create an employee object using the custom constructor in the employee class
             var employee = new Employee {
                 employeeLast = lastName,
                 employeeFirst = firstName,
-                hireDate =  HireDateCal.SelectionStart.ToShortDateString(),            //"4-3-2015",
+                hireDate =  HireDateCal.SelectionStart.ToShortDateString(),
                 positionID = postID,
                 shiftID = shftID,
-                salary = 18.0,
+                salary = rateOfPay,
                 fullTime = empType,
                 hourly = payType,
                 isActive = true 
@@ -253,7 +213,7 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                string hired = "test"; // row["hireDate"].ToString();
+                string hired =  row["hireDate"].ToString();
                 int posID = 1; // Convert.ToInt16(row["positionID"]);
                 string title = "test title";
                 int shift = Convert.ToInt16(row["shiftID"]);
@@ -349,6 +309,19 @@ namespace FoodShop
         }
 
 
+        private string stringValidator(string text)
+        {
+            string name;
+            if (text.Length <= 20)
+                //employee.employeeLast = txt_lastName.Text;
+                name = text;
+            else
+                //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
+                name = text.Substring(0, 20);
+            return name;
+        }
+
+
 
         private void gbx_workerType_Enter(object sender, EventArgs e)
         {
@@ -379,6 +352,8 @@ namespace FoodShop
             }
             return type;
         }
+
+
         // Return the employee's shift type (full or part-time).
         public RadioButton getShiftType(int shiftID)
         {
