@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 
 namespace FoodShop
 {
@@ -19,6 +21,7 @@ namespace FoodShop
         string conString;
         string testString = "";
         int currentComboIndex = 0;
+        Boolean isUpdate = false;
 
         public frm_ManageEmployees()
         {
@@ -31,7 +34,7 @@ namespace FoodShop
 
             // Consider pulling these into an Initializer Class if possible
             // Initialize positionID combo box
-            cmb_position.Items.Add(new Item("Store Manager", 1));
+  /*          cmb_position.Items.Add(new Item("Store Manager", 1));
             cmb_position.Items.Add(new Item("Assistant Manager", 2));
             cmb_position.Items.Add(new Item("Kitchen Manager", 3));
             cmb_position.Items.Add(new Item("Floor Manager", 4));
@@ -39,10 +42,10 @@ namespace FoodShop
             cmb_position.Items.Add(new Item("Cook", 6));
             cmb_position.Items.Add(new Item("Busser", 7));
             cmb_position.Items.Add(new Item("Cashier", 8));
-            cmb_position.Items.Add(new Item("Counter Attendant", 9));
+            cmb_position.Items.Add(new Item("Counter Attendant", 9));       */
 
             // Initialize ShiftID
-            cmb_shift.Items.Add(new Item("First Shift/First Half", 1));
+ /*           cmb_shift.Items.Add(new Item("First Shift/First Half", 1));
             cmb_shift.Items.Add(new Item("First Shift/Second Half", 2));
             cmb_shift.Items.Add(new Item("First Shift", 3));
             cmb_shift.Items.Add(new Item("Second Shift/First Half", 4));
@@ -50,7 +53,7 @@ namespace FoodShop
             cmb_shift.Items.Add(new Item("Second Shift", 6));
             cmb_shift.Items.Add(new Item("Third Shift/First Half", 7));
             cmb_shift.Items.Add(new Item("Third Shift/Second Half", 8));
-            cmb_shift.Items.Add(new Item("Third Shift", 9));
+            cmb_shift.Items.Add(new Item("Third Shift", 9));                */
 
             // Associate the event-handling method with the 
             // KeyDown event. 
@@ -108,6 +111,30 @@ namespace FoodShop
             {
                 MessageBox.Show(err.Message);
             }
+
+            /***************************************************************************************/
+            
+
+           // SqlConnection conn = new SqlConnection(@"Data Source=TOM-PC\sqlexpress;Initial Catalog=Northwind;User ID=sa;Password=xyz") ;
+           // conn.Open();
+           //     SqlCommand sc = new SqlCommand("select positionID, positionTitle from Positions", );
+           //     SqlDataReader reader;
+
+           //     reader = sc.ExecuteReader();
+            string execString = "select positionID, positionTitle from Positions";
+                DataTable dt = new DataTable();
+                dt = dbs.ExecuteSqlReturnTable(execString);
+             dt.Columns.Add("customerid", typeof(string));
+             dt.Columns.Add("contactname", typeof(string));
+          //      dt.Load(reader);
+
+                cmb_position.ValueMember = "positionID";
+                cmb_position.DisplayMember = "positionTitle";
+                cmb_position.DataSource = dt;
+
+          //      conn.Close();
+
+            /***************************************************************************************/
         }
 
 
@@ -173,7 +200,7 @@ namespace FoodShop
             var employee = new Employee {
                 employeeLast = lastName,
                 employeeFirst = firstName,
-                hireDate = "4-3-2015",
+                hireDate =  HireDateCal.SelectionStart.ToShortDateString(),            //"4-3-2015",
                 positionID = postID,
                 shiftID = shftID,
                 salary = 18.0,
@@ -182,7 +209,14 @@ namespace FoodShop
                 isActive = true 
             };
             // Save employee object to DB
-            MessageBox.Show(db.SaveData(employee));
+            if (isUpdate)
+            {
+                // TODO pass employee to UPDATE function
+            }
+            if (!isUpdate)
+            {
+                MessageBox.Show(db.SaveData(employee));
+            }
         }
 
 
@@ -239,6 +273,7 @@ namespace FoodShop
         // Populate the edit employee tab with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
+            isUpdate = true;
             int rowIndex;
             string sqlQuery;
 
@@ -257,7 +292,8 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                string hired = "test"; // row["hireDate"].ToString();
+                DateTime hired = Convert.ToDateTime(row["hireDate"]);
+                
                 int posID = 1; // Convert.ToInt16(row["positionID"]);
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
@@ -267,7 +303,7 @@ namespace FoodShop
                 //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
-                txt_hireDate.Text = hired;
+                HireDateCal.BoldedDates.Equals(hired);
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
@@ -304,7 +340,7 @@ namespace FoodShop
 
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //btn_save.Enabled = true;
+            string ID = cmb_position.SelectedValue.ToString();
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)

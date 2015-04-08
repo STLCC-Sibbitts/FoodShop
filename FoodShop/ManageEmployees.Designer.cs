@@ -51,9 +51,7 @@
             this.tab_manageEmployees = new System.Windows.Forms.TabPage();
             this.btn_save = new System.Windows.Forms.Button();
             this.rdo_isActive = new System.Windows.Forms.RadioButton();
-            this.txt_hireDate = new System.Windows.Forms.TextBox();
             this.lbl_hireDate = new System.Windows.Forms.Label();
-            this.txt_id = new System.Windows.Forms.TextBox();
             this.btn_tabExitToMenu = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.pnl_salary = new System.Windows.Forms.Panel();
@@ -65,7 +63,6 @@
             this.rdo_salary = new System.Windows.Forms.RadioButton();
             this.lbl_rateOfPay = new System.Windows.Forms.Label();
             this.txt_rateOfPay = new System.Windows.Forms.TextBox();
-            this.lbl_id = new System.Windows.Forms.Label();
             this.cmb_shift = new System.Windows.Forms.ComboBox();
             this.lbl_shift = new System.Windows.Forms.Label();
             this.lbl_position = new System.Windows.Forms.Label();
@@ -75,6 +72,7 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
+            this.HireDateCal = new System.Windows.Forms.MonthCalendar();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -247,15 +245,13 @@
             // 
             // tab_manageEmployees
             // 
+            this.tab_manageEmployees.Controls.Add(this.HireDateCal);
             this.tab_manageEmployees.Controls.Add(this.btn_save);
             this.tab_manageEmployees.Controls.Add(this.rdo_isActive);
-            this.tab_manageEmployees.Controls.Add(this.txt_hireDate);
             this.tab_manageEmployees.Controls.Add(this.lbl_hireDate);
-            this.tab_manageEmployees.Controls.Add(this.txt_id);
             this.tab_manageEmployees.Controls.Add(this.btn_tabExitToMenu);
             this.tab_manageEmployees.Controls.Add(this.btn_delete);
             this.tab_manageEmployees.Controls.Add(this.pnl_salary);
-            this.tab_manageEmployees.Controls.Add(this.lbl_id);
             this.tab_manageEmployees.Controls.Add(this.cmb_shift);
             this.tab_manageEmployees.Controls.Add(this.lbl_shift);
             this.tab_manageEmployees.Controls.Add(this.lbl_position);
@@ -294,29 +290,14 @@
             this.rdo_isActive.Text = "Is Active?";
             this.rdo_isActive.UseVisualStyleBackColor = true;
             // 
-            // txt_hireDate
-            // 
-            this.txt_hireDate.Location = new System.Drawing.Point(520, 61);
-            this.txt_hireDate.Name = "txt_hireDate";
-            this.txt_hireDate.Size = new System.Drawing.Size(100, 20);
-            this.txt_hireDate.TabIndex = 61;
-            // 
             // lbl_hireDate
             // 
             this.lbl_hireDate.AutoSize = true;
-            this.lbl_hireDate.Location = new System.Drawing.Point(517, 33);
+            this.lbl_hireDate.Location = new System.Drawing.Point(638, 33);
             this.lbl_hireDate.Name = "lbl_hireDate";
             this.lbl_hireDate.Size = new System.Drawing.Size(52, 13);
             this.lbl_hireDate.TabIndex = 60;
             this.lbl_hireDate.Text = "Hire Date";
-            // 
-            // txt_id
-            // 
-            this.txt_id.Location = new System.Drawing.Point(679, 61);
-            this.txt_id.Name = "txt_id";
-            this.txt_id.ReadOnly = true;
-            this.txt_id.Size = new System.Drawing.Size(100, 20);
-            this.txt_id.TabIndex = 59;
             // 
             // btn_tabExitToMenu
             // 
@@ -438,15 +419,6 @@
             this.txt_rateOfPay.Size = new System.Drawing.Size(100, 20);
             this.txt_rateOfPay.TabIndex = 9;
             // 
-            // lbl_id
-            // 
-            this.lbl_id.AutoSize = true;
-            this.lbl_id.Location = new System.Drawing.Point(676, 33);
-            this.lbl_id.Name = "lbl_id";
-            this.lbl_id.Size = new System.Drawing.Size(67, 13);
-            this.lbl_id.TabIndex = 58;
-            this.lbl_id.Text = "Employee ID";
-            // 
             // cmb_shift
             // 
             this.cmb_shift.FormattingEnabled = true;
@@ -529,6 +501,12 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
+            // HireDateCal
+            // 
+            this.HireDateCal.Location = new System.Drawing.Point(728, 33);
+            this.HireDateCal.Name = "HireDateCal";
+            this.HireDateCal.TabIndex = 64;
+            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -578,9 +556,7 @@
         private System.Windows.Forms.Button btn_exitToMenu;
         private System.Windows.Forms.Button btn_exitApplication;
         private System.Windows.Forms.RadioButton rdo_isActive;
-        private System.Windows.Forms.TextBox txt_hireDate;
         private System.Windows.Forms.Label lbl_hireDate;
-        private System.Windows.Forms.TextBox txt_id;
         private System.Windows.Forms.Button btn_tabExitToMenu;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Panel pnl_salary;
@@ -590,7 +566,6 @@
         private System.Windows.Forms.RadioButton rdo_hourly;
         private System.Windows.Forms.RadioButton rdo_partTime;
         private System.Windows.Forms.RadioButton rdo_salary;
-        private System.Windows.Forms.Label lbl_id;
         private System.Windows.Forms.ComboBox cmb_shift;
         private System.Windows.Forms.Label lbl_shift;
         private System.Windows.Forms.Label lbl_position;
@@ -603,6 +578,7 @@
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.GroupBox gbx_payType;
         private System.Windows.Forms.GroupBox gbx_shiftType;
+        private System.Windows.Forms.MonthCalendar HireDateCal;
 
     }
 }

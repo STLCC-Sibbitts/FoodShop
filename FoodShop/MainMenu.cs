@@ -96,6 +96,11 @@ namespace FoodShop
         {
             frm_ManageEmployees formManageEmployees = new frm_ManageEmployees();
             formManageEmployees.Show();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }  
     }
 }
