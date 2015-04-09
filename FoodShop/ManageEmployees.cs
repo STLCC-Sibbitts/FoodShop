@@ -280,7 +280,7 @@ namespace FoodShop
             DataTable dataTable = new DataTable();
 
             // sqlGetTable();
-            rowIndex = grd_employees.CurrentCell.RowIndex;  // This will be inconsistent if an empID is deleted
+            rowIndex = grd_employees.CurrentCell.RowIndex;  // This will be inconsistent if an employee object is deleted
 
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
