@@ -87,6 +87,7 @@ namespace FoodShop
                 MessageBox.Show(err.Message);
             }
 
+            // Populate the combo boxes for position ID and shift ID
             string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
             posDT = dbs.ExecuteSqlReturnTable(posExecString);
@@ -106,35 +107,19 @@ namespace FoodShop
         }
 
 
-        // On button click, initialize new employee
+        // When the save button is clicked, create a new employee object with the data entered
+        // by the user.
         private void btn_save_Click_1(object sender, EventArgs e)
         {
-            string lastName = String.Empty;
-            string firstName = String.Empty;
-            int postID = 0;
-            int shftID = 10;
-            int empType = 0;
-            int payType = 0;
-            decimal rateOfPay = 0.0m;
+            string lastName = stringValidator(txt_lastName.Text);
+            string firstName = stringValidator(txt_firstName.Text);
+            string whenHired = HireDateCal.SelectionStart.ToShortDateString();
+            int postID = Convert.ToInt16(cmb_position.SelectedIndex);
+            int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
+            int empType = getShiftType();  // this is revised method
+            int payType = getSalaryType();  // this is a revised method
+            decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
 
-            lastName = stringValidator(txt_lastName.Text);
-            firstName = stringValidator(txt_firstName.Text);
-
-            //employee.positionID = Convert.ToInt16(cmb_position.SelectedIndex);
-            postID = Convert.ToInt16(cmb_position.SelectedIndex);
-            //employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-            shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-
-            // How about using decimal for money stuff? It seems to be compatible with "money" datatype in SQL
-            if (decimal.Parse(txt_rateOfPay.Text) < 0)
-            {
-                MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
-            }
-            else
-                rateOfPay = decimal.Parse(txt_rateOfPay.Text);
-
-            empType = getShiftType(); // this is revised method
-            payType = getSalaryType(); // this is a revised method
             // employee.isActive = TODO
 
 
@@ -143,7 +128,7 @@ namespace FoodShop
             {
                 employeeLast = lastName,
                 employeeFirst = firstName,
-                hireDate = HireDateCal.SelectionStart.ToShortDateString(),
+                hireDate = whenHired,
                 positionID = postID,
                 shiftID = shftID,
                 salary = rateOfPay,
@@ -151,15 +136,17 @@ namespace FoodShop
                 hourly = payType,
                 isActive = true
             };
+
+            db.updateData(employee);
             // Save employee object to DB
-            if (isUpdate)
+     /*       if (isUpdate)
             {
                 // TODO pass employee to UPDATE function
             }
             if (!isUpdate)
-            {
-                MessageBox.Show(db.SaveData(employee));
-            }
+            { */
+                MessageBox.Show("using new updateEmployee method: " + db.SaveData(employee));
+   //         }
         }
 
 
@@ -435,6 +422,26 @@ namespace FoodShop
         {
             this.Hide();
         }
+
+        // Validate rate of pay
+        private decimal validateRateOfPay(string pay)
+        {
+         /*   if (decimal.Parse(pay) < 0)
+            {
+                MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
+            }
+            else
+                rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
+
+
+            decimal num;
+            bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), // cached
+            out num);
+            return num;
+        }
+
+
+
     }
 
 

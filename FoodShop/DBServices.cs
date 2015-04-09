@@ -106,7 +106,7 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees"; 
+                    string tableName = "Employees";
                     string insertStatement = "INSERT INTO " + tableName +
                         " VALUES(@LastName, @FirstName, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
                     using (SqlCommand command = new SqlCommand(
@@ -140,12 +140,60 @@ namespace FoodShop
         }
 
         // TODOs: Overload SaveData Method to accept other objects
-        public string SaveData(Customer cust)
+        public string saveData(Customer cust)
         {
             string retVal = String.Empty;
             // Put the SQL Connection Here
             return retVal;
         }
+
+        #region Update Data Methods
+        public string updateData(Employee emp)
+        {
+            string retVal = string.Empty;
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "Employees";
+                    string updateStatement = "UPDATE " + tableName +
+                        " SET employeeLast = @LastName, employeeFirst = @FirstName, hireDate = @HireDate," +
+                            " positionId = @PositionID, shiftID = @ShiftID, salary = @Salary, fullTime = @FullTime," +
+                            " hourly = @Hourly, isActive = @IsActive " +
+                        " WHERE employeeID = @EmployeeID";
+                    using (SqlCommand command = new SqlCommand(
+                    updateStatement, sqlCon))
+                    {
+                        command.Parameters.AddWithValue("EmployeeID", emp.employeeID);
+                        command.Parameters.AddWithValue("LastName", emp.employeeLast);
+                        command.Parameters.AddWithValue("FirstName", emp.employeeFirst);
+                        command.Parameters.AddWithValue("HireDate", emp.hireDate);
+                        command.Parameters.AddWithValue("PositionID", emp.positionID);
+                        command.Parameters.AddWithValue("ShiftID", emp.shiftID);
+                        command.Parameters.AddWithValue("Salary", emp.salary);
+                        command.Parameters.AddWithValue("FullTime", emp.fullTime);
+                        command.Parameters.AddWithValue("Hourly", emp.hourly);
+                        command.Parameters.AddWithValue("IsActive", emp.isActive);
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "Data Successfully Updated!";
+                }
+                catch
+                {
+                    retVal = "Failed to Update Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
+            return retVal;
+        }
+        #endregion
+
+
 
         #endregion
     }
