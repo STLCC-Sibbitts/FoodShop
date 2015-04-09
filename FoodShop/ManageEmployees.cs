@@ -32,29 +32,6 @@ namespace FoodShop
             this.KeyPreview = true;
             btn_save.Enabled = false;
 
-            // Consider pulling these into an Initializer Class if possible
-            // Initialize positionID combo box
-  /*          cmb_position.Items.Add(new Item("Store Manager", 1));
-            cmb_position.Items.Add(new Item("Assistant Manager", 2));
-            cmb_position.Items.Add(new Item("Kitchen Manager", 3));
-            cmb_position.Items.Add(new Item("Floor Manager", 4));
-            cmb_position.Items.Add(new Item("Head cook", 5));
-            cmb_position.Items.Add(new Item("Cook", 6));
-            cmb_position.Items.Add(new Item("Busser", 7));
-            cmb_position.Items.Add(new Item("Cashier", 8));
-            cmb_position.Items.Add(new Item("Counter Attendant", 9));       */
-
-            // Initialize ShiftID
- /*           cmb_shift.Items.Add(new Item("First Shift/First Half", 1));
-            cmb_shift.Items.Add(new Item("First Shift/Second Half", 2));
-            cmb_shift.Items.Add(new Item("First Shift", 3));
-            cmb_shift.Items.Add(new Item("Second Shift/First Half", 4));
-            cmb_shift.Items.Add(new Item("Second Shift/Second Half", 5));
-            cmb_shift.Items.Add(new Item("Second Shift", 6));
-            cmb_shift.Items.Add(new Item("Third Shift/First Half", 7));
-            cmb_shift.Items.Add(new Item("Third Shift/Second Half", 8));
-            cmb_shift.Items.Add(new Item("Third Shift", 9));                */
-
             // Associate the event-handling method with the KeyDown event. 
             this.KeyDown += new KeyEventHandler(frm_ManageEmployees_KeyDown);
 
@@ -66,8 +43,8 @@ namespace FoodShop
         // to the control with focus by setting the KeyEventArg.Handled 
         // property to false. 
         private void frm_ManageEmployees_KeyDown(object sender, KeyEventArgs e)
-        {   
-            e.Handled = true;        
+        {
+            e.Handled = true;
             btn_save.Enabled = true;
 
             // tried this to regiser changes in combo box
@@ -109,18 +86,23 @@ namespace FoodShop
             {
                 MessageBox.Show(err.Message);
             }
-                        
-            string execString = "select positionID, positionTitle from Positions";
-                DataTable dt = new DataTable();
-                dt = dbs.ExecuteSqlReturnTable(execString);
-                dt.Columns.Add("customerid", typeof(string));
-                dt.Columns.Add("contactname", typeof(string));
-              //      dt.Load(reader);
 
-                cmb_position.ValueMember = "positionID";
-                cmb_position.DisplayMember = "positionTitle";
-                cmb_position.DataSource = dt;
-          //      conn.Close();
+            string posExecString = "select positionID, positionTitle from Positions";
+            DataTable posDT = new DataTable();
+            posDT = dbs.ExecuteSqlReturnTable(posExecString);
+            //      dt.Load(reader);
+
+            cmb_position.ValueMember = "positionID";
+            cmb_position.DisplayMember = "positionTitle";
+            cmb_position.DataSource = posDT;
+            //      conn.Close();
+
+            string shiftExecString = "select shiftID, shiftTitle from Shifts";
+            DataTable shiftDT = new DataTable();
+            shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);
+            cmb_shift.ValueMember = "shiftID";
+            cmb_shift.DisplayMember = "shiftTitle";
+            cmb_shift.DataSource = shiftDT;
         }
 
 
@@ -142,31 +124,32 @@ namespace FoodShop
             postID = Convert.ToInt16(cmb_position.SelectedIndex);
             //employee.shiftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-            
+
             // How about using decimal for money stuff? It seems to be compatible with "money" datatype in SQL
-            if(decimal.Parse(txt_rateOfPay.Text) < 0)
+            if (decimal.Parse(txt_rateOfPay.Text) < 0)
             {
                 MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
             }
             else
                 rateOfPay = decimal.Parse(txt_rateOfPay.Text);
-            
+
             empType = getShiftType(); // this is revised method
             payType = getSalaryType(); // this is a revised method
             // employee.isActive = TODO
 
 
             // Create an employee object using the custom constructor in the employee class
-            var employee = new Employee {
+            var employee = new Employee
+            {
                 employeeLast = lastName,
                 employeeFirst = firstName,
-                hireDate =  HireDateCal.SelectionStart.ToShortDateString(),
+                hireDate = HireDateCal.SelectionStart.ToShortDateString(),
                 positionID = postID,
                 shiftID = shftID,
                 salary = rateOfPay,
                 fullTime = empType,
                 hourly = payType,
-                isActive = true 
+                isActive = true
             };
             // Save employee object to DB
             if (isUpdate)
@@ -187,7 +170,7 @@ namespace FoodShop
             string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
                 "'" + emp.employeeLast + "'" + ", " +
                 "'" + emp.employeeFirst + "'" + ", " +
-                "'" + "2015-03-01" + "'" + ", " +
+                "'" + emp.hireDate + "'" + ", " +
                 "'" + emp.positionID + "'" + ", " +
                 "'" + emp.shiftID + "'" + ", " +
                 "'" + emp.salary + "'" + ", " +
@@ -213,8 +196,12 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                string hired =  row["hireDate"].ToString();
-                int posID = 1; // Convert.ToInt16(row["positionID"]);
+                string hired = row["hireDate"].ToString();
+
+                //int posID = isValidID((Convert.ToInt16(row["positionID"])));
+                int posID = SafeGetInt(row, "positionID");
+                MessageBox.Show("posID = " + posID);
+
                 string title = "test title";
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
@@ -229,8 +216,16 @@ namespace FoodShop
             }
         }
 
+        public static int SafeGetInt(DataRow row, string colName)
+        {
+            if (!DBNull.Value.Equals(row[colName]))
+                return Convert.ToInt16(row[colName]);
+            else
+                return -1;
+        }
 
-        // Populate the edit employee tab with the results of a sql query.
+
+        // Populate the edit employee tab fields with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
             isUpdate = true;
@@ -253,7 +248,7 @@ namespace FoodShop
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
                 DateTime hired = Convert.ToDateTime(row["hireDate"]);
-                
+
                 int posID = 1; // Convert.ToInt16(row["positionID"]);
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
@@ -308,6 +303,19 @@ namespace FoodShop
             //btn_save.Enabled = true;
         }
 
+        // Returns position id after ensuring it is a valid value
+        private int isValidID(int id)
+        {
+            int posID = 0;
+            if (id != null)
+            {
+                posID = id;
+            }
+            else
+                posID = -1;
+            return posID;
+        }
+
 
         private string stringValidator(string text)
         {
@@ -359,7 +367,7 @@ namespace FoodShop
         {
             RadioButton rdo_selected = new RadioButton();
 
-            if(shiftID == 0)
+            if (shiftID == 0)
                 rdo_selected = rdo_fullTime;
             if (shiftID == 1)
                 rdo_selected = rdo_partTime;
