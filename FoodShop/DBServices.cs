@@ -98,7 +98,7 @@ namespace FoodShop
         /// </summary>
         /// <param name="emp">Employee Object</param>
         /// <returns> Status </returns>
-        public string SaveData(Employee emp)
+        public string saveData(Employee emp)
         {
             string retVal = String.Empty;
             using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))

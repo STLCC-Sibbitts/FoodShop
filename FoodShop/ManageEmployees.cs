@@ -145,7 +145,7 @@ namespace FoodShop
             }
             if (!isUpdate)
             { */
-                MessageBox.Show("using new updateEmployee method: " + db.SaveData(employee));
+                MessageBox.Show("using new updateEmployee method: " + db.saveData(employee));
    //         }
         }
 
