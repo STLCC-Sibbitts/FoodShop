@@ -106,7 +106,7 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees"; 
+                    string tableName = "Employees";
                     string insertStatement = "INSERT INTO " + tableName +
                         " VALUES(@LastName, @FirstName, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
                     using (SqlCommand command = new SqlCommand(
@@ -158,8 +158,8 @@ namespace FoodShop
                 {
                     string tableName = "Employees";
                     string updateStatement = "UPDATE " + tableName +
-                        " SET employeeLast = @LastName, employeeFirst = @FirstName, hireDate = @HireDate," + 
-                            " positionId = @PositionID, shiftID = @ShiftID, salary = @Salary, fullTime = @FullTime," + 
+                        " SET employeeLast = @LastName, employeeFirst = @FirstName, hireDate = @HireDate," +
+                            " positionId = @PositionID, shiftID = @ShiftID, salary = @Salary, fullTime = @FullTime," +
                             " hourly = @Hourly, isActive = @IsActive " +
                         " WHERE employeeID = @EmployeeID";
                     using (SqlCommand command = new SqlCommand(
