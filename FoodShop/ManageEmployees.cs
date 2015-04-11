@@ -111,6 +111,13 @@ namespace FoodShop
         // by the user.
         private void btn_save_Click_1(object sender, EventArgs e)
         {
+            int empNumber = 0;
+            // Check if there's an existing employeeID
+            if (!string.IsNullOrWhiteSpace(txt_employeeID.Text))
+            {
+                empNumber = int.Parse(txt_employeeID.Text);
+            }
+
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
             string whenHired = HireDateCal.SelectionStart.ToShortDateString();
@@ -119,34 +126,19 @@ namespace FoodShop
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
-
+            bool isActive = true;
             // employee.isActive = TODO
-
-
-            // Create an employee object using the custom constructor in the employee class
-            var employee = new Employee
+            // Create new employee object
+            var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
+            // Decide whether to insert new data or update an old employee data, then show status
+            if (newName.employeeID == 0)
             {
-                employeeLast = lastName,
-                employeeFirst = firstName,
-                hireDate = whenHired,
-                positionID = postID,
-                shiftID = shftID,
-                salary = rateOfPay,
-                fullTime = empType,
-                hourly = payType,
-                isActive = true
-            };
-
-            db.updateData(employee);
-            // Save employee object to DB
-     /*       if (isUpdate)
-            {
-                // TODO pass employee to UPDATE function
+                MessageBox.Show(db.addNewData(newName));
             }
-            if (!isUpdate)
-            { */
-                MessageBox.Show("using new updateEmployee method: " + db.saveData(employee));
-   //         }
+            else
+            {
+                MessageBox.Show(db.updateData(newName));
+            }
         }
 
 
