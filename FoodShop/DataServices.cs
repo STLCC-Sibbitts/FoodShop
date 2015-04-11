@@ -15,6 +15,7 @@ using System.Windows.Forms;
 
 namespace FoodShop
 {
+    /*
     public class DatabaseServices
     {
 
@@ -211,4 +212,6 @@ namespace FoodShop
         {
         }
     }
+    
+     */
 }
