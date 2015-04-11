@@ -49,6 +49,8 @@
             this.btn_exitToMenu = new System.Windows.Forms.Button();
             this.btn_exitApplication = new System.Windows.Forms.Button();
             this.tab_manageEmployees = new System.Windows.Forms.TabPage();
+            this.txt_employeeID = new System.Windows.Forms.TextBox();
+            this.lbl_employeeID = new System.Windows.Forms.Label();
             this.HireDateCal = new System.Windows.Forms.MonthCalendar();
             this.btn_save = new System.Windows.Forms.Button();
             this.rdo_isActive = new System.Windows.Forms.RadioButton();
@@ -73,8 +75,6 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.lbl_employeeID = new System.Windows.Forms.Label();
-            this.txt_employeeID = new System.Windows.Forms.TextBox();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -272,6 +272,24 @@
             this.tab_manageEmployees.TabIndex = 2;
             this.tab_manageEmployees.Text = "Manage Employees";
             this.tab_manageEmployees.UseVisualStyleBackColor = true;
+            // 
+            // txt_employeeID
+            // 
+            this.txt_employeeID.Location = new System.Drawing.Point(498, 61);
+            this.txt_employeeID.Name = "txt_employeeID";
+            this.txt_employeeID.ReadOnly = true;
+            this.txt_employeeID.Size = new System.Drawing.Size(94, 20);
+            this.txt_employeeID.TabIndex = 66;
+            this.txt_employeeID.Visible = false;
+            // 
+            // lbl_employeeID
+            // 
+            this.lbl_employeeID.AutoSize = true;
+            this.lbl_employeeID.Location = new System.Drawing.Point(495, 33);
+            this.lbl_employeeID.Name = "lbl_employeeID";
+            this.lbl_employeeID.Size = new System.Drawing.Size(67, 13);
+            this.lbl_employeeID.TabIndex = 65;
+            this.lbl_employeeID.Text = "Employee ID";
             // 
             // HireDateCal
             // 
@@ -510,23 +528,6 @@
             this.btn_tabExitApp.Text = "Exit Application";
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
-            // 
-            // lbl_employeeID
-            // 
-            this.lbl_employeeID.AutoSize = true;
-            this.lbl_employeeID.Location = new System.Drawing.Point(495, 33);
-            this.lbl_employeeID.Name = "lbl_employeeID";
-            this.lbl_employeeID.Size = new System.Drawing.Size(67, 13);
-            this.lbl_employeeID.TabIndex = 65;
-            this.lbl_employeeID.Text = "Employee ID";
-            // 
-            // txt_employeeID
-            // 
-            this.txt_employeeID.Location = new System.Drawing.Point(498, 61);
-            this.txt_employeeID.Name = "txt_employeeID";
-            this.txt_employeeID.ReadOnly = true;
-            this.txt_employeeID.Size = new System.Drawing.Size(94, 20);
-            this.txt_employeeID.TabIndex = 66;
             // 
             // frm_ManageEmployees
             // 
