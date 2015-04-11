@@ -253,6 +253,7 @@ namespace FoodShop
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
+                txt_employeeID.Text = id.ToString();
 
 
                 currentComboIndex = cmb_position.SelectedIndex;

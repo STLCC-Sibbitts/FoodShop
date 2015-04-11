@@ -73,6 +73,8 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
+            this.lbl_employeeID = new System.Windows.Forms.Label();
+            this.txt_employeeID = new System.Windows.Forms.TextBox();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -128,7 +130,6 @@
             this.grd_employees.Name = "grd_employees";
             this.grd_employees.Size = new System.Drawing.Size(1083, 297);
             this.grd_employees.TabIndex = 20;
-            //this.grd_employees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_employees_CellContentClick);
             // 
             // employeeID
             // 
@@ -246,6 +247,8 @@
             // 
             // tab_manageEmployees
             // 
+            this.tab_manageEmployees.Controls.Add(this.txt_employeeID);
+            this.tab_manageEmployees.Controls.Add(this.lbl_employeeID);
             this.tab_manageEmployees.Controls.Add(this.HireDateCal);
             this.tab_manageEmployees.Controls.Add(this.btn_save);
             this.tab_manageEmployees.Controls.Add(this.rdo_isActive);
@@ -508,6 +511,23 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
+            // lbl_employeeID
+            // 
+            this.lbl_employeeID.AutoSize = true;
+            this.lbl_employeeID.Location = new System.Drawing.Point(495, 33);
+            this.lbl_employeeID.Name = "lbl_employeeID";
+            this.lbl_employeeID.Size = new System.Drawing.Size(67, 13);
+            this.lbl_employeeID.TabIndex = 65;
+            this.lbl_employeeID.Text = "Employee ID";
+            // 
+            // txt_employeeID
+            // 
+            this.txt_employeeID.Location = new System.Drawing.Point(498, 61);
+            this.txt_employeeID.Name = "txt_employeeID";
+            this.txt_employeeID.ReadOnly = true;
+            this.txt_employeeID.Size = new System.Drawing.Size(94, 20);
+            this.txt_employeeID.TabIndex = 66;
+            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -580,6 +600,8 @@
         private System.Windows.Forms.GroupBox gbx_payType;
         private System.Windows.Forms.GroupBox gbx_shiftType;
         private System.Windows.Forms.MonthCalendar HireDateCal;
+        private System.Windows.Forms.TextBox txt_employeeID;
+        private System.Windows.Forms.Label lbl_employeeID;
 
     }
 }
