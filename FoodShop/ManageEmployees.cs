@@ -14,7 +14,7 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        DatabaseServices dbs = new DatabaseServices();
+        //DatabaseServices dbs = new DatabaseServices();
 
         DBServices db = new DBServices();
 
@@ -75,8 +75,10 @@ namespace FoodShop
 
             try
             {
-                conString = dbs.DbConnectionString;
-                testString = dbs.TestConnection();
+                //conString = dbs.DbConnectionString;
+                conString = db.DbConnString;
+                //testString = dbs.TestConnection();
+                testString = db.TestConnection();
                 MessageBox.Show(conString + "/n/n" + testString);
 
                 sqlGetTable();
@@ -159,7 +161,7 @@ namespace FoodShop
                 "'" + emp.hourly + "'" + ", " +
                 "'" + 1 + "'" + ");";
             // send the employee instance to Joe's method
-            dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
+            //dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
         }
 
 
