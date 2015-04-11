@@ -223,9 +223,13 @@ namespace FoodShop
 
             // sqlGetTable();
             rowIndex = grd_employees.CurrentCell.RowIndex;
-            MessageBox.Show("rowIndex = " + rowIndex);
+            int columnIndex = 0;
+            // Revised: This returns the value (ID) given column index and row index
+            int index = (int)grd_employees[columnIndex, rowIndex].Value;
+            //MessageBox.Show("rowIndex = " + rowIndex);
 
-            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
 
             dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
 
