@@ -90,7 +90,8 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
-            posDT = dbs.ExecuteSqlReturnTable(posExecString);
+            //posDT = dbs.ExecuteSqlReturnTable(posExecString); 
+            posDT = db.ExecuteSqlReturnTable(posExecString);
             //      dt.Load(reader);
 
             cmb_position.ValueMember = "positionID";
@@ -100,7 +101,8 @@ namespace FoodShop
 
             string shiftExecString = "select shiftID, shiftTitle from Shifts";
             DataTable shiftDT = new DataTable();
-            shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);
+            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);
+            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
             cmb_shift.ValueMember = "shiftID";
             cmb_shift.DisplayMember = "shiftTitle";
             cmb_shift.DataSource = shiftDT;
@@ -168,7 +170,8 @@ namespace FoodShop
 
             DataTable dataTable = new DataTable();
 
-            dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);
+            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);
+            dataTable = db.ExecuteSqlReturnTable(sqlSelect);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -223,7 +226,8 @@ namespace FoodShop
             //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
             sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
 
-            dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
+            //dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
+            dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
             {

@@ -93,6 +93,7 @@ namespace FoodShop
             return retVal;
         }
 
+        #region Add New Data Methods
         /// <summary>
         /// Helper method to add new employee data to database.
         /// </summary>
@@ -140,7 +141,9 @@ namespace FoodShop
         }
 
         // TODOs: Overload SaveData Method to accept other objects
-        public string saveData(Customer cust)
+
+        #endregion
+        public string addNewData(Customer cust)
         {
             string retVal = String.Empty;
             // Put the SQL Connection Here
@@ -192,6 +195,41 @@ namespace FoodShop
             return retVal;
         }
         #endregion
+
+        // Method that takes an SQL query and returns a data table
+        public DataTable ExecuteSqlReturnTable(String pSqlToExecute)
+        {
+            SqlConnection sqlCON = new SqlConnection(this.DbConnString);
+            SqlCommand sqlCMD = new SqlCommand();
+            SqlDataAdapter sqlDA = new SqlDataAdapter();
+
+            DataTable datReturn = new DataTable();
+
+            sqlCMD.Connection = sqlCON;
+            sqlCMD.CommandType = CommandType.Text;
+            sqlCMD.CommandText = pSqlToExecute;
+
+            try
+            {
+                sqlDA.SelectCommand = sqlCMD;
+                sqlCON.Open();
+                sqlDA.Fill(datReturn);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                //Clean up resources...
+                sqlCON.Close();
+                sqlCON.Dispose();
+                sqlCMD.Dispose();
+                sqlDA.Dispose();
+            }
+
+            return datReturn;
+        }
 
 
 
