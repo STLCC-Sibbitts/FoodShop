@@ -14,7 +14,7 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        //DatabaseServices dbs = new DatabaseServices();
+        //DatabaseServices dbs = new DatabaseServices();   //This and all dbs instances can be deleted
 
         DBServices db = new DBServices();
 
@@ -92,7 +92,7 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
-            //posDT = dbs.ExecuteSqlReturnTable(posExecString); 
+            //posDT = dbs.ExecuteSqlReturnTable(posExecString);  // This can be deleted
             posDT = db.ExecuteSqlReturnTable(posExecString);
             //      dt.Load(reader);
 
@@ -103,7 +103,7 @@ namespace FoodShop
 
             string shiftExecString = "select shiftID, shiftTitle from Shifts";
             DataTable shiftDT = new DataTable();
-            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);
+            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);  // This can be deleted
             shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
             cmb_shift.ValueMember = "shiftID";
             cmb_shift.DisplayMember = "shiftTitle";
@@ -132,7 +132,7 @@ namespace FoodShop
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = true;
             // employee.isActive = TODO
-            // Create new employee object
+            // Create new employee object, and initialize it
             var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
             // Decide whether to insert new data or update an old employee data, then show status
             if (newName.employeeID == 0)
@@ -147,7 +147,7 @@ namespace FoodShop
 
 
         // Add employee record to the database
-        public void insertEmployee(Employee emp)
+        public void insertEmployee(Employee emp)   // This can be deleted
         {
             // create an instance of the employee
             string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
@@ -172,7 +172,7 @@ namespace FoodShop
 
             DataTable dataTable = new DataTable();
 
-            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);
+            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
 
             foreach (DataRow row in dataTable.Rows)
