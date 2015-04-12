@@ -73,11 +73,11 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.lbl_employeeID = new System.Windows.Forms.Label();
             this.txt_employeeID = new System.Windows.Forms.TextBox();
-=======
->>>>>>> DatabaseServices
+
+// DatabaseServices
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -515,7 +515,7 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
-<<<<<<< HEAD
+//<<<<<<< HEAD
             // lbl_employeeID
             // 
             this.lbl_employeeID.AutoSize = true;
@@ -533,8 +533,8 @@
             this.txt_employeeID.Size = new System.Drawing.Size(94, 20);
             this.txt_employeeID.TabIndex = 66;
             // 
-=======
->>>>>>> DatabaseServices
+//=======
+//>>>>>>> DatabaseServices
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

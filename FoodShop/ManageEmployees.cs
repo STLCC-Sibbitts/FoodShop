@@ -173,6 +173,7 @@ namespace FoodShop
         public void sqlGetTable()
         {
             string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
+            string posSelect = "SELECT positionTitle FROM BreadProjectJr.is283_kmne68.Positions WHERE positionID = ";
 
             DataTable dataTable = new DataTable();
 
@@ -184,12 +185,14 @@ namespace FoodShop
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
                 string hired = row["hireDate"].ToString();
-
-                //int posID = isValidID((Convert.ToInt16(row["positionID"])));
                 int posID = SafeGetInt(row, "positionID");
-                MessageBox.Show("posID = " + posID);
+         //       MessageBox.Show("posID = " + posID);
 
-                string title = "test title";
+                // Get postion title
+         //       string posValue = dbs.ExecuteScalar(posSelect + posID + ";").ToString();
+         //       MessageBox.Show("postion value from table = " + posValue.ToString());
+
+         //       string title = posValue.ToString();
                 int shift = Convert.ToInt16(row["shiftID"]);
                 double compensation = Convert.ToDouble(row["salary"]);
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
@@ -203,6 +206,7 @@ namespace FoodShop
             }
         }
 
+        // Retrieves values for the data grid.
         public static int SafeGetInt(DataRow row, string colName)
         {
             if (!DBNull.Value.Equals(row[colName]))
@@ -290,20 +294,6 @@ namespace FoodShop
         {
             //btn_save.Enabled = true;
         }
-
-        // Returns position id after ensuring it is a valid value
-        private int isValidID(int id)
-        {
-            int posID = 0;
-            if (id != null)
-            {
-                posID = id;
-            }
-            else
-                posID = -1;
-            return posID;
-        }
-
 
         private string stringValidator(string text)
         {
