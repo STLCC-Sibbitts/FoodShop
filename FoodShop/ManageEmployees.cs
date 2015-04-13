@@ -14,7 +14,7 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        DatabaseServices dbs = new DatabaseServices();
+        //DatabaseServices dbs = new DatabaseServices();   //This and all dbs instances can be deleted
 
         DBServices db = new DBServices();
 
@@ -75,8 +75,10 @@ namespace FoodShop
 
             try
             {
-                conString = dbs.DbConnectionString;
-                testString = dbs.TestConnection();
+                //conString = dbs.DbConnectionString;
+                conString = db.DbConnString;
+                //testString = dbs.TestConnection();
+                testString = db.TestConnection();
                 MessageBox.Show(conString + "/n/n" + testString);
 
                 sqlGetTable();
@@ -90,7 +92,8 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
-            posDT = dbs.ExecuteSqlReturnTable(posExecString);
+            //posDT = dbs.ExecuteSqlReturnTable(posExecString);  // This can be deleted
+            posDT = db.ExecuteSqlReturnTable(posExecString);
             //      dt.Load(reader);
 
             cmb_position.ValueMember = "positionID";
@@ -100,7 +103,8 @@ namespace FoodShop
 
             string shiftExecString = "select shiftID, shiftTitle from Shifts";
             DataTable shiftDT = new DataTable();
-            shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);
+            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);  // This can be deleted
+            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
             cmb_shift.ValueMember = "shiftID";
             cmb_shift.DisplayMember = "shiftTitle";
             cmb_shift.DataSource = shiftDT;
@@ -111,6 +115,13 @@ namespace FoodShop
         // by the user.
         private void btn_save_Click_1(object sender, EventArgs e)
         {
+            int empNumber = 0;
+            // Check if there's an existing employeeID
+            if (!string.IsNullOrWhiteSpace(txt_employeeID.Text))
+            {
+                empNumber = int.Parse(txt_employeeID.Text);
+            }
+
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
             string whenHired = HireDateCal.SelectionStart.ToShortDateString();
@@ -119,39 +130,24 @@ namespace FoodShop
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
-
+            bool isActive = true;
             // employee.isActive = TODO
-
-
-            // Create an employee object using the custom constructor in the employee class
-            var employee = new Employee
+            // Create new employee object, and initialize it
+            var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
+            // Decide whether to insert new data or update an old employee data, then show status
+            if (newName.employeeID == 0)
             {
-                employeeLast = lastName,
-                employeeFirst = firstName,
-                hireDate = whenHired,
-                positionID = postID,
-                shiftID = shftID,
-                salary = rateOfPay,
-                fullTime = empType,
-                hourly = payType,
-                isActive = true
-            };
-
-            db.updateData(employee);
-            // Save employee object to DB
-     /*       if (isUpdate)
-            {
-                // TODO pass employee to UPDATE function
+                MessageBox.Show(db.addNewData(newName));
             }
-            if (!isUpdate)
-            { */
-                MessageBox.Show("using new updateEmployee method: " + db.SaveData(employee));
-   //         }
+            else
+            {
+                MessageBox.Show(db.updateData(newName));
+            }
         }
 
 
         // Add employee record to the database
-        public void insertEmployee(Employee emp)
+        public void insertEmployee(Employee emp)   // This can be deleted
         {
             // create an instance of the employee
             string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
@@ -165,7 +161,7 @@ namespace FoodShop
                 "'" + emp.hourly + "'" + ", " +
                 "'" + 1 + "'" + ");";
             // send the employee instance to Joe's method
-            dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
+            //dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
         }
 
 
@@ -177,7 +173,8 @@ namespace FoodShop
 
             DataTable dataTable = new DataTable();
 
-            dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);
+            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
+            dataTable = db.ExecuteSqlReturnTable(sqlSelect);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -227,11 +224,16 @@ namespace FoodShop
 
             // sqlGetTable();
             rowIndex = grd_employees.CurrentCell.RowIndex;
-            MessageBox.Show("rowIndex = " + rowIndex);
+            int columnIndex = 0;
+            // Revised: This returns the value (ID) given column index and row index
+            int index = (int)grd_employees[columnIndex, rowIndex].Value;
+            //MessageBox.Show("rowIndex = " + rowIndex);
 
-            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
+            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
 
-            dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
+            //dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
+            dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
             {
