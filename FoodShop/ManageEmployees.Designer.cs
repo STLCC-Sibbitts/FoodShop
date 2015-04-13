@@ -75,7 +75,6 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.lbl_employeeID = new System.Windows.Forms.Label();
             this.txt_employeeID = new System.Windows.Forms.TextBox();
 
 // DatabaseServices
