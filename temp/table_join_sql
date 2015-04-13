@@ -1,0 +1,4 @@
+SELECT        Employees.*, Positions.positionTitle, Shifts.shiftTitle
+FROM            Employees INNER JOIN
+                         Positions ON Employees.positionID = Positions.positionID INNER JOIN
+                         Shifts ON Employees.shiftID = Shifts.shiftID
