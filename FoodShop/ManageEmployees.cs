@@ -168,38 +168,28 @@ namespace FoodShop
         // Retrieve values for the grid.
         public void sqlGetTable()
         {
-            string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
-            string posSelect = "SELECT positionTitle FROM BreadProjectJr.is283_kmne68.Positions WHERE positionID = ";
-
+            // string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
+            string sqlSelect = "SELECT e.employeeID, e.employeeLast, e.employeeFirst, e.positionID, e.hireDate, e.salary, e.isActive, Positions.positionTitle, Shifts.shiftTitle FROM Employees as e INNER JOIN Positions ON e.positionID = Positions.positionID INNER JOIN Shifts ON e.shiftID = Shifts.shiftID;";
             DataTable dataTable = new DataTable();
-
             //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
-
             foreach (DataRow row in dataTable.Rows)
             {
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
+                int position = SafeGetInt(row, "positionID");
+          //      string position = row["positionID"].ToString();
+                string title = row["positionTitle"].ToString(); //posSelect + posID + ";").ToString();
+                string shift = row["shiftTitle"].ToString();
                 string hired = row["hireDate"].ToString();
-                int posID = SafeGetInt(row, "positionID");
-         //       MessageBox.Show("posID = " + posID);
-
-                // Get postion title
-         //       string posValue = dbs.ExecuteScalar(posSelect + posID + ";").ToString();
          //       MessageBox.Show("postion value from table = " + posValue.ToString());
-
-                string title = "test";  // posValue.ToString();
-                int shift = Convert.ToInt16(row["shiftID"]);
+                bool active = Convert.ToBoolean(row["isActive"]);
                 double compensation = Convert.ToDouble(row["salary"]);
-                int status = 1; // Convert.ToInt16(row["fullTime"]);
+                string status = "test"; // getShiftType(Convert.ToInt16(row["fullTime"]));
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
-                bool active = true;
-                //       bool active = Convert.ToBoolean(row["isActive"]);
-
-                MessageBox.Show("employee name: " + lastName + firstName);
-
-                grd_employees.Rows.Add(id, lastName, firstName, posID, title, shift, hired, active, compensation, status, howPaid);
+//                MessageBox.Show("employee name: " + lastName + firstName);
+                grd_employees.Rows.Add(id, lastName, firstName, position, title, hired, compensation, status, howPaid);
             }
         }
 
@@ -317,16 +307,18 @@ namespace FoodShop
 
 
         // Return the employee's shift type (full or part-time).
-        public int getShiftType(Employee emp)
+        public string getShiftType(int empStatus)
         {
+            string status = "";
             foreach (RadioButton rb in this.gbx_shiftType.Controls)
             {
+                
                 if (rdo_fullTime.Checked)
-                    emp.fullTime = 1;
+                    status = "Full Time";
                 if (rdo_partTime.Checked)
-                    emp.fullTime = 0;
+                    status = "Part Time";
             }
-            return emp.fullTime;
+            return status;
         }
         // REVISED: employee's shift type (full or part-time).
         public int getShiftType()
@@ -343,7 +335,7 @@ namespace FoodShop
 
 
         // Return the employee's shift type (full or part-time).
-        public RadioButton getShiftType(int shiftID)
+   /*     public RadioButton getShiftType(int shiftID)
         {
             RadioButton rdo_selected = new RadioButton();
 
@@ -352,7 +344,7 @@ namespace FoodShop
             if (shiftID == 1)
                 rdo_selected = rdo_partTime;
             return rdo_selected;
-        }
+        } */
 
 
         // Return the employee's salary type (paid hourly or salary).

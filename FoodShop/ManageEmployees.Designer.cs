@@ -75,9 +75,6 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.txt_employeeID = new System.Windows.Forms.TextBox();
-
-// DatabaseServices
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -293,6 +290,7 @@
             this.lbl_employeeID.Size = new System.Drawing.Size(67, 13);
             this.lbl_employeeID.TabIndex = 65;
             this.lbl_employeeID.Text = "Employee ID";
+            this.lbl_employeeID.Visible = false;
             // 
             // HireDateCal
             // 
