@@ -11,7 +11,7 @@ namespace MainOrderForm
 	public class Order : INotifyPropertyChanged
 	{ 
 		/// <summary>
-		/// The constructor is private to enforce the factory pattern
+		/// The constructor is private to enforce the factory pattern.
 		/// </summary>
 		private Order()
         {
