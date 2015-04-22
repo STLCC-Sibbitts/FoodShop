@@ -169,7 +169,7 @@ namespace FoodShop
         public void sqlGetTable()
         {
             // string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
-            string sqlSelect = "SELECT e.employeeID, e.employeeLast, e.employeeFirst, e.positionID, e.hireDate, e.salary, e.isActive, Positions.positionTitle, Shifts.shiftTitle FROM Employees as e INNER JOIN Positions ON e.positionID = Positions.positionID INNER JOIN Shifts ON e.shiftID = Shifts.shiftID;";
+            string sqlSelect = "SELECT e.employeeID, e.employeeLast, e.employeeFirst, e.hireDate, e.salary, e.isActive, e.positionID, Positions.positionTitle, Shifts.shiftTitle FROM Employees as e INNER JOIN Positions ON e.positionID = Positions.positionID INNER JOIN Shifts ON e.shiftID = Shifts.shiftID;";
             DataTable dataTable = new DataTable();
             //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
@@ -178,18 +178,24 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-                int position = SafeGetInt(row, "positionID");
-          //      string position = row["positionID"].ToString();
+          //      int position = SafeGetInt(row, "positionID");
+                string position = row["positionID"].ToString();
                 string title = row["positionTitle"].ToString(); //posSelect + posID + ";").ToString();
                 string shift = row["shiftTitle"].ToString();
                 string hired = row["hireDate"].ToString();
          //       MessageBox.Show("postion value from table = " + posValue.ToString());
-                bool active = Convert.ToBoolean(row["isActive"]);
+         //       bool active = Convert.ToBoolean(row["isActive"]);
+
+                string active = isNull(row["isActive"]);
+             //   MessageBox.Show(active + " " + row["isActive"].ToString());
+                
+
+
                 double compensation = Convert.ToDouble(row["salary"]);
-                string status = "test"; // getShiftType(Convert.ToInt16(row["fullTime"]));
+        //        string status = "test"; // getShiftType(Convert.ToInt16(row["fullTime"]));
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
 //                MessageBox.Show("employee name: " + lastName + firstName);
-                grd_employees.Rows.Add(id, lastName, firstName, position, title, hired, compensation, status, howPaid);
+                grd_employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift); //status,
             }
         }
 
@@ -238,7 +244,7 @@ namespace FoodShop
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
-                //       bool active = Convert.ToBoolean(row["isActive"]);
+         //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
                 HireDateCal.BoldedDates.Equals(hired);
@@ -297,6 +303,29 @@ namespace FoodShop
                 //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
                 name = text.Substring(0, 20);
             return name;
+        }
+
+
+
+
+
+        private string isNull(object colValue)
+        {
+            string value = "";
+            if (colValue.Equals(null) || colValue.Equals("") || colValue.Equals("NULL"))
+            {
+                value = "null";
+            }
+            else if (colValue.ToString() == "1")
+            {
+                value = "yes";
+            }
+            else
+            {
+                value = "no";
+            }
+    //        else value = colValue.ToString();
+            return value;
         }
 
 
