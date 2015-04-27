@@ -124,17 +124,18 @@ namespace FoodShop
 
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
-            string whenHired = HireDateCal.SelectionStart.ToShortDateString();
+            DateTime whenHired = getDateTime();
+            //string whenHired = HireDateCal.SelectionStart.ToShortDateString();
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
-            bool isActive = true;
-            // employee.isActive = TODO
+            bool isActive = getIsActive();
+
             // Create new employee object, and initialize it
             var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
-            // Decide whether to insert new data or update an old employee data, then show status
+            // Decide whether to insert new data or update an existing record, then show status
             if (newName.employeeID == 0)
             {
                 MessageBox.Show(db.addNewData(newName));
@@ -143,6 +144,16 @@ namespace FoodShop
             {
                 MessageBox.Show(db.updateData(newName));
             }
+        }
+
+        // Returns result form isActive radio button
+        private bool getIsActive()
+        {
+            bool active = false;
+            if (rdo_isActive.Checked)
+                active = true;
+            return active;
+            throw new NotImplementedException();
         }
 
 
@@ -199,6 +210,7 @@ namespace FoodShop
             }
         }
 
+
         // Retrieves values for the data grid.
         public static int SafeGetInt(DataRow row, string colName)
         {
@@ -248,6 +260,10 @@ namespace FoodShop
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
                 HireDateCal.BoldedDates.Equals(hired);
+
+                dtm_dateHired.Value = hired;
+//                dateTimePicker1.Value = DateTime.Today.AddDays(-1);
+
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
@@ -283,15 +299,18 @@ namespace FoodShop
             }
         }
 
+        // Position drop down menu
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
             string ID = cmb_position.SelectedValue.ToString();
         }
 
+        // Menu drop down menu
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
             //btn_save.Enabled = true;
         }
+
 
         private string stringValidator(string text)
         {
@@ -454,8 +473,17 @@ namespace FoodShop
             return num;
         }
 
+        private DateTime getDateTime()
+        {
+            DateTime result = dtm_dateHired.Value;
+            return result;
+        }
 
-
+    /*    private DateTime dtm_dateHired_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime result = dtm_dateHired.Value;
+            return result;
+        } */
     }
 
 

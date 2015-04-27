@@ -10,7 +10,7 @@ namespace FoodShop
         public int employeeID { get; set; }
         public string employeeLast { get; set; }
         public string employeeFirst { get; set; }
-        public string hireDate { get; set; }
+        public DateTime hireDate { get; set; }
         public int positionID { get; set; }
         public int shiftID { get; set; }
         public decimal salary { get; set; }
@@ -25,7 +25,7 @@ namespace FoodShop
         }
 
         // Constructor
-        public Employee (int empID, string lastName, string firstName, string hired, int posID,
+        public Employee (int empID, string lastName, string firstName, DateTime hired, int posID,
             int shift, decimal pay, int fullPart, int paidPerHour, bool active)
         {
             employeeID = empID;
