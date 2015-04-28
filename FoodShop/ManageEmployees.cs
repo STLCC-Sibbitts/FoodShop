@@ -14,8 +14,6 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        //DatabaseServices dbs = new DatabaseServices();   //This and all dbs instances can be deleted
-
         DBServices db = new DBServices();
 
         string conString;
@@ -46,23 +44,8 @@ namespace FoodShop
         {
             e.Handled = true;
             btn_save.Enabled = true;
-
-            // tried this to regiser changes in combo box
-            if (cmb_position.SelectedIndex != currentComboIndex)
-            {
-                //btn_save.Enabled = true;
-            }
         }
 
-
-        // tried this to regiser changes in combo box
-        private void frm_ManageEmployees_MouseClick(object sender, KeyEventArgs e)
-        {
-            if (cmb_position.SelectedIndex != currentComboIndex)
-            {
-                // btn_save.Enabled = true;
-            }
-        }
 
 
         /**
@@ -75,12 +58,9 @@ namespace FoodShop
 
             try
             {
-                //conString = dbs.DbConnectionString;
                 conString = db.DbConnString;
-                //testString = dbs.TestConnection();
                 testString = db.TestConnection();
                 MessageBox.Show(conString + "/n/n" + testString);
-
                 sqlGetTable();
 
             }
