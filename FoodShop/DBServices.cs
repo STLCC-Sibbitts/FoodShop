@@ -108,15 +108,15 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees";
+                    string tableName = "Employee";
                     string insertStatement = "INSERT INTO " + tableName +
-                        " VALUES(@LastName, @FirstName, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
+                        " VALUES(@EmployeeLast, @EmployeeFirst, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
                     using (SqlCommand command = new SqlCommand(
                     insertStatement, sqlCon))
                     {
                         //command.Parameters.Add(new SqlParameter("ID", emp.employeeID));
-                        command.Parameters.Add(new SqlParameter("LastName", emp.employeeLast));
-                        command.Parameters.Add(new SqlParameter("FirstName", emp.employeeFirst));
+                        command.Parameters.Add(new SqlParameter("EmployeeLast", emp.employeeLast));
+                        command.Parameters.Add(new SqlParameter("EmployeeFirst", emp.employeeFirst));
                         command.Parameters.Add(new SqlParameter("HireDate", emp.hireDate));
                         command.Parameters.Add(new SqlParameter("PositionID", emp.positionID));
                         command.Parameters.Add(new SqlParameter("ShiftID", emp.shiftID));

@@ -26,7 +26,7 @@ namespace FoodShop
         public frm_ManageEmployees()
         {
             InitializeComponent();
-
+            MessageBox.Show(db.TestConnection());
             // Set KeyPreview object to true to allow the form to process  
             // the key before the control with focus processes it. 
             this.KeyPreview = true;
