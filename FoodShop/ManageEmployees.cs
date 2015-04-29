@@ -128,7 +128,7 @@ namespace FoodShop
             // Decide whether to insert new data or update an old employee data, then show status
             if (newName.employeeID == 0)
             {
-                MessageBox.Show(db.addNewData(newName));
+                MessageBox.Show(db.addNewData(newName)); //This is working
             }
             else
             {
