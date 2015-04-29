@@ -14,27 +14,22 @@ namespace FoodShop
 {
     public partial class frm_ManageEmployees : Form
     {
-        //DatabaseServices dbs = new DatabaseServices();   //This and all dbs instances can be deleted
-
+        // Create a DBServices instance
         DBServices db = new DBServices();
 
-        string conString;
-        string testString = "";
+        //string testString = "";
         int currentComboIndex = 0;
         Boolean isUpdate = false;
 
         public frm_ManageEmployees()
         {
             InitializeComponent();
-            MessageBox.Show(db.TestConnection());
             // Set KeyPreview object to true to allow the form to process  
             // the key before the control with focus processes it. 
             this.KeyPreview = true;
             btn_save.Enabled = false;
-
             // Associate the event-handling method with the KeyDown event. 
             this.KeyDown += new KeyEventHandler(frm_ManageEmployees_KeyDown);
-
         }
 
         // The form will handle all key events before the control with   
@@ -46,15 +41,12 @@ namespace FoodShop
         {
             e.Handled = true;
             btn_save.Enabled = true;
-
             // tried this to regiser changes in combo box
             if (cmb_position.SelectedIndex != currentComboIndex)
             {
                 //btn_save.Enabled = true;
             }
         }
-
-
         // tried this to regiser changes in combo box
         private void frm_ManageEmployees_MouseClick(object sender, KeyEventArgs e)
         {
@@ -71,43 +63,42 @@ namespace FoodShop
          * */
         private void frm_ManageEmployees_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(conString + "/n/n" + testString);
-
-            try
-            {
+            //MessageBox.Show(conString + "/n/n" + testString);
+            //try
+            //{
                 //conString = dbs.DbConnectionString;
-                conString = db.DbConnString;
+                //conString = db.DbConnString;
                 //testString = dbs.TestConnection();
-                testString = db.TestConnection();
-                MessageBox.Show(conString + "/n/n" + testString);
-
+                //testString = db.TestConnection();
+                //MessageBox.Show(conString + "/n/n" + testString);
+                // Test database Connection
+                MessageBox.Show(db.TestConnection());
                 sqlGetTable();
-
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
+            //}
+            //catch (Exception err)
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message);
+            //}
 
             // Populate the combo boxes for position ID and shift ID
-            string posExecString = "select positionID, positionTitle from Positions";
-            DataTable posDT = new DataTable();
-            //posDT = dbs.ExecuteSqlReturnTable(posExecString);  // This can be deleted
-            posDT = db.ExecuteSqlReturnTable(posExecString);
-            //      dt.Load(reader);
+            //string posExecString = "select positionID, positionTitle from Positions";
+            ////string posExecString = "select PositionID, PositionTitle from Positions";
+            //DataTable posDT = new DataTable();
+            //posDT = db.ExecuteSqlReturnTable(posExecString);
+            ////      dt.Load(reader);
 
-            cmb_position.ValueMember = "positionID";
-            cmb_position.DisplayMember = "positionTitle";
-            cmb_position.DataSource = posDT;
-            //      conn.Close();
+            //cmb_position.ValueMember = "PositionID";
+            //cmb_position.DisplayMember = "PositionTitle";
+            //cmb_position.DataSource = posDT;
+            ////      conn.Close();
 
-            string shiftExecString = "select shiftID, shiftTitle from Shifts";
-            DataTable shiftDT = new DataTable();
-            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);  // This can be deleted
-            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
-            cmb_shift.ValueMember = "shiftID";
-            cmb_shift.DisplayMember = "shiftTitle";
-            cmb_shift.DataSource = shiftDT;
+            //string shiftExecString = "select shiftID, shiftTitle from Shifts";
+            //DataTable shiftDT = new DataTable();
+            //shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
+            //cmb_shift.ValueMember = "shiftID";
+            //cmb_shift.DisplayMember = "shiftTitle";
+            //cmb_shift.DataSource = shiftDT;
         }
 
 
@@ -145,30 +136,11 @@ namespace FoodShop
             }
         }
 
-
-        // Add employee record to the database
-        public void insertEmployee(Employee emp)   // This can be deleted
-        {
-            // create an instance of the employee
-            string sqlInsert = "INSERT INTO Employees (employeeLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-                "'" + emp.employeeLast + "'" + ", " +
-                "'" + emp.employeeFirst + "'" + ", " +
-                "'" + emp.hireDate + "'" + ", " +
-                "'" + emp.positionID + "'" + ", " +
-                "'" + emp.shiftID + "'" + ", " +
-                "'" + emp.salary + "'" + ", " +
-                "'" + emp.fullTime + "'" + ", " +
-                "'" + emp.hourly + "'" + ", " +
-                "'" + 1 + "'" + ");";
-            // send the employee instance to Joe's method
-            //dbs.ExecuteNonQueryReturnRowCount(sqlInsert);
-        }
-
-
         // Retrieve values for the grid.
         public void sqlGetTable()
         {
-            string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
+            //string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
+            string sqlSelect = "SELECT * FROM BreadProject.jarcelo_admin.Employee;";
 
             DataTable dataTable = new DataTable();
 
@@ -177,24 +149,29 @@ namespace FoodShop
 
             foreach (DataRow row in dataTable.Rows)
             {
-                int id = Convert.ToInt16(row["employeeID"]);
-                string lastName = row["employeeLast"].ToString();
-                string firstName = row["employeeFirst"].ToString();
-                string hired = row["hireDate"].ToString();
-
+                //int id = Convert.ToInt16(row["employeeID"]);
+                int id = Convert.ToInt16(row["EmployeeID"]);
+                //string lastName = row["employeeLast"].ToString();
+                string lastName = row["EmployeeLast"].ToString();
+                //string firstName = row["employeeFirst"].ToString();
+                string firstName = row["EmployeeFirst"].ToString();
+                //string hired = row["hireDate"].ToString();
+                string hired = row["HireDate"].ToString();
                 //int posID = isValidID((Convert.ToInt16(row["positionID"])));
-                int posID = SafeGetInt(row, "positionID");
-                MessageBox.Show("posID = " + posID);
-
+                //int posID = SafeGetInt(row, "positionID");
+                int posID = SafeGetInt(row, "PositionID");
+                //MessageBox.Show("posID = " + posID);
                 string title = "test title";
-                int shift = Convert.ToInt16(row["shiftID"]);
-                double compensation = Convert.ToDouble(row["salary"]);
+                //int shift = Convert.ToInt16(row["shiftID"]);
+                int shift = 1;
+                //double compensation = Convert.ToDouble(row["salary"]);
+                double compensation = 10.1;  //TODO: Make this decimal for money data type
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
                 //       bool active = Convert.ToBoolean(row["isActive"]);
 
-                MessageBox.Show("employee name: " + lastName + firstName);
+                //MessageBox.Show("employee name: " + lastName + firstName);
 
                 grd_employees.Rows.Add(id, lastName, firstName, posID, title, shift, hired, active, compensation, status, howPaid);
             }

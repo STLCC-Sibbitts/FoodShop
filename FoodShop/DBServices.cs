@@ -80,7 +80,7 @@ namespace FoodShop
             try
             {
                 sqlCON.Open();
-                retVal = "Successfully Connected to DB!";
+                retVal = "Successfully Connected to Joe's DB!";
             }
             catch (Exception ex)
             {
@@ -160,18 +160,18 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees";
+                    string tableName = "Employee";
                     string updateStatement = "UPDATE " + tableName +
-                        " SET employeeLast = @LastName, employeeFirst = @FirstName, hireDate = @HireDate," +
-                            " positionId = @PositionID, shiftID = @ShiftID, salary = @Salary, fullTime = @FullTime," +
-                            " hourly = @Hourly, isActive = @IsActive " +
-                        " WHERE employeeID = @EmployeeID";
+                        " SET EmployeeLast = @EmployeeLast, EmployeeFirst = @FirstName, HireDate = @HireDate," +
+                            " PositionId = @PositionID, ShiftID = @ShiftID, Salary = @Salary, FullTime = @FullTime," +
+                            " Hourly = @Hourly, IsActive = @IsActive " +
+                        " WHERE EmployeeID = @EmployeeID";
                     using (SqlCommand command = new SqlCommand(
                     updateStatement, sqlCon))
                     {
                         command.Parameters.AddWithValue("EmployeeID", emp.employeeID);
-                        command.Parameters.AddWithValue("LastName", emp.employeeLast);
-                        command.Parameters.AddWithValue("FirstName", emp.employeeFirst);
+                        command.Parameters.AddWithValue("EmployeeLast", emp.employeeLast);
+                        command.Parameters.AddWithValue("EmployeeFirst", emp.employeeFirst);
                         command.Parameters.AddWithValue("HireDate", emp.hireDate);
                         command.Parameters.AddWithValue("PositionID", emp.positionID);
                         command.Parameters.AddWithValue("ShiftID", emp.shiftID);

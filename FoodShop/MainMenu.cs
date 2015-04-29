@@ -95,7 +95,8 @@ namespace FoodShop
         private void btn_employees_Click_1(object sender, EventArgs e)
         {
             frm_ManageEmployees formManageEmployees = new frm_ManageEmployees();
-            formManageEmployees.Show();
+            //formManageEmployees.Show();
+            formManageEmployees.ShowDialog();
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
