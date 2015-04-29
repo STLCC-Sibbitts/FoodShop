@@ -15,7 +15,8 @@ namespace FoodShop
         // Click "+" to view the code on regions
         #region Fields
         // Connection name is set to constant (and can only be viewed within class)
-        private const string connName = "KeithConnectionString";
+        // private const string connName = "KeithConnectionString";
+        private const string connName = "BreadConnectionString";
         // SQL Statement to create the Employee Table
         private string createEmployeeTableSQL =
             "CREATE TABLE EmployeeTest (EmployeeID int IDENTITY(100,1), " +
