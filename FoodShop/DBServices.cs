@@ -162,8 +162,8 @@ namespace FoodShop
                 {
                     string tableName = "Employee";
                     string updateStatement = "UPDATE " + tableName +
-                        " SET EmployeeLast = @EmployeeLast, EmployeeFirst = @FirstName, HireDate = @HireDate," +
-                            " PositionId = @PositionID, ShiftID = @ShiftID, Salary = @Salary, FullTime = @FullTime," +
+                        " SET EmployeeLast = @EmployeeLast, EmployeeFirst = @EmployeeFirst, HireDate = @HireDate," +
+                            " PositionID = @PositionID, ShiftID = @ShiftID, Salary = @Salary, FullTime = @FullTime," +
                             " Hourly = @Hourly, IsActive = @IsActive " +
                         " WHERE EmployeeID = @EmployeeID";
                     using (SqlCommand command = new SqlCommand(

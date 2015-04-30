@@ -140,7 +140,8 @@ namespace FoodShop
         public void sqlGetTable()
         {
             //string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
-            string sqlSelect = "SELECT * FROM BreadProject.jarcelo_admin.Employee;";
+            //string sqlSelect = "SELECT * FROM BreadProject.jarcelo_admin.Employee;";
+            string sqlSelect = "SELECT * FROM Employee;";
 
             DataTable dataTable = new DataTable();
 
@@ -203,21 +204,28 @@ namespace FoodShop
             //MessageBox.Show("rowIndex = " + rowIndex);
 
             //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
-            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
+            sqlQuery = "SELECT * FROM Employee WHERE EmployeeID = " + index + ";";
 
             //dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                int id = Convert.ToInt16(row["employeeID"]);
-                string lastName = row["employeeLast"].ToString();
-                string firstName = row["employeeFirst"].ToString();
-                DateTime hired = Convert.ToDateTime(row["hireDate"]);
+                //int id = Convert.ToInt16(row["employeeID"]);
+                int id = Convert.ToInt16(row["EmployeeID"]);
+                //string lastName = row["employeeLast"].ToString();
+                string lastName = row["EmployeeLast"].ToString();
+                //string firstName = row["employeeFirst"].ToString();
+                string firstName = row["EmployeeFirst"].ToString();
+                //DateTime hired = Convert.ToDateTime(row["hireDate"]);
+                DateTime hired = Convert.ToDateTime(row["HireDate"]);
 
-                int posID = 1; // Convert.ToInt16(row["positionID"]);
-                int shift = Convert.ToInt16(row["shiftID"]);
-                double compensation = Convert.ToDouble(row["salary"]);
+                //int posID = 1; // Convert.ToInt16(row["positionID"]);
+                int posID = Convert.ToInt16(row["PositionID"]);
+                //int shift = Convert.ToInt16(row["shiftID"]);
+                int shift = Convert.ToInt16(row["ShiftID"]);
+                //double compensation = Convert.ToDouble(row["salary"]);
+                double compensation = Convert.ToDouble(row["Salary"]);
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
@@ -256,7 +264,6 @@ namespace FoodShop
                 }
                 tab_Employee.SelectTab(tab_manageEmployees);
                 // Test commit
-
             }
         }
 
