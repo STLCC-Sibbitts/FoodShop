@@ -188,6 +188,8 @@ namespace FoodShop
 
 
         // Populate the edit employee tab fields with the results of a sql query.
+        // Make index a global variable so delete button can retrieve the index value 
+        int index;
         private void btn_select_Click(object sender, EventArgs e)
         {
             isUpdate = true;
@@ -200,7 +202,8 @@ namespace FoodShop
             rowIndex = grd_employees.CurrentCell.RowIndex;
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
-            int index = (int)grd_employees[columnIndex, rowIndex].Value;
+            //int index = (int)grd_employees[columnIndex, rowIndex].Value;
+            index = (int)grd_employees[columnIndex, rowIndex].Value;
             //MessageBox.Show("rowIndex = " + rowIndex);
 
             //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
@@ -419,18 +422,19 @@ namespace FoodShop
             }
             else
                 rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
-
-
             decimal num;
             bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), // cached
             out num);
             return num;
         }
 
-
-
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            // Enter code to delete row
+            string sql = "DELETE FROM Employee WHERE EmployeeID = " + index + ";"  ;
+            MessageBox.Show(db.deleteRecord(sql));
+        }
     }
-
 
     // Content items for the combo box
     public class Item

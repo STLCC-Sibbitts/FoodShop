@@ -80,7 +80,7 @@ namespace FoodShop
             try
             {
                 sqlCON.Open();
-                retVal = "Successfully Connected to Joe's DB!";
+                retVal = "Successfully Connected to BreadProject's Database!";
             }
             catch (Exception ex)
             {
@@ -232,7 +232,36 @@ namespace FoodShop
             return datReturn;
         }
 
+        // Method that executes an sql query
+        public string deleteRecord(String pSqlToExecute)
+        {
+            SqlConnection sqlCON = new SqlConnection(this.DbConnString);
+            SqlCommand sqlCMD = new SqlCommand();
+            string retVal;
 
+            sqlCMD.Connection = sqlCON;
+            sqlCMD.CommandType = CommandType.Text;
+            sqlCMD.CommandText = pSqlToExecute;
+
+            try
+            {
+                sqlCON.Open();
+                sqlCMD.ExecuteNonQuery();
+                retVal = "Record Successfully Deleted";
+            }
+            catch (Exception)
+            {
+                retVal = "Failed Delete Record This Time";
+                //throw;
+            }
+            finally
+            {
+                sqlCON.Close();
+                sqlCON.Dispose();
+                sqlCMD.Dispose();
+            }
+            return retVal;
+        }
 
         #endregion
     }
