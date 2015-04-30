@@ -104,7 +104,7 @@ namespace FoodShop
 
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
-            DateTime whenHired = getDateTime();
+            DateTime whenHired = ValidationUtility.getDateTime(dtm_dateHired);
             //string whenHired = HireDateCal.SelectionStart.ToShortDateString();
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
