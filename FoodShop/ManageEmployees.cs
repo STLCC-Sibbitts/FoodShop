@@ -105,12 +105,14 @@ namespace FoodShop
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
             DateTime whenHired = ValidationUtility.getDateTime(dtm_dateHired);
-            //string whenHired = HireDateCal.SelectionStart.ToShortDateString();
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
-            decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
+
+//            decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
+
+            decimal rateOfPay = ValidationUtility.validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = getIsActive();
 
             // Create new employee object, and initialize it
@@ -182,7 +184,7 @@ namespace FoodShop
                 
 
 
-                double compensation = Convert.ToDouble(row["salary"]);
+                decimal compensation = Convert.ToDecimal(row["salary"]);
         //        string status = "test"; // getShiftType(Convert.ToInt16(row["fullTime"]));
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
 //                MessageBox.Show("employee name: " + lastName + firstName);
@@ -437,8 +439,8 @@ namespace FoodShop
         }
 
         // Validate rate of pay
-        private decimal validateRateOfPay(string pay)
-        {
+  //      private decimal validateRateOfPay(string pay)
+    //    {
          /*   if (decimal.Parse(pay) < 0)
             {
                 MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
@@ -447,17 +449,17 @@ namespace FoodShop
                 rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
 
 
-            decimal num;
+  /*          decimal num;
             bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), // cached
             out num);
             return num;
-        }
+        } */
 
-        private DateTime getDateTime()
+/*        private DateTime getDateTime()
         {
             DateTime result = dtm_dateHired.Value;
             return result;
-        }
+        } */
 
     /*    private DateTime dtm_dateHired_ValueChanged(object sender, EventArgs e)
         {
