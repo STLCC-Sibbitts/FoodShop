@@ -72,9 +72,7 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
-            //posDT = dbs.ExecuteSqlReturnTable(posExecString);  // This can be deleted
             posDT = db.ExecuteSqlReturnTable(posExecString);
-            //      dt.Load(reader);
 
             cmb_position.ValueMember = "positionID";
             cmb_position.DisplayMember = "positionTitle";
@@ -83,7 +81,6 @@ namespace FoodShop
 
             string shiftExecString = "select shiftID, shiftTitle from Shifts";
             DataTable shiftDT = new DataTable();
-            //shiftDT = dbs.ExecuteSqlReturnTable(shiftExecString);  // This can be deleted
             shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
             cmb_shift.ValueMember = "shiftID";
             cmb_shift.DisplayMember = "shiftTitle";
@@ -102,16 +99,13 @@ namespace FoodShop
                 empNumber = int.Parse(txt_employeeID.Text);
             }
 
-            string lastName = stringValidator(txt_lastName.Text);
-            string firstName = stringValidator(txt_firstName.Text);
+            string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
+            string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
             DateTime whenHired = ValidationUtility.getDateTime(dtm_dateHired);
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
-
-//            decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
-
             decimal rateOfPay = ValidationUtility.validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = getIsActive();
 
@@ -132,7 +126,7 @@ namespace FoodShop
         private bool getIsActive()
         {
             bool active = false;
-            if (rdo_isActive.Checked)
+            if (cbx_isActive.Checked)
                 active = true;
             return active;
             throw new NotImplementedException();
@@ -171,24 +165,14 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["employeeID"]);
                 string lastName = row["employeeLast"].ToString();
                 string firstName = row["employeeFirst"].ToString();
-          //      int position = SafeGetInt(row, "positionID");
                 string position = row["positionID"].ToString();
-                string title = row["positionTitle"].ToString(); //posSelect + posID + ";").ToString();
+                string title = row["positionTitle"].ToString();
                 string shift = row["shiftTitle"].ToString();
                 string hired = row["hireDate"].ToString();
-         //       MessageBox.Show("postion value from table = " + posValue.ToString());
-         //       bool active = Convert.ToBoolean(row["isActive"]);
-
-                string active = isNull(row["isActive"]);
-             //   MessageBox.Show(active + " " + row["isActive"].ToString());
-                
-
-
+                string active = ValidationUtility.isNull(row["isActive"]);
                 decimal compensation = Convert.ToDecimal(row["salary"]);
-        //        string status = "test"; // getShiftType(Convert.ToInt16(row["fullTime"]));
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
-//                MessageBox.Show("employee name: " + lastName + firstName);
-                grd_employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift); //status,
+                grd_employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift);
             }
         }
 
@@ -200,7 +184,7 @@ namespace FoodShop
                 return Convert.ToInt16(row[colName]);
             else
                 return -1;
-        }
+        } 
 
 
         // Populate the edit employee tab fields with the results of a sql query.
@@ -217,12 +201,7 @@ namespace FoodShop
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             int index = (int)grd_employees[columnIndex, rowIndex].Value;
-            //MessageBox.Show("rowIndex = " + rowIndex);
-
-            //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
             sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
-
-            //dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
@@ -294,62 +273,6 @@ namespace FoodShop
         }
 
 
-        private string stringValidator(string text)
-        {
-            string name;
-            if (text.Length <= 20)
-                //employee.employeeLast = txt_lastName.Text;
-                name = text;
-            else
-                //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
-                name = text.Substring(0, 20);
-            return name;
-        }
-
-
-
-
-
-        private string isNull(object colValue)
-        {
-            string value = "";
-            if (colValue.Equals(null) || colValue.Equals("") || colValue.Equals("NULL"))
-            {
-                value = "null";
-            }
-            else if (colValue.ToString() == "1")
-            {
-                value = "yes";
-            }
-            else
-            {
-                value = "no";
-            }
-    //        else value = colValue.ToString();
-            return value;
-        }
-
-
-
-        private void gbx_workerType_Enter(object sender, EventArgs e)
-        {
-        }
-
-
-        // Return the employee's shift type (full or part-time).
-        public string getShiftType(int empStatus)
-        {
-            string status = "";
-            foreach (RadioButton rb in this.gbx_shiftType.Controls)
-            {
-                
-                if (rdo_fullTime.Checked)
-                    status = "Full Time";
-                if (rdo_partTime.Checked)
-                    status = "Part Time";
-            }
-            return status;
-        }
         // REVISED: employee's shift type (full or part-time).
         public int getShiftType()
         {
@@ -364,31 +287,6 @@ namespace FoodShop
         }
 
 
-        // Return the employee's shift type (full or part-time).
-   /*     public RadioButton getShiftType(int shiftID)
-        {
-            RadioButton rdo_selected = new RadioButton();
-
-            if (shiftID == 0)
-                rdo_selected = rdo_fullTime;
-            if (shiftID == 1)
-                rdo_selected = rdo_partTime;
-            return rdo_selected;
-        } */
-
-
-        // Return the employee's salary type (paid hourly or salary).
-        public int getSalaryType(Employee emp)
-        {
-            foreach (RadioButton rb in this.gbx_payType.Controls)
-            {
-                if (rdo_salary.Checked)
-                    emp.hourly = 1;
-                if (rdo_hourly.Checked)
-                    emp.hourly = 0;
-            }
-            return emp.hourly;
-        }
         // REVISED: employee's salary type (paid hourly or salary).
         public int getSalaryType()
         {
@@ -401,17 +299,6 @@ namespace FoodShop
             return type;
         }
 
-        // Return the employee's salary type (paid hourly or salary).
-        public RadioButton getSalaryType(int salaryID)
-        {
-            RadioButton rdo_selected = new RadioButton();
-
-            if (salaryID == 0)
-                rdo_selected = rdo_salary;
-            if (salaryID == 1)
-                rdo_selected = rdo_hourly;
-            return rdo_selected;
-        }
 
         private void btn_addNew_Click(object sender, EventArgs e)
         {
@@ -437,35 +324,6 @@ namespace FoodShop
         {
             this.Hide();
         }
-
-        // Validate rate of pay
-  //      private decimal validateRateOfPay(string pay)
-    //    {
-         /*   if (decimal.Parse(pay) < 0)
-            {
-                MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
-            }
-            else
-                rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
-
-
-  /*          decimal num;
-            bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), // cached
-            out num);
-            return num;
-        } */
-
-/*        private DateTime getDateTime()
-        {
-            DateTime result = dtm_dateHired.Value;
-            return result;
-        } */
-
-    /*    private DateTime dtm_dateHired_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime result = dtm_dateHired.Value;
-            return result;
-        } */
     }
 
 

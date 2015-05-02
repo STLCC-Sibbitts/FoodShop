@@ -51,7 +51,6 @@
             this.lbl_employeeID = new System.Windows.Forms.Label();
             this.HireDateCal = new System.Windows.Forms.MonthCalendar();
             this.btn_save = new System.Windows.Forms.Button();
-            this.rdo_isActive = new System.Windows.Forms.RadioButton();
             this.lbl_hireDate = new System.Windows.Forms.Label();
             this.btn_tabExitToMenu = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
@@ -73,6 +72,7 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
+            this.cbx_isActive = new System.Windows.Forms.CheckBox();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -227,12 +227,12 @@
             // 
             // tab_manageEmployees
             // 
+            this.tab_manageEmployees.Controls.Add(this.cbx_isActive);
             this.tab_manageEmployees.Controls.Add(this.dtm_dateHired);
             this.tab_manageEmployees.Controls.Add(this.txt_employeeID);
             this.tab_manageEmployees.Controls.Add(this.lbl_employeeID);
             this.tab_manageEmployees.Controls.Add(this.HireDateCal);
             this.tab_manageEmployees.Controls.Add(this.btn_save);
-            this.tab_manageEmployees.Controls.Add(this.rdo_isActive);
             this.tab_manageEmployees.Controls.Add(this.lbl_hireDate);
             this.tab_manageEmployees.Controls.Add(this.btn_tabExitToMenu);
             this.tab_manageEmployees.Controls.Add(this.btn_delete);
@@ -260,7 +260,6 @@
             this.dtm_dateHired.Name = "dtm_dateHired";
             this.dtm_dateHired.Size = new System.Drawing.Size(200, 20);
             this.dtm_dateHired.TabIndex = 67;
-      //      this.dtm_dateHired.ValueChanged += new System.EventHandler(this.dtm_dateHired_ValueChanged);
             // 
             // txt_employeeID
             // 
@@ -297,17 +296,6 @@
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click_1);
-            // 
-            // rdo_isActive
-            // 
-            this.rdo_isActive.AutoSize = true;
-            this.rdo_isActive.Location = new System.Drawing.Point(520, 148);
-            this.rdo_isActive.Name = "rdo_isActive";
-            this.rdo_isActive.Size = new System.Drawing.Size(72, 17);
-            this.rdo_isActive.TabIndex = 62;
-            this.rdo_isActive.TabStop = true;
-            this.rdo_isActive.Text = "Is Active?";
-            this.rdo_isActive.UseVisualStyleBackColor = true;
             // 
             // lbl_hireDate
             // 
@@ -520,6 +508,16 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
+            // cbx_isActive
+            // 
+            this.cbx_isActive.AutoSize = true;
+            this.cbx_isActive.Location = new System.Drawing.Point(498, 151);
+            this.cbx_isActive.Name = "cbx_isActive";
+            this.cbx_isActive.Size = new System.Drawing.Size(73, 17);
+            this.cbx_isActive.TabIndex = 68;
+            this.cbx_isActive.Text = "Is Active?";
+            this.cbx_isActive.UseVisualStyleBackColor = true;
+            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,7 +555,6 @@
         private System.Windows.Forms.Button btn_select;
         private System.Windows.Forms.Button btn_exitToMenu;
         private System.Windows.Forms.Button btn_exitApplication;
-        private System.Windows.Forms.RadioButton rdo_isActive;
         private System.Windows.Forms.Label lbl_hireDate;
         private System.Windows.Forms.Button btn_tabExitToMenu;
         private System.Windows.Forms.Button btn_delete;
@@ -592,6 +589,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn positionTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiftID;
         private System.Windows.Forms.DateTimePicker dtm_dateHired;
+        private System.Windows.Forms.CheckBox cbx_isActive;
 
     }
 }
