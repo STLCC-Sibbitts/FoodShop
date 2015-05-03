@@ -68,21 +68,14 @@ namespace FoodShop
             }
 
             // Populate the combo boxes for birth month
- /*           string posExecString = "select positionID, positionTitle from Positions";
+  /*          string posExecString = "select positionID, positionTitle from Positions";
             DataTable posDT = new DataTable();
             posDT = db.ExecuteSqlReturnTable(posExecString);
 
-            cmb_position.ValueMember = "positionID";
-            cmb_position.DisplayMember = "positionTitle";
-            cmb_position.DataSource = posDT;
-            //      conn.Close();
-
-            string shiftExecString = "select shiftID, shiftTitle from Shifts";
-            DataTable shiftDT = new DataTable();
-            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
-            cmb_shift.ValueMember = "shiftID";
-            cmb_shift.DisplayMember = "shiftTitle";
-            cmb_shift.DataSource = shiftDT;                          */
+            cmb_birthMonth.ValueMember = "positionID";
+            cmb_birthMonth.DisplayMember = "positionTitle";
+            cmb_birthMonth.DataSource = posDT; */
+            //      conn.Close();                       
         }
 
 
@@ -99,11 +92,11 @@ namespace FoodShop
 
             string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
             string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
-            DateTime dateJoined = ValidationUtility.getDateTime(dtm_enrollDate);
-  /*          int postID = Convert.ToInt16(cmb_position.SelectedIndex);
-            int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
-            int empType = getShiftType();  // this is revised method
-            int payType = getSalaryType();  // this is a revised method
+            string gender = "male";
+            string eMail = ValidationUtility.stringValidator(txt_email.Text);
+            string telephone = ValidationUtility.stringValidator(txt_phone.Text);
+            DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
+            DateTime birthMonthDay = ValidationUtility.getDateTime(dtm_enrollDate);
 
             // Create new employee object, and initialize it
             var newName = new Customer(customerNumber, lastName, firstName, gender, eMail, telephone, birthMonthDay, frequentEnrollDate);
@@ -115,8 +108,8 @@ namespace FoodShop
             }
             else
             {
-                MessageBox.Show(db.updateData(newName));
-            }   */
+         //       MessageBox.Show(db.updateData(newName));
+            }   
         }
 
         // Add customer record to the database
