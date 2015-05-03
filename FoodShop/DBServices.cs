@@ -15,7 +15,8 @@ namespace FoodShop
         // Click "+" to view the code on regions
         #region Fields
         // Connection name is set to constant (and can only be viewed within class)
-        private const string connName = "KeithConnectionString";
+        // private const string connName = "KeithConnectionString";
+        private const string connName = "BreadConnectionString";
         // SQL Statement to create the Employee Table
         private string createEmployeeTableSQL =
             "CREATE TABLE EmployeeTest (EmployeeID int IDENTITY(100,1), " +
@@ -79,7 +80,7 @@ namespace FoodShop
             try
             {
                 sqlCON.Open();
-                retVal = "Successfully Connected to DB!";
+                retVal = "Successfully Connected to BreadProject's Database!";
             }
             catch (Exception ex)
             {
@@ -107,15 +108,15 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees";
+                    string tableName = "Employee";
                     string insertStatement = "INSERT INTO " + tableName +
-                        " VALUES(@LastName, @FirstName, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
+                        " VALUES(@EmployeeLast, @EmployeeFirst, @HireDate, @PositionID, @ShiftID, @Salary, @FullTime, @Hourly, @IsActive)";
                     using (SqlCommand command = new SqlCommand(
                     insertStatement, sqlCon))
                     {
                         //command.Parameters.Add(new SqlParameter("ID", emp.employeeID));
-                        command.Parameters.Add(new SqlParameter("LastName", emp.employeeLast));
-                        command.Parameters.Add(new SqlParameter("FirstName", emp.employeeFirst));
+                        command.Parameters.Add(new SqlParameter("EmployeeLast", emp.employeeLast));
+                        command.Parameters.Add(new SqlParameter("EmployeeFirst", emp.employeeFirst));
                         command.Parameters.Add(new SqlParameter("HireDate", emp.hireDate));
                         command.Parameters.Add(new SqlParameter("PositionID", emp.positionID));
                         command.Parameters.Add(new SqlParameter("ShiftID", emp.shiftID));
@@ -151,6 +152,47 @@ namespace FoodShop
         }
 
         #region Update Data Methods
+        public string updateData(Customer cust)
+        {
+            string retVal = string.Empty;
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "Customer";
+                    string updateStatement = "UPDATE " + tableName +
+                        " SET CustomerLast = @CustomerLast, CustomerFirst = @CustomerFirst, Gender = @Gender," +
+                            " Email = @Email, Telephone = @Telephone, BirthMoDay = @BirthMoDay, FrequentEnrollDate = @FrequentEnrollDate," +
+                        " WHERE CustomerID = @CustomerID";
+                    using (SqlCommand command = new SqlCommand(
+                    updateStatement, sqlCon))
+                    {
+                        command.Parameters.AddWithValue("CustomerID", cust.customerID);
+                        command.Parameters.AddWithValue("CustomerLast", cust.customerLast);
+                        command.Parameters.AddWithValue("CustomerFirst", cust.customerFirst);
+                        command.Parameters.AddWithValue("Gender", cust.gender);
+                        command.Parameters.AddWithValue("Email", cust.eMail);
+                        command.Parameters.AddWithValue("Telephone", cust.telephone);
+                        command.Parameters.AddWithValue("BirthMoDay", cust.birthMonthDay);
+                        command.Parameters.AddWithValue("FrequentEnrollDate", cust.frequentEnrollDate);
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "Data Successfully Updated!";
+                }
+                catch
+                {
+                    retVal = "Failed to Update Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
+            return retVal;
+        }
+
         public string updateData(Employee emp)
         {
             string retVal = string.Empty;
@@ -159,18 +201,18 @@ namespace FoodShop
                 sqlCon.Open();
                 try
                 {
-                    string tableName = "Employees";
+                    string tableName = "Employee";
                     string updateStatement = "UPDATE " + tableName +
-                        " SET employeeLast = @LastName, employeeFirst = @FirstName, hireDate = @HireDate," +
-                            " positionId = @PositionID, shiftID = @ShiftID, salary = @Salary, fullTime = @FullTime," +
-                            " hourly = @Hourly, isActive = @IsActive " +
-                        " WHERE employeeID = @EmployeeID";
+                        " SET EmployeeLast = @EmployeeLast, EmployeeFirst = @EmployeeFirst, HireDate = @HireDate," +
+                            " PositionID = @PositionID, ShiftID = @ShiftID, Salary = @Salary, FullTime = @FullTime," +
+                            " Hourly = @Hourly, IsActive = @IsActive " +
+                        " WHERE EmployeeID = @EmployeeID";
                     using (SqlCommand command = new SqlCommand(
                     updateStatement, sqlCon))
                     {
                         command.Parameters.AddWithValue("EmployeeID", emp.employeeID);
-                        command.Parameters.AddWithValue("LastName", emp.employeeLast);
-                        command.Parameters.AddWithValue("FirstName", emp.employeeFirst);
+                        command.Parameters.AddWithValue("EmployeeLast", emp.employeeLast);
+                        command.Parameters.AddWithValue("EmployeeFirst", emp.employeeFirst);
                         command.Parameters.AddWithValue("HireDate", emp.hireDate);
                         command.Parameters.AddWithValue("PositionID", emp.positionID);
                         command.Parameters.AddWithValue("ShiftID", emp.shiftID);
@@ -231,7 +273,36 @@ namespace FoodShop
             return datReturn;
         }
 
+        // Method that executes an sql query
+        public string deleteRecord(String pSqlToExecute)
+        {
+            SqlConnection sqlCON = new SqlConnection(this.DbConnString);
+            SqlCommand sqlCMD = new SqlCommand();
+            string retVal;
 
+            sqlCMD.Connection = sqlCON;
+            sqlCMD.CommandType = CommandType.Text;
+            sqlCMD.CommandText = pSqlToExecute;
+
+            try
+            {
+                sqlCON.Open();
+                sqlCMD.ExecuteNonQuery();
+                retVal = "Record Successfully Deleted";
+            }
+            catch (Exception)
+            {
+                retVal = "Failed Delete Record This Time";
+                //throw;
+            }
+            finally
+            {
+                sqlCON.Close();
+                sqlCON.Dispose();
+                sqlCMD.Dispose();
+            }
+            return retVal;
+        }
 
         #endregion
     }

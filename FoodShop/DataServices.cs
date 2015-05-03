@@ -1,7 +1,7 @@
 ﻿/**
  * DataServices class graciously provided by Professor Robert Oberst
  * 
- * */
+ * 
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace FoodShop
 {
-    /*
+    
     public class DatabaseServices
     {
 
@@ -213,5 +213,6 @@ namespace FoodShop
         }
     }
     
-     */
+     
 }
+*/
