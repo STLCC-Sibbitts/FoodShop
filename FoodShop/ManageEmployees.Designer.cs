@@ -30,7 +30,7 @@
         {
             this.tab_Employee = new System.Windows.Forms.TabControl();
             this.tab_Employees = new System.Windows.Forms.TabPage();
-            this.grd_employees = new System.Windows.Forms.DataGridView();
+            this.grd_Employees = new System.Windows.Forms.DataGridView();
             this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +46,7 @@
             this.btn_exitToMenu = new System.Windows.Forms.Button();
             this.btn_exitApplication = new System.Windows.Forms.Button();
             this.tab_manageEmployees = new System.Windows.Forms.TabPage();
+            this.cbx_isActive = new System.Windows.Forms.CheckBox();
             this.dtm_dateHired = new System.Windows.Forms.DateTimePicker();
             this.txt_employeeID = new System.Windows.Forms.TextBox();
             this.lbl_employeeID = new System.Windows.Forms.Label();
@@ -72,10 +73,9 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.cbx_isActive = new System.Windows.Forms.CheckBox();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grd_Employees)).BeginInit();
             this.tab_manageEmployees.SuspendLayout();
             this.pnl_salary.SuspendLayout();
             this.gbx_shiftType.SuspendLayout();
@@ -94,7 +94,7 @@
             // 
             // tab_Employees
             // 
-            this.tab_Employees.Controls.Add(this.grd_employees);
+            this.tab_Employees.Controls.Add(this.grd_Employees);
             this.tab_Employees.Controls.Add(this.lbl_productList);
             this.tab_Employees.Controls.Add(this.txt_searchBox);
             this.tab_Employees.Controls.Add(this.btn_addNew);
@@ -109,10 +109,10 @@
             this.tab_Employees.Text = "View Employees";
             this.tab_Employees.UseVisualStyleBackColor = true;
             // 
-            // grd_employees
+            // grd_Employees
             // 
-            this.grd_employees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grd_employees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grd_Employees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grd_Employees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.employeeID,
             this.employeeLast,
             this.employeeFirst,
@@ -121,10 +121,10 @@
             this.isActive,
             this.positionTitle,
             this.shiftID});
-            this.grd_employees.Location = new System.Drawing.Point(6, 89);
-            this.grd_employees.Name = "grd_employees";
-            this.grd_employees.Size = new System.Drawing.Size(1083, 297);
-            this.grd_employees.TabIndex = 20;
+            this.grd_Employees.Location = new System.Drawing.Point(6, 89);
+            this.grd_Employees.Name = "grd_Employees";
+            this.grd_Employees.Size = new System.Drawing.Size(1083, 297);
+            this.grd_Employees.TabIndex = 20;
             // 
             // employeeID
             // 
@@ -253,6 +253,16 @@
             this.tab_manageEmployees.TabIndex = 2;
             this.tab_manageEmployees.Text = "Manage Employees";
             this.tab_manageEmployees.UseVisualStyleBackColor = true;
+            // 
+            // cbx_isActive
+            // 
+            this.cbx_isActive.AutoSize = true;
+            this.cbx_isActive.Location = new System.Drawing.Point(498, 151);
+            this.cbx_isActive.Name = "cbx_isActive";
+            this.cbx_isActive.Size = new System.Drawing.Size(73, 17);
+            this.cbx_isActive.TabIndex = 68;
+            this.cbx_isActive.Text = "Is Active?";
+            this.cbx_isActive.UseVisualStyleBackColor = true;
             // 
             // dtm_dateHired
             // 
@@ -508,16 +518,6 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
-            // cbx_isActive
-            // 
-            this.cbx_isActive.AutoSize = true;
-            this.cbx_isActive.Location = new System.Drawing.Point(498, 151);
-            this.cbx_isActive.Name = "cbx_isActive";
-            this.cbx_isActive.Size = new System.Drawing.Size(73, 17);
-            this.cbx_isActive.TabIndex = 68;
-            this.cbx_isActive.Text = "Is Active?";
-            this.cbx_isActive.UseVisualStyleBackColor = true;
-            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,7 +530,7 @@
             this.tab_Employee.ResumeLayout(false);
             this.tab_Employees.ResumeLayout(false);
             this.tab_Employees.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grd_Employees)).EndInit();
             this.tab_manageEmployees.ResumeLayout(false);
             this.tab_manageEmployees.PerformLayout();
             this.pnl_salary.ResumeLayout(false);
@@ -548,7 +548,7 @@
         private System.Windows.Forms.TabControl tab_Employee;
         private System.Windows.Forms.TabPage tab_Employees;
         private System.Windows.Forms.TabPage tab_manageEmployees;
-        private System.Windows.Forms.DataGridView grd_employees;
+        private System.Windows.Forms.DataGridView grd_Employees;
         private System.Windows.Forms.Label lbl_productList;
         private System.Windows.Forms.TextBox txt_searchBox;
         private System.Windows.Forms.Button btn_addNew;

@@ -7,14 +7,14 @@ namespace FoodShop
 {
     class Customer
     {
-        private int customerID { get; set; }
-        private string customerLast { get; set; }
-        private string customerFirst { get; set; }
-        private string gender { get; set; }
-        private string eMail { get; set; }
-        private string telephone { get; set; }
-        private DateTime birthMonthDay { get; set; }
-        private DateTime frequentEnrollDate { get; set; }
+        public int customerID { get; set; }
+        public string customerLast { get; set; }
+        public string customerFirst { get; set; }
+        public string gender { get; set; }
+        public string eMail { get; set; }
+        public string telephone { get; set; }
+        public DateTime birthMonthDay { get; set; }
+        public DateTime frequentEnrollDate { get; set; }
 
         // Constructor
         public Customer(int id, string lastName, string firstName, string sex, string email, string phone, DateTime birthday, DateTime enrollDate)
