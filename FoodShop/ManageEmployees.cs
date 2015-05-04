@@ -175,7 +175,7 @@ namespace FoodShop
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
-                grd_employees.Rows.Add(id, lastName, firstName, posID, title, shift, hired, active, compensation, status, howPaid);
+                grd_employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
             }
         }
 
