@@ -147,7 +147,7 @@ namespace FoodShop
             throw new NotImplementedException();
         }
 
-        // Retrieve values for the grid.
+        // Retrieve values for the grid. Grid correctly populates data after merging with test branch
         public void sqlGetTable()
         {
             //string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
