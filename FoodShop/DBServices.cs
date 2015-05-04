@@ -191,6 +191,47 @@ namespace FoodShop
         }
 
         #region Update Data Methods
+        public string updateData(Customer cust)
+        {
+            string retVal = string.Empty;
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "Customer";
+                    string updateStatement = "UPDATE " + tableName +
+                        " SET CustomerLast = @CustomerLast, CustomerFirst = @CustomerFirst, Gender = @Gender," +
+                            " Email = @Email, Telephone = @Telephone, BirthMoDay = @BirthMoDay, FrequentEnrollDate = @FrequentEnrollDate," +
+                        " WHERE CustomerID = @CustomerID";
+                    using (SqlCommand command = new SqlCommand(
+                    updateStatement, sqlCon))
+                    {
+                        command.Parameters.AddWithValue("CustomerID", cust.customerID);
+                        command.Parameters.AddWithValue("CustomerLast", cust.customerLast);
+                        command.Parameters.AddWithValue("CustomerFirst", cust.customerFirst);
+                        command.Parameters.AddWithValue("Gender", cust.gender);
+                        command.Parameters.AddWithValue("Email", cust.eMail);
+                        command.Parameters.AddWithValue("Telephone", cust.telephone);
+                        command.Parameters.AddWithValue("BirthMoDay", cust.birthMonthDay);
+                        command.Parameters.AddWithValue("FrequentEnrollDate", cust.frequentEnrollDate);
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "Data Successfully Updated!";
+                }
+                catch
+                {
+                    retVal = "Failed to Update Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
+            return retVal;
+        }
+
         public string updateData(Employee emp)
         {
             string retVal = string.Empty;
