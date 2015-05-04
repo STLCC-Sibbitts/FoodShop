@@ -147,10 +147,6 @@ namespace FoodShop
             throw new NotImplementedException();
         }
 
-
-        
-
-
         // Retrieve values for the grid.
         public void sqlGetTable()
         {
@@ -181,7 +177,8 @@ namespace FoodShop
                 //int shift = Convert.ToInt16(row["shiftID"]);
                 int shift = 1;
                 //double compensation = Convert.ToDouble(row["salary"]);
-                double compensation = 10.1;  //TODO: Make this decimal for money data type
+                //double compensation = 10.1;  //TODO: Make this decimal for money data type
+                decimal compensation = Convert.ToDecimal(row["Salary"]);
                 int status = 0; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 10; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
@@ -189,7 +186,7 @@ namespace FoodShop
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
-                grd_employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
+                grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
             }
         }
 
@@ -218,7 +215,7 @@ namespace FoodShop
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             //int index = (int)grd_employees[columnIndex, rowIndex].Value;
-            index = (int)grd_employees[columnIndex, rowIndex].Value;
+            index = (int)grd_Employees[columnIndex, rowIndex].Value;
             //MessageBox.Show("rowIndex = " + rowIndex);
 
             //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
