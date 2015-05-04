@@ -431,7 +431,7 @@ namespace FoodShop
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            // Deletes a record based on index
+            // This is working!
             string sql = "DELETE FROM Employee WHERE EmployeeID = " + index + ";";
             MessageBox.Show(db.deleteRecord(sql));
         }
