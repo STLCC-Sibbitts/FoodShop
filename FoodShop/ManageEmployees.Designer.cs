@@ -39,6 +39,8 @@
             this.isActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PositionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_productList = new System.Windows.Forms.Label();
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_addNew = new System.Windows.Forms.Button();
@@ -73,7 +75,7 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.PositionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HowPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -122,7 +124,9 @@
             this.isActive,
             this.positionTitle,
             this.shiftID,
-            this.PositionID});
+            this.PositionID,
+            this.Status,
+            this.HowPaid});
             this.grd_employees.Location = new System.Drawing.Point(6, 89);
             this.grd_employees.Name = "grd_employees";
             this.grd_employees.Size = new System.Drawing.Size(1083, 297);
@@ -170,6 +174,16 @@
             // 
             this.shiftID.HeaderText = "Shift";
             this.shiftID.Name = "shiftID";
+            // 
+            // PositionID
+            // 
+            this.PositionID.HeaderText = "Position ID";
+            this.PositionID.Name = "PositionID";
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
             // 
             // lbl_productList
             // 
@@ -524,10 +538,10 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
-            // PositionID
+            // HowPaid
             // 
-            this.PositionID.HeaderText = "Position ID";
-            this.PositionID.Name = "PositionID";
+            this.HowPaid.HeaderText = "How Paid";
+            this.HowPaid.Name = "HowPaid";
             // 
             // frm_ManageEmployees
             // 
@@ -602,6 +616,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn positionTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiftID;
         private System.Windows.Forms.DataGridViewTextBoxColumn PositionID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HowPaid;
 
     }
 }

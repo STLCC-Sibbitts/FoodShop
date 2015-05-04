@@ -168,8 +168,8 @@ namespace FoodShop
                 int shift = 1;
                 //double compensation = Convert.ToDouble(row["salary"]);
                 double compensation = 10.1;  //TODO: Make this decimal for money data type
-                int status = 1; // Convert.ToInt16(row["fullTime"]);
-                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
+                int status = 0; // Convert.ToInt16(row["fullTime"]);
+                int howPaid = 10; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
                 //       bool active = Convert.ToBoolean(row["isActive"]);
 
