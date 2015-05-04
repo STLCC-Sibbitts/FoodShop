@@ -236,7 +236,8 @@ namespace FoodShop
                 //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
-                HireDateCal.BoldedDates.Equals(hired);
+                //HireDateCal.BoldedDates.Equals(hired);
+                dtm_dateHired.Value = hired; 
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
