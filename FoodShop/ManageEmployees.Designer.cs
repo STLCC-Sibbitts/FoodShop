@@ -260,7 +260,6 @@
             this.dtm_dateHired.Name = "dtm_dateHired";
             this.dtm_dateHired.Size = new System.Drawing.Size(200, 20);
             this.dtm_dateHired.TabIndex = 67;
-      //      this.dtm_dateHired.ValueChanged += new System.EventHandler(this.dtm_dateHired_ValueChanged);
             // 
             // txt_employeeID
             // 
