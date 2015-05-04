@@ -151,6 +151,45 @@ namespace FoodShop
             return retVal;
         }
 
+        public string addNewData(LineItem li)
+        {
+            string retVal = String.Empty;
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "LineItem";
+                    string insertStatement = "INSERT INTO " + tableName +
+                        " VALUES(@LineItemID, @ProductID, @Quantity, @ProductName, @Price, @ProductDescription, @UpsellID)";
+                    using (SqlCommand command = new SqlCommand(
+                    insertStatement, sqlCon))
+                    {
+                        //command.Parameters.Add(new SqlParameter("ID", emp.employeeID));
+                        command.Parameters.Add(new SqlParameter("LineItemID", li.LineItemID));
+                        command.Parameters.Add(new SqlParameter("ProductID", li.ProductID));
+                        command.Parameters.Add(new SqlParameter("Quantity", li.Quantity));
+                        command.Parameters.Add(new SqlParameter("ProductName", li.ProductName));
+                        command.Parameters.Add(new SqlParameter("Price", li.Price));
+                        command.Parameters.Add(new SqlParameter("ProductDescription", li.ProductDescription));
+                        command.Parameters.Add(new SqlParameter("UpsellID", li.UpsellID));
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "Line Item Data Successfully Saved!";
+                }
+                catch
+                {
+                    retVal = "Failed to Insert Line Item Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
+            return retVal;
+        }
+
         #region Update Data Methods
         public string updateData(Employee emp)
         {
