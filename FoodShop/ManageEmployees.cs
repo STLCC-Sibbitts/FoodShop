@@ -435,6 +435,11 @@ namespace FoodShop
             string sql = "DELETE FROM Employee WHERE EmployeeID = " + index + ";";
             MessageBox.Show(db.deleteRecord(sql));
         }
+
+        private void grd_employees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
     // Content items for the combo box

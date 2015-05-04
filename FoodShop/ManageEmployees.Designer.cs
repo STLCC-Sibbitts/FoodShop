@@ -31,14 +31,6 @@
             this.tab_Employee = new System.Windows.Forms.TabControl();
             this.tab_Employees = new System.Windows.Forms.TabPage();
             this.grd_employees = new System.Windows.Forms.DataGridView();
-            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hireDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.positionTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_productList = new System.Windows.Forms.Label();
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_addNew = new System.Windows.Forms.Button();
@@ -73,6 +65,14 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
+            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeLast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeFirst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hireDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.positionTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_employees)).BeginInit();
@@ -125,47 +125,7 @@
             this.grd_employees.Name = "grd_employees";
             this.grd_employees.Size = new System.Drawing.Size(1083, 297);
             this.grd_employees.TabIndex = 20;
-            // 
-            // employeeID
-            // 
-            this.employeeID.HeaderText = "Employee ID";
-            this.employeeID.Name = "employeeID";
-            this.employeeID.ReadOnly = true;
-            // 
-            // employeeLast
-            // 
-            this.employeeLast.HeaderText = "Last Name";
-            this.employeeLast.Name = "employeeLast";
-            // 
-            // employeeFirst
-            // 
-            this.employeeFirst.HeaderText = "First Name";
-            this.employeeFirst.Name = "employeeFirst";
-            // 
-            // hireDate
-            // 
-            this.hireDate.HeaderText = "Hire Date";
-            this.hireDate.Name = "hireDate";
-            // 
-            // salary
-            // 
-            this.salary.HeaderText = "Salary";
-            this.salary.Name = "salary";
-            // 
-            // isActive
-            // 
-            this.isActive.HeaderText = "Is Active";
-            this.isActive.Name = "isActive";
-            // 
-            // positionTitle
-            // 
-            this.positionTitle.HeaderText = "Title";
-            this.positionTitle.Name = "positionTitle";
-            // 
-            // shiftID
-            // 
-            this.shiftID.HeaderText = "Shift";
-            this.shiftID.Name = "shiftID";
+            this.grd_employees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_employees_CellContentClick);
             // 
             // lbl_productList
             // 
@@ -258,7 +218,7 @@
             // 
             this.dtm_dateHired.Location = new System.Drawing.Point(641, 61);
             this.dtm_dateHired.Name = "dtm_dateHired";
-            this.dtm_dateHired.Size = new System.Drawing.Size(200, 20);
+            this.dtm_dateHired.Size = new System.Drawing.Size(196, 20);
             this.dtm_dateHired.TabIndex = 67;
             // 
             // txt_employeeID
@@ -520,6 +480,48 @@
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
             // 
+            // employeeID
+            // 
+            this.employeeID.HeaderText = "Employee ID";
+            this.employeeID.Name = "employeeID";
+            this.employeeID.ReadOnly = true;
+            this.employeeID.Visible = false;
+            // 
+            // employeeLast
+            // 
+            this.employeeLast.HeaderText = "Last Name";
+            this.employeeLast.Name = "employeeLast";
+            // 
+            // employeeFirst
+            // 
+            this.employeeFirst.HeaderText = "First Name";
+            this.employeeFirst.Name = "employeeFirst";
+            // 
+            // hireDate
+            // 
+            this.hireDate.HeaderText = "Hire Date";
+            this.hireDate.Name = "hireDate";
+            // 
+            // salary
+            // 
+            this.salary.HeaderText = "Salary";
+            this.salary.Name = "salary";
+            // 
+            // isActive
+            // 
+            this.isActive.HeaderText = "Is Active";
+            this.isActive.Name = "isActive";
+            // 
+            // positionTitle
+            // 
+            this.positionTitle.HeaderText = "Title";
+            this.positionTitle.Name = "positionTitle";
+            // 
+            // shiftID
+            // 
+            this.shiftID.HeaderText = "Shift";
+            this.shiftID.Name = "shiftID";
+            // 
             // frm_ManageEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -583,6 +585,7 @@
         private System.Windows.Forms.MonthCalendar HireDateCal;
         private System.Windows.Forms.TextBox txt_employeeID;
         private System.Windows.Forms.Label lbl_employeeID;
+        private System.Windows.Forms.DateTimePicker dtm_dateHired;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeLast;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeFirst;
@@ -591,7 +594,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn isActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn positionTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiftID;
-        private System.Windows.Forms.DateTimePicker dtm_dateHired;
 
     }
 }
