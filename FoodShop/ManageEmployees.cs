@@ -45,7 +45,7 @@ namespace FoodShop
             if (cmb_position.SelectedIndex != currentComboIndex)
             {
                 //btn_save.Enabled = true;
-            }
+        }
         }
         // tried this to regiser changes in combo box
         private void frm_ManageEmployees_MouseClick(object sender, KeyEventArgs e)
@@ -73,7 +73,7 @@ namespace FoodShop
             //MessageBox.Show(conString + "/n/n" + testString);
             // Test database Connection
             MessageBox.Show(db.TestConnection());
-            sqlGetTable();
+                sqlGetTable();
             //}
             //catch (Exception err)
             //catch (Exception e)
@@ -136,6 +136,20 @@ namespace FoodShop
                 MessageBox.Show(db.updateData(newName));
             }
         }
+
+        // Returns result form isActive radio button
+        private bool getIsActive()
+        {
+            bool active = false;
+            if (cbx_isActive.Checked)
+                active = true;
+            return active;
+            throw new NotImplementedException();
+        }
+
+
+        
+
 
         // Retrieve values for the grid.
         public void sqlGetTable()
@@ -200,7 +214,7 @@ namespace FoodShop
             DataTable dataTable = new DataTable();
 
             // sqlGetTable();
-            rowIndex = grd_employees.CurrentCell.RowIndex;
+            rowIndex = grd_Employees.CurrentCell.RowIndex;
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             //int index = (int)grd_employees[columnIndex, rowIndex].Value;
@@ -233,11 +247,11 @@ namespace FoodShop
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
                 bool active = true;
-                //       bool active = Convert.ToBoolean(row["isActive"]);
+         //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
                 //HireDateCal.BoldedDates.Equals(hired);
-                dtm_dateHired.Value = hired; 
+                dtm_dateHired.Value = hired;
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
                 txt_rateOfPay.Text = compensation.ToString();
@@ -353,19 +367,6 @@ namespace FoodShop
             return rdo_selected;
         }
 
-
-        // Return the employee's salary type (paid hourly or salary).
-        public int getSalaryType(Employee emp)
-        {
-            foreach (RadioButton rb in this.gbx_payType.Controls)
-            {
-                if (rdo_salary.Checked)
-                    emp.hourly = 1;
-                if (rdo_hourly.Checked)
-                    emp.hourly = 0;
-            }
-            return emp.hourly;
-        }
         // REVISED: employee's salary type (paid hourly or salary).
         public int getSalaryType()
         {
@@ -378,17 +379,6 @@ namespace FoodShop
             return type;
         }
 
-        // Return the employee's salary type (paid hourly or salary).
-        public RadioButton getSalaryType(int salaryID)
-        {
-            RadioButton rdo_selected = new RadioButton();
-
-            if (salaryID == 0)
-                rdo_selected = rdo_salary;
-            if (salaryID == 1)
-                rdo_selected = rdo_hourly;
-            return rdo_selected;
-        }
 
         private void btn_addNew_Click(object sender, EventArgs e)
         {

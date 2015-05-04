@@ -89,6 +89,12 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageCustomers.Designer.cs">
+      <DependentUpon>ManageCustomers.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageCustomers.resx">
+      <DependentUpon>ManageCustomers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageEmployees.resx">
       <DependentUpon>ManageEmployees.cs</DependentUpon>

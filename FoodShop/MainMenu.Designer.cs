@@ -37,6 +37,7 @@
             this.btn_products = new System.Windows.Forms.Button();
             this.btn_store = new System.Windows.Forms.Button();
             this.btn_employees = new System.Windows.Forms.Button();
+            this.btn_Customers = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +92,7 @@
             // btn_products
             // 
             this.btn_products.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_products.Location = new System.Drawing.Point(471, 248);
+            this.btn_products.Location = new System.Drawing.Point(604, 248);
             this.btn_products.Name = "btn_products";
             this.btn_products.Size = new System.Drawing.Size(194, 59);
             this.btn_products.TabIndex = 9;
@@ -101,7 +102,7 @@
             // btn_store
             // 
             this.btn_store.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_store.Location = new System.Drawing.Point(471, 387);
+            this.btn_store.Location = new System.Drawing.Point(862, 248);
             this.btn_store.Name = "btn_store";
             this.btn_store.Size = new System.Drawing.Size(194, 59);
             this.btn_store.TabIndex = 10;
@@ -111,7 +112,7 @@
             // btn_employees
             // 
             this.btn_employees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_employees.Location = new System.Drawing.Point(471, 119);
+            this.btn_employees.Location = new System.Drawing.Point(339, 248);
             this.btn_employees.Name = "btn_employees";
             this.btn_employees.Size = new System.Drawing.Size(194, 59);
             this.btn_employees.TabIndex = 11;
@@ -119,11 +120,23 @@
             this.btn_employees.UseVisualStyleBackColor = true;
             this.btn_employees.Click += new System.EventHandler(this.btn_employees_Click_1);
             // 
+            // btn_Customers
+            // 
+            this.btn_Customers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Customers.Location = new System.Drawing.Point(75, 248);
+            this.btn_Customers.Name = "btn_Customers";
+            this.btn_Customers.Size = new System.Drawing.Size(194, 59);
+            this.btn_Customers.TabIndex = 13;
+            this.btn_Customers.Text = "Customers";
+            this.btn_Customers.UseVisualStyleBackColor = true;
+            this.btn_Customers.Click += new System.EventHandler(this.btn_Customers_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 564);
+            this.Controls.Add(this.btn_Customers);
             this.Controls.Add(this.btn_products);
             this.Controls.Add(this.btn_store);
             this.Controls.Add(this.btn_employees);
@@ -152,5 +165,6 @@
         private System.Windows.Forms.Button btn_products;
         private System.Windows.Forms.Button btn_store;
         private System.Windows.Forms.Button btn_employees;
+        private System.Windows.Forms.Button btn_Customers;
     }
 }

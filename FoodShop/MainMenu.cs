@@ -102,6 +102,13 @@ namespace FoodShop
         private void btn_exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_Customers_Click(object sender, EventArgs e)
+        {
+            frm_ManageCustomers formManageCustomers = new frm_ManageCustomers();
+            formManageCustomers.Show();
+
         }  
     }
 }
