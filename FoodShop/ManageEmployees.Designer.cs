@@ -39,6 +39,9 @@
             this.isActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.positionTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PositionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HowPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_productList = new System.Windows.Forms.Label();
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_addNew = new System.Windows.Forms.Button();
@@ -73,9 +76,6 @@
             this.txt_lastName = new System.Windows.Forms.TextBox();
             this.txt_firstName = new System.Windows.Forms.TextBox();
             this.btn_tabExitApp = new System.Windows.Forms.Button();
-            this.PositionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HowPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_Employees)).BeginInit();
@@ -173,6 +173,21 @@
             // 
             this.shiftID.HeaderText = "Shift";
             this.shiftID.Name = "shiftID";
+            // 
+            // PositionID
+            // 
+            this.PositionID.HeaderText = "PositionID";
+            this.PositionID.Name = "PositionID";
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            // 
+            // HowPaid
+            // 
+            this.HowPaid.HeaderText = "How Paid";
+            this.HowPaid.Name = "HowPaid";
             // 
             // lbl_productList
             // 
@@ -480,6 +495,7 @@
             this.cmb_position.Name = "cmb_position";
             this.cmb_position.Size = new System.Drawing.Size(121, 21);
             this.cmb_position.TabIndex = 50;
+            this.cmb_position.Text = "Select Position";
             this.cmb_position.SelectedIndexChanged += new System.EventHandler(this.cmb_position_SelectedIndexChanged);
             // 
             // lbl_Last
@@ -525,21 +541,6 @@
             this.btn_tabExitApp.Text = "Exit Application";
             this.btn_tabExitApp.UseVisualStyleBackColor = true;
             this.btn_tabExitApp.Click += new System.EventHandler(this.btn_tabExitApp_Click);
-            // 
-            // PositionID
-            // 
-            this.PositionID.HeaderText = "PositionID";
-            this.PositionID.Name = "PositionID";
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            // 
-            // HowPaid
-            // 
-            this.HowPaid.HeaderText = "How Paid";
-            this.HowPaid.Name = "HowPaid";
             // 
             // frm_ManageEmployees
             // 
