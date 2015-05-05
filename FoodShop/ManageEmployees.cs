@@ -171,8 +171,8 @@ namespace FoodShop
                 int posID = SafeGetInt(row, "PositionID");
                 //MessageBox.Show("posID = " + posID);
                 string title = "test title";
-                //int shift = Convert.ToInt16(row["shiftID"]);
-                int shift = 1;
+                int shift = Convert.ToInt16(row["ShiftID"]);
+                //int shift = 1;
                 //double compensation = Convert.ToDouble(row["salary"]);
                 //double compensation = 10.1;  //TODO: Make this decimal for money data type
                 decimal compensation = Convert.ToDecimal(row["Salary"]);
