@@ -283,11 +283,12 @@ namespace FoodShop
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
             string ID = cmb_position.SelectedValue.ToString();
+            btn_save.Enabled = true;
         }
 
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //btn_save.Enabled = true;
+            btn_save.Enabled = true;
         }
 
         // Returns position id after ensuring it is a valid value
