@@ -73,7 +73,7 @@ namespace FoodShop
             //MessageBox.Show(conString + "/n/n" + testString);
             // Test database Connection
             MessageBox.Show(db.TestConnection());
-                sqlGetTable();
+            sqlGetTable();
             //}
             //catch (Exception err)
             //catch (Exception e)
@@ -82,17 +82,13 @@ namespace FoodShop
             //}
 
             // Populate the combo boxes for position ID and shift ID
-            //string posExecString = "select PositionID, PositionTitle from Positions";
+            // Comboboxes default values are assinged to ID=0 in the database table
             string posExecString = "Select PositionID, PositionTitle from Position";
-            
             DataTable posDT = new DataTable();
             posDT = db.ExecuteSqlReturnTable(posExecString);
-            //dt.Load(reader);
-
             cmb_position.ValueMember = "PositionID";
             cmb_position.DisplayMember = "PositionTitle";
             cmb_position.DataSource = posDT;
-            ////      conn.Close();
 
             string shiftExecString = "Select ShiftID, ShiftTitle from Shift";
             DataTable shiftDT = new DataTable();
