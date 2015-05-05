@@ -82,23 +82,24 @@ namespace FoodShop
             //}
 
             // Populate the combo boxes for position ID and shift ID
-            //string posExecString = "select positionID, positionTitle from Positions";
-            ////string posExecString = "select PositionID, PositionTitle from Positions";
-            //DataTable posDT = new DataTable();
-            //posDT = db.ExecuteSqlReturnTable(posExecString);
-            ////      dt.Load(reader);
+            //string posExecString = "select PositionID, PositionTitle from Positions";
+            string posExecString = "Select PositionID, PositionTitle from Position";
+            
+            DataTable posDT = new DataTable();
+            posDT = db.ExecuteSqlReturnTable(posExecString);
+            //dt.Load(reader);
 
-            //cmb_position.ValueMember = "PositionID";
-            //cmb_position.DisplayMember = "PositionTitle";
-            //cmb_position.DataSource = posDT;
+            cmb_position.ValueMember = "PositionID";
+            cmb_position.DisplayMember = "PositionTitle";
+            cmb_position.DataSource = posDT;
             ////      conn.Close();
 
-            //string shiftExecString = "select shiftID, shiftTitle from Shifts";
-            //DataTable shiftDT = new DataTable();
-            //shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
-            //cmb_shift.ValueMember = "shiftID";
-            //cmb_shift.DisplayMember = "shiftTitle";
-            //cmb_shift.DataSource = shiftDT;
+            string shiftExecString = "Select ShiftID, ShiftTitle from Shift";
+            DataTable shiftDT = new DataTable();
+            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
+            cmb_shift.ValueMember = "ShiftID";
+            cmb_shift.DisplayMember = "ShiftTitle";
+            cmb_shift.DataSource = shiftDT;
         }
 
 
