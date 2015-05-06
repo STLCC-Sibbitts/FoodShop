@@ -42,7 +42,6 @@ namespace FoodShop
             btn_save.Enabled = true;
         }
 
-
         /**
          * Initializes the ManageEmployees form and connects to the database
          * 
@@ -51,8 +50,6 @@ namespace FoodShop
         {
             MessageBox.Show(db.TestConnection());
             sqlGetTable();
-
-
             // Populate the combo boxes for position ID and shift ID
             // Comboboxes default values are assinged to ID=0 in the database table
             string posExecString = "Select PositionID, PositionTitle from Position";
@@ -69,7 +66,6 @@ namespace FoodShop
             cmb_shift.DisplayMember = "ShiftTitle";
             cmb_shift.DataSource = shiftDT;
         }
-
 
         // When the save button is clicked, create a new employee object with the data entered
         // by the user.
@@ -92,13 +88,12 @@ namespace FoodShop
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = getIsActive();
-            // employee.isActive = TODO
             // Create new employee object, and initialize it
             var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
             // Decide whether to insert new data or update an old employee data, then show status
             if (newName.employeeID == 0)
             {
-                MessageBox.Show(db.addNewData(newName)); //This is working
+                MessageBox.Show(db.addNewData(newName)); 
             }
             else
             {
@@ -119,13 +114,8 @@ namespace FoodShop
         // Retrieve values for the grid. Grid correctly populates data after merging with test branch
         public void sqlGetTable()
         {
-            //string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
-            //string sqlSelect = "SELECT * FROM BreadProject.jarcelo_admin.Employee;";
             string sqlSelect = "SELECT * FROM Employee;";
-
             DataTable dataTable = new DataTable();
-
-            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
 
             foreach (DataRow row in dataTable.Rows)
@@ -166,7 +156,6 @@ namespace FoodShop
             else
                 return -1;
         }
-
 
         // Populate the edit employee tab fields with the results of a sql query.
         // Make index a global variable so delete button can retrieve the index value 
