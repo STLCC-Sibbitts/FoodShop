@@ -13,17 +13,8 @@ namespace FoodShop
 
         public static DateTime getDateTime(Object dt)
         {
-            var result = DateTime.MinValue;
-            try
-            {
-                DateTimePicker typed = (DateTimePicker)dt;
-                result = typed.Value;
-                return result;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Invalid Data");
-            }
+            DateTimePicker typed = (DateTimePicker)dt;
+            DateTime result = typed.Value;
             return result;
         }
 
