@@ -126,11 +126,11 @@ namespace FoodShop
                         command.Parameters.Add(new SqlParameter("IsActive", emp.isActive));
                         command.ExecuteNonQuery();
                     }
-                    retVal = "Data Successfully Saved!";
+                    retVal = "New Employee Data Saved!";
                 }
                 catch
                 {
-                    retVal = "Failed to Insert Data.";
+                    retVal = "Failed to Insert New Employee Data.";
                 }
                 finally
                 {
