@@ -175,11 +175,11 @@ namespace FoodShop
                         command.Parameters.Add(new SqlParameter("UpsellID", li.UpsellID));
                         command.ExecuteNonQuery();
                     }
-                    retVal = "Line Item Data Successfully Saved!";
+                    retVal = "New Line Item Data Successfully Saved!";
                 }
                 catch
                 {
-                    retVal = "Failed to Insert Line Item Data.";
+                    retVal = "Failed to Insert New Line Item Data.";
                 }
                 finally
                 {
@@ -217,11 +217,11 @@ namespace FoodShop
                         command.Parameters.AddWithValue("FrequentEnrollDate", cust.frequentEnrollDate);
                         command.ExecuteNonQuery();
                     }
-                    retVal = "Data Successfully Updated!";
+                    retVal = "Customer Data Successfully Updated!";
                 }
                 catch
                 {
-                    retVal = "Failed to Update Data.";
+                    retVal = "Failed to Update Customer Data.";
                 }
                 finally
                 {
@@ -261,11 +261,11 @@ namespace FoodShop
                         command.Parameters.AddWithValue("IsActive", emp.isActive);
                         command.ExecuteNonQuery();
                     }
-                    retVal = "Data Successfully Updated!";
+                    retVal = "Employee Data Successfully Updated!";
                 }
                 catch
                 {
-                    retVal = "Failed to Update Data.";
+                    retVal = "Failed to Update Employee Data.";
                 }
                 finally
                 {
