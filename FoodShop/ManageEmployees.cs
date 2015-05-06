@@ -91,7 +91,7 @@ namespace FoodShop
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
-            bool isActive = true;
+            bool isActive = getIsActive();
             // employee.isActive = TODO
             // Create new employee object, and initialize it
             var newName = new Employee(empNumber, lastName, firstName, whenHired, postID, shftID, rateOfPay, empType, payType, isActive);
