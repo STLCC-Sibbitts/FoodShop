@@ -63,43 +63,26 @@ namespace FoodShop
          * */
         private void frm_ManageEmployees_Load(object sender, EventArgs e)
         {
-            //MessageBox.Show(conString + "/n/n" + testString);
-            //try
-            //{
-            //conString = dbs.DbConnectionString;
-            //conString = db.DbConnString;
-            //testString = dbs.TestConnection();
-            //testString = db.TestConnection();
-            //MessageBox.Show(conString + "/n/n" + testString);
-            // Test database Connection
             MessageBox.Show(db.TestConnection());
             sqlGetTable();
-            //}
-            //catch (Exception err)
-            //catch (Exception e)
-            //{
-            //    MessageBox.Show(e.Message);
-            //}
+
 
             // Populate the combo boxes for position ID and shift ID
-            //<<<<<<< HEAD
-            //string posExecString = "select positionID, positionTitle from Positions";
-            ////string posExecString = "select PositionID, PositionTitle from Positions";
-            //DataTable posDT = new DataTable();
-            //posDT = db.ExecuteSqlReturnTable(posExecString);
-            ////      dt.Load(reader);
+            string posExecString = "select positionID, positionTitle from Position";
+            DataTable posDT = new DataTable();
+            posDT = db.ExecuteSqlReturnTable(posExecString);
 
-            //cmb_position.ValueMember = "PositionID";
-            //cmb_position.DisplayMember = "PositionTitle";
-            //cmb_position.DataSource = posDT;
+            cmb_position.ValueMember = "PositionID";
+            cmb_position.DisplayMember = "PositionTitle";
+            cmb_position.DataSource = posDT;
             ////      conn.Close();
 
-            //string shiftExecString = "select shiftID, shiftTitle from Shifts";
-            //DataTable shiftDT = new DataTable();
-            //shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
-            //cmb_shift.ValueMember = "shiftID";
-            //cmb_shift.DisplayMember = "shiftTitle";
-            //cmb_shift.DataSource = shiftDT;
+            string shiftExecString = "select ShiftID, ShiftTitle from Shift";
+            DataTable shiftDT = new DataTable();
+            shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
+            cmb_shift.ValueMember = "ShiftID";
+            cmb_shift.DisplayMember = "ShiftTitle";
+            cmb_shift.DataSource = shiftDT;
             /*=======
                         string posExecString = "select positionID, positionTitle from Positions";
                         DataTable posDT = new DataTable();
