@@ -210,8 +210,8 @@ namespace FoodShop
                 int shift = Convert.ToInt16(row["ShiftID"]);
                 //double compensation = Convert.ToDouble(row["salary"]);
                 double compensation = Convert.ToDouble(row["Salary"]);
-                int status = 1; // Convert.ToInt16(row["fullTime"]);
-                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
+                int status = Convert.ToInt16(row["FullTime"]);
+                int howPaid = Convert.ToInt16(row["Hourly"]);
                 //bool active = true;
                 //bool active = Convert.ToBoolean(row["IsActive"]);
                 int active = Convert.ToInt16(row["IsActive"]);
