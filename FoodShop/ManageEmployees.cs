@@ -150,8 +150,8 @@ namespace FoodShop
                 decimal compensation = Convert.ToDecimal(row["Salary"]);
                 int status = Convert.ToInt16(row["FullTime"]);
                 int howPaid = Convert.ToInt16(row["Hourly"]);
-                bool active = true;
-                //       bool active = Convert.ToBoolean(row["isActive"]);
+                //bool active = true;
+                bool active = Convert.ToBoolean(row["IsActive"]);
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
@@ -212,11 +212,13 @@ namespace FoodShop
                 double compensation = Convert.ToDouble(row["Salary"]);
                 int status = 1; // Convert.ToInt16(row["fullTime"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
-                bool active = true;
-         //       bool active = Convert.ToBoolean(row["isActive"]);
+                //bool active = true;
+                //bool active = Convert.ToBoolean(row["IsActive"]);
+                int active = Convert.ToInt16(row["IsActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
                 //HireDateCal.BoldedDates.Equals(hired);
+                cbx_isActive.Checked = (active > 0); // Checkbox is checked when value is 1
                 dtm_dateHired.Value = hired;
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
