@@ -134,6 +134,11 @@ namespace FoodShop
                 //MessageBox.Show("posID = " + posID);
                 string title = "test title";
                 int shift = Convert.ToInt16(row["ShiftID"]);
+                //string sql = "SELECT ShiftTitle WHERE ShiftID = " + shift + " FROM Employee";
+                //MessageBox.Show(db.executeSQLQuery(sql));
+                //cmb_shift.SelectedIndex = shift;
+                //string title = db.executeSQLQuery(sql);
+                //MessageBox.Show(cmb_shift.SelectedItem.ToString());
                 //int shift = 1;
                 //double compensation = Convert.ToDouble(row["salary"]);
                 //double compensation = 10.1;  //TODO: Make this decimal for money data type
@@ -145,6 +150,7 @@ namespace FoodShop
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
+                //grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
                 grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
             }
         }
@@ -176,10 +182,7 @@ namespace FoodShop
             index = (int)grd_Employees[columnIndex, rowIndex].Value;
             //MessageBox.Show("rowIndex = " + rowIndex);
 
-            //sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + rowIndex + ";";
             sqlQuery = "SELECT * FROM Employee WHERE EmployeeID = " + index + ";";
-
-            //dataTable = dbs.ExecuteSqlReturnTable(sqlQuery);
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
@@ -214,7 +217,6 @@ namespace FoodShop
                 txt_rateOfPay.Text = compensation.ToString();
                 txt_employeeID.Text = id.ToString();
 
-
                 currentComboIndex = cmb_position.SelectedIndex;
 
                 if (status == 0)
@@ -239,7 +241,6 @@ namespace FoodShop
                     rdo_salary.Checked = false;
                 }
                 tab_Employee.SelectTab(tab_manageEmployees);
-                // Test commit
             }
         }
 
