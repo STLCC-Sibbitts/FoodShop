@@ -13,10 +13,11 @@ namespace FoodShop
 {
     public partial class frm_ManageCustomers : Form
     {
+        // Create a DBServices instance
         DBServices db = new DBServices();
 
-        string conString;
-        string testString = "";
+    //    string conString;
+    //    string testString = "";
         int currentComboIndex = 0;
         Boolean isUpdate = false;  
 
@@ -47,35 +48,22 @@ namespace FoodShop
 
 
         /**
-         * Initializes the ManageEmployees form and connects to the database
+         * Initializes the ManageCustomers form and connects to the database
          * 
          * */
         private void frm_ManageCustomers_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(conString + "/n/n" + testString);
-
-            try
-            {
-                conString = db.DbConnString;
-                testString = db.TestConnection();
-                MessageBox.Show(conString + "/n/n" + testString);
-                sqlGetTable();
-
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
+            MessageBox.Show(db.TestConnection());
+            sqlGetTable();
 
             // Populate the combo boxes for birth month
-  /*          string posExecString = "select positionID, positionTitle from Positions";
-            DataTable posDT = new DataTable();
-            posDT = db.ExecuteSqlReturnTable(posExecString);
+            string monthExecString = "select MonthID, MonthName from Month";
+            DataTable monthDT = new DataTable();
+            monthDT = db.ExecuteSqlReturnTable(monthExecString);
 
-            cmb_birthMonth.ValueMember = "positionID";
-            cmb_birthMonth.DisplayMember = "positionTitle";
-            cmb_birthMonth.DataSource = posDT; */
-            //      conn.Close();                       
+            cmb_birthMonth.ValueMember = "MonthID";
+            cmb_birthMonth.DisplayMember = "MonthName";
+            cmb_birthMonth.DataSource = monthDT;               
         }
 
 
@@ -108,7 +96,7 @@ namespace FoodShop
             }
             else
             {
-     //           MessageBox.Show(db.updateData(newName));
+                MessageBox.Show(db.updateData(newName));
             }   
         }
 
@@ -132,19 +120,20 @@ namespace FoodShop
         public void sqlGetTable()
         {
             // string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
-            string sqlSelect = "SELECT e.employeeID, e.employeeLast, e.employeeFirst, e.hireDate, e.salary, e.isActive, e.positionID, Positions.positionTitle, Shifts.shiftTitle FROM Employees as e INNER JOIN Positions ON e.positionID = Positions.positionID INNER JOIN Shifts ON e.shiftID = Shifts.shiftID;";
+            string sqlSelect = "SELECT * FROM Customer;";
             DataTable dataTable = new DataTable();
             //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
             foreach (DataRow row in dataTable.Rows)
             {
-                int id = Convert.ToInt16(row["employeeID"]);
-                string lastName = row["employeeLast"].ToString();
-                string firstName = row["employeeFirst"].ToString();
-                string position = row["positionID"].ToString();
-                string title = row["positionTitle"].ToString();
-                string shift = row["shiftTitle"].ToString();
-                string hired = row["hireDate"].ToString();
+                int id = Convert.ToInt16(row["CustomerID"]);
+                string lastName = row["CustomerLast"].ToString();
+                string firstName = row["CustomerFirst"].ToString();
+                string position = row["Gender"].ToString();
+                string title = row["Email"].ToString();
+                string shift = row["Telephone"].ToString();
+                string hired = row["BirthMonthDay"].ToString();
+                string enrollDate = row["FrequentEnrollDate"].ToString();
                 string active = ValidationUtility.isNull(row["isActive"]);
                 decimal compensation = Convert.ToDecimal(row["salary"]);
                 int howPaid = 1; // Convert.ToInt16(row["hourly"]);
