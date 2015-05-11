@@ -108,6 +108,7 @@
             this.btn_addCustomer.TabIndex = 5;
             this.btn_addCustomer.Text = "Add Customer";
             this.btn_addCustomer.UseVisualStyleBackColor = true;
+            this.btn_addCustomer.Click += new System.EventHandler(this.btn_addCustomer_Click);
             // 
             // btn_exitApplication
             // 
@@ -267,6 +268,7 @@
             this.btn_save.TabIndex = 16;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // gbx_gender
             // 

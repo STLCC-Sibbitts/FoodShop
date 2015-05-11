@@ -129,15 +129,12 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["CustomerID"]);
                 string lastName = row["CustomerLast"].ToString();
                 string firstName = row["CustomerFirst"].ToString();
-                string position = row["Gender"].ToString();
-                string title = row["Email"].ToString();
-                string shift = row["Telephone"].ToString();
-                string hired = row["BirthMonthDay"].ToString();
+                string gender = row["Gender"].ToString();
+                string email = row["Email"].ToString();
+                string phone = row["Telephone"].ToString();
+                string birthday = row["BirthMonthDay"].ToString();
                 string enrollDate = row["FrequentEnrollDate"].ToString();
-                string active = ValidationUtility.isNull(row["isActive"]);
-                decimal compensation = Convert.ToDecimal(row["salary"]);
-                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
-                grd_Customers.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift);
+                grd_Customers.Rows.Add(id, lastName, firstName, gender, email, phone, birthday, enrollDate);
             }
         }
 
@@ -152,7 +149,7 @@ namespace FoodShop
         } 
 
 
-        // Populate the edit employee tab fields with the results of a sql query.
+        // Populate the edit customer tab fields with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
             isUpdate = true;
@@ -166,33 +163,26 @@ namespace FoodShop
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             int index = (int)grd_Customers[columnIndex, rowIndex].Value;
-            sqlQuery = "SELECT * FROM Employees WHERE employeeID = " + index + ";";
+            sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                int id = Convert.ToInt16(row["employeeID"]);
-                string lastName = row["employeeLast"].ToString();
-                string firstName = row["employeeFirst"].ToString();
-                DateTime hired = Convert.ToDateTime(row["hireDate"]);
+                int id = Convert.ToInt16(row["CustomerID"]);
+                string lastName = row["CustomerLast"].ToString();
+                string firstName = row["CustomerFirst"].ToString();
+                string gender = row["Gender"].ToString();
+                string email = row["Email"].ToString();
+                string phone = row["Telephone"].ToString();
+                int birthday = Convert.ToInt16(row["BirthMoDay"]);
+                DateTime enrollDate = Convert.ToDateTime(row["FrequentEnrollDate"]);
 
-                int posID = 1; // Convert.ToInt16(row["positionID"]);
-                int shift = Convert.ToInt16(row["shiftID"]);
-                double compensation = Convert.ToDouble(row["salary"]);
-                int status = 1; // Convert.ToInt16(row["fullTime"]);
-                int howPaid = 1; // Convert.ToInt16(row["hourly"]);
-                bool active = true;
-         //       bool active = Convert.ToBoolean(row["isActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
-
-                dtm_enrollDate.Value = hired;
-//                dateTimePicker1.Value = DateTime.Today.AddDays(-1);
-
- /*               cmb_position.SelectedIndex = posID;
-                cmb_shift.SelectedIndex = shift;
-                txt_rateOfPay.Text = compensation.ToString();
-                txt_employeeID.Text = id.ToString();                        */
+                txt_email.Text = email;
+                txt_phone.Text = phone;
+                cmb_birthMonth.SelectedIndex = birthday;
+                dtm_enrollDate.Value = enrollDate;
             }
         }
 
@@ -247,6 +237,42 @@ namespace FoodShop
         private void btn_tabExitToMenu_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btn_addCustomer_Click(object sender, EventArgs e)
+        {
+            tab_Customer.SelectTab(tab_manageCustomers);
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            int customerNumber = 0;
+            // Check if there's an existing customerID
+            if (!string.IsNullOrWhiteSpace(txt_customerID.Text))
+            {
+                customerNumber = int.Parse(txt_customerID.Text);
+            }
+
+            string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
+            string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
+            string gender = "male";
+            string eMail = ValidationUtility.stringValidator(txt_email.Text);
+            string telephone = ValidationUtility.stringValidator(txt_phone.Text);
+            DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
+            DateTime birthMonthDay = ValidationUtility.getDateTime(dtm_enrollDate);
+
+            // Create new employee object, and initialize it
+            var newName = new Customer(customerNumber, lastName, firstName, gender, eMail, telephone, birthMonthDay, frequentEnrollDate);
+
+            // Decide whether to insert new data or update an existing record, then show status
+            if (newName.customerID == 0)
+            {
+                MessageBox.Show(db.addNewData(newName));
+            }
+            else
+            {
+                MessageBox.Show(db.updateData(newName));
+            }  
         }
     }
 
