@@ -16,13 +16,13 @@ namespace FoodShop
         // Create a DBServices instance
         DBServices db = new DBServices();
 
-    //    string conString;
-    //    string testString = "";
+        //    string conString;
+        //    string testString = "";
         int currentComboIndex = 0;
-        Boolean isUpdate = false;  
+        Boolean isUpdate = false;
 
         public frm_ManageCustomers()
-        {            
+        {
             InitializeComponent();
             // Set KeyPreview object to true to allow the form to process  
             // the key before the control with focus processes it. 
@@ -32,7 +32,7 @@ namespace FoodShop
             // Associate the event-handling method with the KeyDown event. 
             this.KeyDown += new KeyEventHandler(frm_ManageCustomers_KeyDown);
         }
-        
+
 
         // The form will handle all key events before the control with   
         // focus handles them.  Show the keys pressed by adding the 
@@ -63,63 +63,62 @@ namespace FoodShop
 
             cmb_birthMonth.ValueMember = "MonthID";
             cmb_birthMonth.DisplayMember = "MonthName";
-            cmb_birthMonth.DataSource = monthDT;               
+            cmb_birthMonth.DataSource = monthDT;
         }
 
 
         // When the save button is clicked, create a new customer object with the data entered
         // by the user.
-        private void btn_save_Click_1(object sender, EventArgs e)
-        {
-            int customerNumber = 0;
-            // Check if there's an existing customerID
-            if (!string.IsNullOrWhiteSpace(txt_customerID.Text))
-            {
-                customerNumber = int.Parse(txt_customerID.Text);
-            }
+        /*     private void btn_save_Click_1(object sender, EventArgs e)
+             {
+                 int customerNumber = 0;
+                 // Check if there's an existing customerID
+                 if (!string.IsNullOrWhiteSpace(txt_customerID.Text))
+                 {
+                     customerNumber = int.Parse(txt_customerID.Text);
+                 }
 
-            string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
-            string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
-            string gender = "male";
-            string eMail = ValidationUtility.stringValidator(txt_email.Text);
-            string telephone = ValidationUtility.stringValidator(txt_phone.Text);
-            DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
-            DateTime birthMonthDay = ValidationUtility.getDateTime(dtm_enrollDate);
+                 string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
+                 string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
+                 string gender = "male";
+                 string eMail = ValidationUtility.stringValidator(txt_email.Text);
+                 string telephone = ValidationUtility.stringValidator(txt_phone.Text);
+                 DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
+                 DateTime birthMonthDay = ValidationUtility.getDateTime(dtm_enrollDate);
 
-            // Create new employee object, and initialize it
-            var newName = new Customer(customerNumber, lastName, firstName, gender, eMail, telephone, birthMonthDay, frequentEnrollDate);
+                 // Create new employee object, and initialize it
+                 var newName = new Customer(customerNumber, lastName, firstName, gender, eMail, telephone, birthMonthDay, frequentEnrollDate);
 
-            // Decide whether to insert new data or update an existing record, then show status
-            if (newName.customerID == 0)
-            {
-                MessageBox.Show(db.addNewData(newName));
-            }
-            else
-            {
-                MessageBox.Show(db.updateData(newName));
-            }   
-        }
-
+                 // Decide whether to insert new data or update an existing record, then show status
+                 if (newName.customerID == 0)
+                 {
+                     MessageBox.Show(db.addNewData(newName));
+                 }
+                 else
+                 {
+                     MessageBox.Show(db.updateData(newName));
+                 }   
+             }
+     */
         // Add customer record to the database
-/*        public void insertCustomer(Customer cust)   // This can be deleted
-        {
-            // create an instance of the employee
-            string sqlInsert = "INSERT INTO Employees (customerLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-                "'" + cust.customerLast + "'" + ", " +
-                "'" + cust.customerFirst + "'" + ", " +
-                "'" + cust.gender + "'" + ", " +
-                "'" + cust.eMail + "'" + ", " +
-                "'" + cust.telephone + "'" + ", " +
-                "'" + cust.birthMonthDay + "'" + ", " +
-                "'" + cust.frequentEnrollDate + "'" + ", " +
-                "'" + 1 + "'" + ");";
-        } */
+        /*        public void insertCustomer(Customer cust)   // This can be deleted
+                {
+                    // create an instance of the employee
+                    string sqlInsert = "INSERT INTO Employees (customerLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
+                        "'" + cust.customerLast + "'" + ", " +
+                        "'" + cust.customerFirst + "'" + ", " +
+                        "'" + cust.gender + "'" + ", " +
+                        "'" + cust.eMail + "'" + ", " +
+                        "'" + cust.telephone + "'" + ", " +
+                        "'" + cust.birthMonthDay + "'" + ", " +
+                        "'" + cust.frequentEnrollDate + "'" + ", " +
+                        "'" + 1 + "'" + ");";
+                } */
 
 
         // Retrieve values for the grid.
         public void sqlGetTable()
         {
-            // string sqlSelect = "SELECT * FROM BreadProjectJr.is283_kmne68.Employees;";
             string sqlSelect = "SELECT * FROM Customer;";
             DataTable dataTable = new DataTable();
             //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
@@ -146,7 +145,7 @@ namespace FoodShop
                 return Convert.ToInt16(row[colName]);
             else
                 return -1;
-        } 
+        }
 
 
         // Populate the edit customer tab fields with the results of a sql query.
@@ -189,7 +188,7 @@ namespace FoodShop
         // Position drop down menu
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-        //    string ID = cmb_position.SelectedValue.ToString();
+            //    string ID = cmb_position.SelectedValue.ToString();
         }
 
         // Menu drop down menu
@@ -244,6 +243,8 @@ namespace FoodShop
             tab_Customer.SelectTab(tab_manageCustomers);
         }
 
+        // When the save button is clicked, create a new customer object with the data entered
+        // by the user.
         private void btn_save_Click(object sender, EventArgs e)
         {
             int customerNumber = 0;
@@ -272,8 +273,35 @@ namespace FoodShop
             else
             {
                 MessageBox.Show(db.updateData(newName));
-            }  
+            }
         }
+
+        private void btn_exitCustomers_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void btn_exitApplication_Click_1(object sender, EventArgs e)
+        {
+            MainMenu.ActiveForm.Disposed += new EventHandler(closeMenu);
+        }
+
+        private void closeMenu(object sender, EventArgs e)
+        {
+            MainMenu.ActiveForm.Dispose();
+        }
+
+        private void btn_exitToMenu_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+
     }
 
 

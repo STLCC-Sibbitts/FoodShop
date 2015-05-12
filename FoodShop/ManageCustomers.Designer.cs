@@ -118,6 +118,7 @@
             this.btn_exitApplication.TabIndex = 4;
             this.btn_exitApplication.Text = "Exit Application";
             this.btn_exitApplication.UseVisualStyleBackColor = true;
+            this.btn_exitApplication.Click += new System.EventHandler(this.btn_exitApplication_Click_1);
             // 
             // btn_exitToMenu
             // 
@@ -127,6 +128,7 @@
             this.btn_exitToMenu.TabIndex = 3;
             this.btn_exitToMenu.Text = "Exit to Menu";
             this.btn_exitToMenu.UseVisualStyleBackColor = true;
+            this.btn_exitToMenu.Click += new System.EventHandler(this.btn_exitToMenu_Click_1);
             // 
             // btn_Select
             // 
@@ -241,6 +243,7 @@
             this.btn_exit.TabIndex = 19;
             this.btn_exit.Text = "Exit to Menu";
             this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
             // btn_exitCustomers
             // 
@@ -250,6 +253,7 @@
             this.btn_exitCustomers.TabIndex = 18;
             this.btn_exitCustomers.Text = "Exit Application";
             this.btn_exitCustomers.UseVisualStyleBackColor = true;
+            this.btn_exitCustomers.Click += new System.EventHandler(this.btn_exitCustomers_Click);
             // 
             // btn_delete
             // 
