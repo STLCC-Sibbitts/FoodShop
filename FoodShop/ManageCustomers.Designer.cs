@@ -99,6 +99,7 @@
             this.tab_Customers.TabIndex = 0;
             this.tab_Customers.Text = "View Customers";
             this.tab_Customers.UseVisualStyleBackColor = true;
+            //this.tab_Customers.Click += new System.EventHandler(this.tab_Customers_Click);
             // 
             // btn_addCustomer
             // 
@@ -118,7 +119,6 @@
             this.btn_exitApplication.TabIndex = 4;
             this.btn_exitApplication.Text = "Exit Application";
             this.btn_exitApplication.UseVisualStyleBackColor = true;
-            this.btn_exitApplication.Click += new System.EventHandler(this.btn_exitApplication_Click_1);
             // 
             // btn_exitToMenu
             // 

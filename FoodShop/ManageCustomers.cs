@@ -24,6 +24,8 @@ namespace FoodShop
         public frm_ManageCustomers()
         {
             InitializeComponent();
+            // Load form event handler
+            Load += new EventHandler(frm_ManageCustomers_Load);
             // Set KeyPreview object to true to allow the form to process  
             // the key before the control with focus processes it. 
             this.KeyPreview = true;
@@ -55,7 +57,6 @@ namespace FoodShop
         {
             MessageBox.Show(db.TestConnection());
             sqlGetTable();
-
             // Populate the combo boxes for birth month
             string monthExecString = "select MonthID, MonthName from Month";
             DataTable monthDT = new DataTable();
@@ -303,8 +304,6 @@ namespace FoodShop
         {
             this.Hide();
         }
-
-
     }
 
 
