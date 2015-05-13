@@ -99,7 +99,6 @@
             this.tab_Customers.TabIndex = 0;
             this.tab_Customers.Text = "View Customers";
             this.tab_Customers.UseVisualStyleBackColor = true;
-            //this.tab_Customers.Click += new System.EventHandler(this.tab_Customers_Click);
             // 
             // btn_addCustomer
             // 
@@ -138,6 +137,7 @@
             this.btn_Select.TabIndex = 2;
             this.btn_Select.Text = "Select";
             this.btn_Select.UseVisualStyleBackColor = true;
+            this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click_1);
             // 
             // grd_Customers
             // 

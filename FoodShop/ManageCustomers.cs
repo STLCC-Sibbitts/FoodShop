@@ -139,7 +139,6 @@ namespace FoodShop
             }
         }
 
-
         // Retrieves values for the data grid.
         public static int SafeGetInt(DataRow row, string colName)
         {
@@ -149,7 +148,7 @@ namespace FoodShop
                 return -1;
         }
 
-
+        /*
         // Populate the edit customer tab fields with the results of a sql query.
         private void btn_select_Click(object sender, EventArgs e)
         {
@@ -164,7 +163,8 @@ namespace FoodShop
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             int index = (int)grd_Customers[columnIndex, rowIndex].Value;
-            sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
+            //sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
+            sqlQuery = "SELECT * FROM Customer WHERE CustomerID = " + index + ";";
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
@@ -177,16 +177,18 @@ namespace FoodShop
                 string phone = row["Telephone"].ToString();
                 int birthday = Convert.ToInt16(row["BirthMoDay"]);
                 DateTime enrollDate = Convert.ToDateTime(row["FrequentEnrollDate"]);
-
+                MessageBox.Show(id.ToString());
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
                 txt_email.Text = email;
                 txt_phone.Text = phone;
                 cmb_birthMonth.SelectedIndex = birthday;
                 dtm_enrollDate.Value = enrollDate;
+
+                tab_Customer.SelectTab(tab_manageCustomers);
             }
         }
-
+        */
         // Position drop down menu
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -304,6 +306,46 @@ namespace FoodShop
         private void btn_exitToMenu_Click_1(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btn_Select_Click_1(object sender, EventArgs e)
+        {
+            isUpdate = true;
+            int rowIndex;
+            string sqlQuery;
+
+            DataTable dataTable = new DataTable();
+
+            // sqlGetTable();
+            rowIndex = grd_Customers.CurrentCell.RowIndex;
+            int columnIndex = 0;
+            // Revised: This returns the value (ID) given column index and row index
+            int index = (int)grd_Customers[columnIndex, rowIndex].Value;
+            //sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
+            sqlQuery = "SELECT * FROM Customer WHERE CustomerID = " + index + ";";
+            dataTable = db.ExecuteSqlReturnTable(sqlQuery);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int id = Convert.ToInt16(row["CustomerID"]);
+                string lastName = row["CustomerLast"].ToString();
+                string firstName = row["CustomerFirst"].ToString();
+                string gender = row["Gender"].ToString();
+                string email = row["Email"].ToString();
+                string phone = row["Telephone"].ToString();
+                //int birthday = Convert.ToInt16(row["BirthMoDay"]);
+                int birthday = (int)DateTime.Now.Month;
+                //DateTime enrollDate = Convert.ToDateTime(row["FrequentEnrollDate"]);
+                DateTime enrollDate = DateTime.Now;
+                txt_firstName.Text = firstName;
+                txt_lastName.Text = lastName;
+                txt_email.Text = email;
+                txt_phone.Text = phone;
+                //cmb_birthMonth.SelectedIndex = birthday;
+                dtm_enrollDate.Value = enrollDate;
+                /// Gender??
+                tab_Customer.SelectTab(tab_manageCustomers);
+            }
         }
     }
 
