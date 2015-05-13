@@ -132,7 +132,8 @@ namespace FoodShop
                 string gender = row["Gender"].ToString();
                 string email = row["Email"].ToString();
                 string phone = row["Telephone"].ToString();
-                string birthday = row["BirthMonthDay"].ToString();
+                //string birthday = row["BirthMonthDay"].ToString();
+                string birthday = row["BirthMoDay"].ToString();
                 string enrollDate = row["FrequentEnrollDate"].ToString();
                 grd_Customers.Rows.Add(id, lastName, firstName, gender, email, phone, birthday, enrollDate);
             }
