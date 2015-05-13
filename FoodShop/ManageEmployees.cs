@@ -42,10 +42,8 @@ namespace FoodShop
             btn_save.Enabled = true;
         }
 
-        /**
-         * Initializes the ManageEmployees form and connects to the database
-         * 
-         * */
+        DataTable posDT = new DataTable();
+        // Initializes the ManageEmployees form and connects to the database
         private void frm_ManageEmployees_Load(object sender, EventArgs e)
         {
             MessageBox.Show(db.TestConnection());
@@ -53,12 +51,12 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             // Comboboxes default values are assinged to ID=0 in the database table
             string posExecString = "Select PositionID, PositionTitle from Position";
-            DataTable posDT = new DataTable();
+            //DataTable posDT = new DataTable();
             posDT = db.ExecuteSqlReturnTable(posExecString);
             cmb_position.ValueMember = "PositionID";
             cmb_position.DisplayMember = "PositionTitle";
             cmb_position.DataSource = posDT;
-
+            
             string shiftExecString = "Select ShiftID, ShiftTitle from Shift";
             DataTable shiftDT = new DataTable();
             shiftDT = db.ExecuteSqlReturnTable(shiftExecString);
@@ -84,6 +82,7 @@ namespace FoodShop
             DateTime whenHired = dtm_dateHired.Value;
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
+            string position = cmb_position.SelectedValue.ToString();
             int empType = getShiftType();  // this is revised method
             int payType = getSalaryType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
@@ -115,8 +114,11 @@ namespace FoodShop
         public void sqlGetTable()
         {
             string sqlSelect = "SELECT * FROM Employee;";
+            string sqlSelectPositions = "SELECT * FROM Position";
             DataTable dataTable = new DataTable();
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
+            DataTable postDataTable = new DataTable();
+            postDataTable = db.ExecuteSqlReturnTable(sqlSelectPositions);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -131,11 +133,16 @@ namespace FoodShop
                 //int posID = isValidID((Convert.ToInt16(row["positionID"])));
                 //int posID = SafeGetInt(row, "positionID");
                 int posID = SafeGetInt(row, "PositionID");
-                //MessageBox.Show("posID = " + posID);
-                string title = "test title";
+                string sqlPosition = "SELECT Position.PositionTitle FROM Position INNER JOIN Employee On Position.PositionID = " + posID + "";
+                string empPosition = db.executeSQLQuery(sqlPosition).ToString();
+                // Check for the postID Match
+                //string position = postDataTable.Rows[posID].ToString();
+                //string title = "test title";
                 int shift = Convert.ToInt16(row["ShiftID"]);
-                //string sql = "SELECT ShiftTitle WHERE ShiftID = " + shift + " FROM Employee";
+                //string sql = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = Employee.ShiftID";
+                string sqlShift = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = " + shift + "";
                 //MessageBox.Show(db.executeSQLQuery(sql));
+                string shiftTitle = db.executeSQLQuery(sqlShift).ToString();
                 //cmb_shift.SelectedIndex = shift;
                 //string title = db.executeSQLQuery(sql);
                 //MessageBox.Show(cmb_shift.SelectedItem.ToString());
@@ -143,16 +150,22 @@ namespace FoodShop
                 //double compensation = Convert.ToDouble(row["salary"]);
                 //double compensation = 10.1;  //TODO: Make this decimal for money data type
                 decimal compensation = Convert.ToDecimal(row["Salary"]);
-                int status = Convert.ToInt16(row["FullTime"]);
-                int howPaid = Convert.ToInt16(row["Hourly"]);
+                int statusID = Convert.ToInt16(row["FullTime"]);
+                //string sqlStatus = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = " + statusID + "";
+                int howPaidID = Convert.ToInt16(row["Hourly"]);
                 //bool active = true;
                 bool active = Convert.ToBoolean(row["IsActive"]);
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
                 //grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
-                grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
+                grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, shiftTitle, empPosition, statusID, howPaidID);
             }
+        }
+        // Method to get the position name
+        private static void getPositionName()
+        {
+
         }
 
         public static int SafeGetInt(DataRow row, string colName)

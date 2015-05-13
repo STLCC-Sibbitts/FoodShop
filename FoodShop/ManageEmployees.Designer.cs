@@ -75,7 +75,6 @@
             this.shiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PositionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HowPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Employee.SuspendLayout();
             this.tab_Employees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_Employees)).BeginInit();
@@ -125,8 +124,7 @@
             this.positionTitle,
             this.shiftID,
             this.PositionID,
-            this.Status,
-            this.HowPaid});
+            this.Status});
             this.grd_Employees.Location = new System.Drawing.Point(6, 89);
             this.grd_Employees.Name = "grd_Employees";
             this.grd_Employees.Size = new System.Drawing.Size(1083, 297);
@@ -519,29 +517,25 @@
             // 
             // positionTitle
             // 
-            this.positionTitle.HeaderText = "Title";
+            this.positionTitle.HeaderText = "Shift Title";
             this.positionTitle.Name = "positionTitle";
-            this.positionTitle.Visible = false;
             // 
             // shiftID
             // 
-            this.shiftID.HeaderText = "Shift";
+            this.shiftID.HeaderText = "Position";
             this.shiftID.Name = "shiftID";
             // 
             // PositionID
             // 
-            this.PositionID.HeaderText = "PositionID";
+            this.PositionID.HeaderText = "Emp Status";
             this.PositionID.Name = "PositionID";
+            this.PositionID.ToolTipText = "FullTime/PartTime";
             // 
             // Status
             // 
-            this.Status.HeaderText = "Status";
+            this.Status.HeaderText = "How Paid";
             this.Status.Name = "Status";
-            // 
-            // HowPaid
-            // 
-            this.HowPaid.HeaderText = "How Paid";
-            this.HowPaid.Name = "HowPaid";
+            this.Status.ToolTipText = "Hourly/Salary";
             // 
             // frm_ManageEmployees
             // 
@@ -618,7 +612,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shiftID;
         private System.Windows.Forms.DataGridViewTextBoxColumn PositionID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HowPaid;
 
     }
 }

@@ -358,11 +358,10 @@ namespace FoodShop
             {
                 sqlCON.Open();
                 retVal = Convert.ToString(sqlCMD.ExecuteScalar());
-                //retVal = "Record Successfully Deleted";
             }
             catch (Exception)
             {
-                retVal = "Failed Delete Record This Time";
+                retVal = "Failed to get value.";
                 //throw;
             }
             finally
