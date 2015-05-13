@@ -527,13 +527,13 @@
             // 
             // PositionID
             // 
-            this.PositionID.HeaderText = "Emp Status";
+            this.PositionID.HeaderText = "Employment Type";
             this.PositionID.Name = "PositionID";
             this.PositionID.ToolTipText = "FullTime/PartTime";
             // 
             // Status
             // 
-            this.Status.HeaderText = "How Paid";
+            this.Status.HeaderText = "Pay Type";
             this.Status.Name = "Status";
             this.Status.ToolTipText = "Hourly/Salary";
             // 

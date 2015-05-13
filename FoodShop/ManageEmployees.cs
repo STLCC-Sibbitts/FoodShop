@@ -83,8 +83,8 @@ namespace FoodShop
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             string position = cmb_position.SelectedValue.ToString();
-            int empType = getShiftType();  // this is revised method
-            int payType = getSalaryType();  // this is a revised method
+            int empType = getEmpType();  // this is revised method
+            int payType = getPayType();  // this is a revised method
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = getIsActive();
             // Create new employee object, and initialize it
@@ -115,6 +115,8 @@ namespace FoodShop
         {
             string sqlSelect = "SELECT * FROM Employee;";
             string sqlSelectPositions = "SELECT * FROM Position";
+            
+            string payType = "Hourly";
             DataTable dataTable = new DataTable();
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
             DataTable postDataTable = new DataTable();
@@ -151,22 +153,41 @@ namespace FoodShop
                 //double compensation = 10.1;  //TODO: Make this decimal for money data type
                 decimal compensation = Convert.ToDecimal(row["Salary"]);
                 int statusID = Convert.ToInt16(row["FullTime"]);
+                string status = getEmpTypeDescription(statusID);
                 //string sqlStatus = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = " + statusID + "";
                 int howPaidID = Convert.ToInt16(row["Hourly"]);
-                //bool active = true;
+                string payTypeDesc = getPayTypeDescription(howPaidID);
                 bool active = Convert.ToBoolean(row["IsActive"]);
 
                 //MessageBox.Show("employee name: " + lastName + firstName);
 
                 //grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
-                grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, shiftTitle, empPosition, statusID, howPaidID);
+                grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, shiftTitle, empPosition, status, payTypeDesc);
             }
         }
-        // Method to get the position name
-        private static void getPositionName()
-        {
 
+        // Method to get the Employment Type Description
+        private static string getEmpTypeDescription(int empTypeID)
+        {
+            // Default value for employment Type
+            string empType = "Part Time";
+            if (empTypeID == 1)
+            {
+                empType = "Full Time";
+            }
+            return empType;
         }
+        private string getPayTypeDescription(int payTypeID)
+        {
+            // Default value for pay type
+            string payType = "Hourly";
+            if (payTypeID == 1)
+            {
+                payType = "Salary";
+            }
+            return payType;
+        }
+
 
         public static int SafeGetInt(DataRow row, string colName)
         {
@@ -234,24 +255,24 @@ namespace FoodShop
 
                 if (status == 0)
                 {
-                    rdo_fullTime.Checked = true;
-                    rdo_partTime.Checked = false;
+                    rdo_fullTime.Checked = false;
+                    rdo_partTime.Checked = true;
                 }
                 else
                 {
-                    rdo_partTime.Checked = true;
-                    rdo_fullTime.Checked = false;
+                    rdo_partTime.Checked = false;
+                    rdo_fullTime.Checked = true;
                 }
 
                 if (howPaid == 0)
                 {
-                    rdo_salary.Checked = true;
-                    rdo_hourly.Checked = false;
+                    rdo_salary.Checked = false;
+                    rdo_hourly.Checked = true;
                 }
                 else
                 {
-                    rdo_hourly.Checked = true;
-                    rdo_salary.Checked = false;
+                    rdo_hourly.Checked = false;
+                    rdo_salary.Checked = true;
                 }
                 tab_Employee.SelectTab(tab_manageEmployees);
             }
@@ -313,10 +334,10 @@ namespace FoodShop
             }
             return emp.fullTime;
         }
-        // REVISED: employee's shift type (full or part-time).
-        public int getShiftType()
+        // REVISED: employee's employment type (part time = 0 / full time = 1). This needs revision
+        public int getEmpType()
         {
-            int type = 0;
+            int type = 0; //Default is part-time
             foreach (RadioButton rb in this.gbx_shiftType.Controls)
             {
                 if (rdo_fullTime.Checked)
@@ -325,7 +346,6 @@ namespace FoodShop
             }
             return type;
         }
-
 
         // Return the employee's shift type (full or part-time).
         public RadioButton getShiftType(int shiftID)
@@ -339,8 +359,8 @@ namespace FoodShop
             return rdo_selected;
         }
 
-        // REVISED: employee's salary type (paid hourly or salary).
-        public int getSalaryType()
+        // REVISED: employee's salary type (paid hourly = 0 or salary = 1).
+        public int getPayType()
         {
             int type = 0;
             foreach (RadioButton rb in this.gbx_payType.Controls)
