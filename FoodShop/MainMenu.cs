@@ -111,6 +111,9 @@ namespace FoodShop
 
         }
 
-
+        private void closeMenu(object sender, EventArgs e)
+        {
+            MainMenu.ActiveForm.Dispose();
+        }
     }
 }

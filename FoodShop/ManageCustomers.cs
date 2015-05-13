@@ -286,16 +286,19 @@ namespace FoodShop
             this.Hide();
         }
 
-        private void btn_exitApplication_Click_1(object sender, EventArgs e)
+/*        private void btn_exitApplication_Click_1(object sender, EventArgs e)
         {
             MainMenu.ActiveForm.Disposed += new EventHandler(closeMenu);
         }
 
         private void closeMenu(object sender, EventArgs e)
         {
-            MainMenu.ActiveForm.Dispose();
-        }
+            MainMenu menu = new MainMenu();
 
+            if(menu != null)
+                MainMenu.ActiveForm.Dispose();
+        } 
+*/
         private void btn_exitToMenu_Click_1(object sender, EventArgs e)
         {
             this.Hide();
