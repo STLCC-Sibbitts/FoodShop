@@ -262,7 +262,7 @@ namespace FoodShop
             string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
             string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
             //string gender = "male";
-            Gender gender = Gender.Female;
+            Gender gender = Gender.Female; //TODO: figure out a way to match the button and the enum gender value
             string eMail = ValidationUtility.stringValidator(txt_email.Text);
             string telephone = ValidationUtility.stringValidator(txt_phone.Text);
             DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
