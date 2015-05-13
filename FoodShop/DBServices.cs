@@ -147,7 +147,39 @@ namespace FoodShop
         public string addNewData(Customer cust)
         {
             string retVal = String.Empty;
-            // Put the SQL Connection Here
+            using (SqlConnection sqlCon = new SqlConnection(this.DbConnString))
+            {
+                sqlCon.Open();
+                try
+                {
+                    string tableName = "Customer";
+                    string insertStatement = "INSERT INTO " + tableName +
+                        " VALUES(@CustomerLast, @CustomerFirst, @Gender, @Email, @Telephone, @BirthMoDay, @FrequentEnrollDate)";
+                    using (SqlCommand command = new SqlCommand(
+                    insertStatement, sqlCon))
+                    {
+                        //command.Parameters.Add(new SqlParameter("ID", emp.employeeID));
+                        command.Parameters.AddWithValue("CustomerLast", cust.customerLast);
+                        command.Parameters.AddWithValue("CustomerFirst", cust.customerFirst);
+                        command.Parameters.AddWithValue("Gender", cust.gender);
+                        command.Parameters.AddWithValue("Email", cust.eMail);
+                        command.Parameters.AddWithValue("Telephone", cust.telephone);
+                        command.Parameters.AddWithValue("BirthMoDay", cust.birthMonthDay);
+                        command.Parameters.AddWithValue("FrequentEnrollDate", cust.frequentEnrollDate);
+                        command.ExecuteNonQuery();
+                    }
+                    retVal = "New Customer Data Saved!";
+                }
+                catch
+                {
+                    retVal = "Failed to Insert New Customer Data.";
+                }
+                finally
+                {
+                    sqlCon.Close();
+                    sqlCon.Dispose();
+                }
+            }
             return retVal;
         }
 
