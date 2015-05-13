@@ -109,6 +109,11 @@ namespace FoodShop
             frm_ManageCustomers formManageCustomers = new frm_ManageCustomers();
             formManageCustomers.Show();
 
-        }  
+        }
+
+        private void closeMenu(object sender, EventArgs e)
+        {
+            MainMenu.ActiveForm.Dispose();
+        }
     }
 }
