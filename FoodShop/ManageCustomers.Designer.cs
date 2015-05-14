@@ -263,6 +263,7 @@
             this.btn_delete.TabIndex = 17;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_save
             // 
@@ -411,7 +412,6 @@
             this.txt_customerID.Name = "txt_customerID";
             this.txt_customerID.Size = new System.Drawing.Size(100, 20);
             this.txt_customerID.TabIndex = 4;
-            this.txt_customerID.Visible = false;
             // 
             // txt_lastName
             // 

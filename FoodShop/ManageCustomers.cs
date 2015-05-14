@@ -310,6 +310,7 @@ namespace FoodShop
             this.Hide();
         }
 
+        int index;
         private void btn_Select_Click_1(object sender, EventArgs e)
         {
             isUpdate = true;
@@ -322,7 +323,7 @@ namespace FoodShop
             rowIndex = grd_Customers.CurrentCell.RowIndex;
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
-            int index = (int)grd_Customers[columnIndex, rowIndex].Value;
+            index = (int)grd_Customers[columnIndex, rowIndex].Value;
             //sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
             sqlQuery = "SELECT * FROM Customer WHERE CustomerID = " + index + ";";
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
@@ -343,11 +344,18 @@ namespace FoodShop
                 txt_lastName.Text = lastName;
                 txt_email.Text = email;
                 txt_phone.Text = phone;
+                txt_customerID.Text = id.ToString();
                 //cmb_birthMonth.SelectedIndex = birthday;
                 dtm_enrollDate.Value = enrollDate;
                 /// Gender??
                 tab_Customer.SelectTab(tab_manageCustomers);
             }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM Customer WHERE CustomerID = " + index + ";";
+            MessageBox.Show(db.deleteRecord(sql));
         }
     }
 
