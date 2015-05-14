@@ -12,7 +12,7 @@ namespace FoodShop
         public string customerLast { get; set; }
         public string customerFirst { get; set; }
         //public string gender { get; set; }
-        public Gender gender { get; set; }
+        public int gender { get; set; }
         public string eMail { get; set; }
         public string telephone { get; set; }
         public DateTime birthMonthDay { get; set; }
@@ -20,7 +20,7 @@ namespace FoodShop
 
         // Constructor
         //public Customer(int id, string lastName, string firstName, string sex, string email, string phone, DateTime birthday, DateTime enrollDate)
-        public Customer(int id, string lastName, string firstName, Gender sex, string email, string phone, DateTime birthday, DateTime enrollDate)
+        public Customer(int id, string lastName, string firstName, int sex, string email, string phone, DateTime birthday, DateTime enrollDate)
         {
             customerID = id;
             customerLast = lastName;

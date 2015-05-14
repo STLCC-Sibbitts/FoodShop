@@ -234,7 +234,7 @@ namespace FoodShop
                     string tableName = "Customer";
                     string updateStatement = "UPDATE " + tableName +
                         " SET CustomerLast = @CustomerLast, CustomerFirst = @CustomerFirst, Gender = @Gender," +
-                            " Email = @Email, Telephone = @Telephone, BirthMoDay = @BirthMoDay, FrequentEnrollDate = @FrequentEnrollDate," +
+                            " Email = @Email, Telephone = @Telephone, BirthMoDay = @BirthMoDay, FrequentEnrollDate = @FrequentEnrollDate" +
                         " WHERE CustomerID = @CustomerID";
                     using (SqlCommand command = new SqlCommand(
                     updateStatement, sqlCon))
@@ -251,9 +251,9 @@ namespace FoodShop
                     }
                     retVal = "Customer Data Successfully Updated!";
                 }
-                catch
+                catch (Exception e)
                 {
-                    retVal = "Failed to Update Customer Data.";
+                    retVal = "Failed to Update Customer Data." + e;
                 }
                 finally
                 {
