@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FoodShop
 {
-    enum Gender { Male, Female, Undeclared }
+    public enum Gender { Male, Female, Undeclared }
     class Customer
     {
         public int customerID { get; set; }

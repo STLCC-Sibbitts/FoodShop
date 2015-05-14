@@ -207,17 +207,15 @@ namespace FoodShop
             //btn_save.Enabled = true;
         }
 
-
-        // REVISED: employee's shift type (full or part-time).
-        public int getGenderID()
+        public Gender getGenderID()
         {
-            int type = (int)Gender.Undeclared;
+            Gender type = Gender.Undeclared;
             foreach (RadioButton rb in this.gbx_gender.Controls)
             {
                 if (rdo_male.Checked)
-                    type = (int)Gender.Male;
+                    type = Gender.Male;
                 else if (rdo_female.Checked)
-                    type = (int)Gender.Female;
+                    type = Gender.Female;
             }
             return type;
         }
@@ -366,10 +364,10 @@ namespace FoodShop
         {
             switch (genderID)
             {
-                case 1:
+                case 0:
                     rdo_female.Checked = true;
                     break;
-                case 2:
+                case 1:
                     rdo_male.Checked = true;
                     break;
                 default:
