@@ -11,7 +11,6 @@ using System.Globalization;
 
 namespace FoodShop
 {
-    
     public partial class frm_ManageCustomers : Form
     {
         // Create a DBServices instance
