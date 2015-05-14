@@ -51,7 +51,6 @@ namespace FoodShop
             // Populate the combo boxes for position ID and shift ID
             // Comboboxes default values are assinged to ID=0 in the database table
             string posExecString = "Select PositionID, PositionTitle from Position";
-            //DataTable posDT = new DataTable();
             posDT = db.ExecuteSqlReturnTable(posExecString);
             cmb_position.ValueMember = "PositionID";
             cmb_position.DisplayMember = "PositionTitle";
@@ -78,13 +77,12 @@ namespace FoodShop
 
             string lastName = stringValidator(txt_lastName.Text);
             string firstName = stringValidator(txt_firstName.Text);
-            //string whenHired = HireDateCal.SelectionStart.ToShortDateString();
             DateTime whenHired = dtm_dateHired.Value;
             int postID = Convert.ToInt16(cmb_position.SelectedIndex);
             int shftID = Convert.ToInt16(cmb_shift.SelectedIndex);
             string position = cmb_position.SelectedValue.ToString();
-            int empType = getEmpType();  // this is revised method
-            int payType = getPayType();  // this is a revised method
+            int empType = getEmpType();  
+            int payType = getPayType();  
             decimal rateOfPay = validateRateOfPay(txt_rateOfPay.Text);
             bool isActive = getIsActive();
             // Create new employee object, and initialize it
@@ -124,44 +122,24 @@ namespace FoodShop
 
             foreach (DataRow row in dataTable.Rows)
             {
-                //int id = Convert.ToInt16(row["employeeID"]);
                 int id = Convert.ToInt16(row["EmployeeID"]);
-                //string lastName = row["employeeLast"].ToString();
                 string lastName = row["EmployeeLast"].ToString();
-                //string firstName = row["employeeFirst"].ToString();
                 string firstName = row["EmployeeFirst"].ToString();
-                //string hired = row["hireDate"].ToString();
                 string hired = row["HireDate"].ToString();
-                //int posID = isValidID((Convert.ToInt16(row["positionID"])));
-                //int posID = SafeGetInt(row, "positionID");
                 int posID = SafeGetInt(row, "PositionID");
                 string sqlPosition = "SELECT Position.PositionTitle FROM Position INNER JOIN Employee On Position.PositionID = " + posID + "";
                 string empPosition = db.executeSQLQuery(sqlPosition).ToString();
                 // Check for the postID Match
-                //string position = postDataTable.Rows[posID].ToString();
-                //string title = "test title";
                 int shift = Convert.ToInt16(row["ShiftID"]);
-                //string sql = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = Employee.ShiftID";
                 string sqlShift = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = " + shift + "";
-                //MessageBox.Show(db.executeSQLQuery(sql));
                 string shiftTitle = db.executeSQLQuery(sqlShift).ToString();
-                //cmb_shift.SelectedIndex = shift;
-                //string title = db.executeSQLQuery(sql);
-                //MessageBox.Show(cmb_shift.SelectedItem.ToString());
-                //int shift = 1;
-                //double compensation = Convert.ToDouble(row["salary"]);
-                //double compensation = 10.1;  //TODO: Make this decimal for money data type
                 decimal compensation = Convert.ToDecimal(row["Salary"]);
                 int statusID = Convert.ToInt16(row["FullTime"]);
                 string status = getEmpTypeDescription(statusID);
-                //string sqlStatus = "SELECT Shift.ShiftTitle FROM Shift INNER JOIN Employee On Shift.ShiftID = " + statusID + "";
                 int howPaidID = Convert.ToInt16(row["Hourly"]);
                 string payTypeDesc = getPayTypeDescription(howPaidID);
                 bool active = Convert.ToBoolean(row["IsActive"]);
 
-                //MessageBox.Show("employee name: " + lastName + firstName);
-
-                //grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, title, shift, posID, status, howPaid);
                 grd_Employees.Rows.Add(id, lastName, firstName, hired, compensation, active, shiftTitle, empPosition, status, payTypeDesc);
             }
         }
@@ -212,39 +190,27 @@ namespace FoodShop
             rowIndex = grd_Employees.CurrentCell.RowIndex;
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
-            //int index = (int)grd_employees[columnIndex, rowIndex].Value;
             index = (int)grd_Employees[columnIndex, rowIndex].Value;
-            //MessageBox.Show("rowIndex = " + rowIndex);
 
             sqlQuery = "SELECT * FROM Employee WHERE EmployeeID = " + index + ";";
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                //int id = Convert.ToInt16(row["employeeID"]);
                 int id = Convert.ToInt16(row["EmployeeID"]);
-                //string lastName = row["employeeLast"].ToString();
                 string lastName = row["EmployeeLast"].ToString();
-                //string firstName = row["employeeFirst"].ToString();
                 string firstName = row["EmployeeFirst"].ToString();
-                //DateTime hired = Convert.ToDateTime(row["hireDate"]);
                 DateTime hired = Convert.ToDateTime(row["HireDate"]);
 
-                //int posID = 1; // Convert.ToInt16(row["positionID"]);
                 int posID = Convert.ToInt16(row["PositionID"]);
-                //int shift = Convert.ToInt16(row["shiftID"]);
                 int shift = Convert.ToInt16(row["ShiftID"]);
-                //double compensation = Convert.ToDouble(row["salary"]);
                 double compensation = Convert.ToDouble(row["Salary"]);
                 int status = Convert.ToInt16(row["FullTime"]);
                 int howPaid = Convert.ToInt16(row["Hourly"]);
-                //bool active = true;
-                //bool active = Convert.ToBoolean(row["IsActive"]);
                 int active = Convert.ToInt16(row["IsActive"]);
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
-                //HireDateCal.BoldedDates.Equals(hired);
-                cbx_isActive.Checked = (active > 0); // Checkbox is checked when value is 1
+                cbx_isActive.Checked = (active > 0); 
                 dtm_dateHired.Value = hired;
                 cmb_position.SelectedIndex = posID;
                 cmb_shift.SelectedIndex = shift;
@@ -310,7 +276,6 @@ namespace FoodShop
                 //employee.employeeLast = txt_lastName.Text;
                 name = text;
             else
-                //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
                 name = text.Substring(0, 20);
             return name;
         }
@@ -334,7 +299,8 @@ namespace FoodShop
             }
             return emp.fullTime;
         }
-        // REVISED: employee's employment type (part time = 0 / full time = 1). This needs revision
+
+
         public int getEmpType()
         {
             int type = 0; //Default is part-time
@@ -342,7 +308,6 @@ namespace FoodShop
             {
                 if (rdo_fullTime.Checked)
                     type = 1;
-                // is else statement necessary?
             }
             return type;
         }
@@ -400,12 +365,6 @@ namespace FoodShop
         // Validate rate of pay
         private decimal validateRateOfPay(string pay)
         {
-            /*   if (decimal.Parse(pay) < 0)
-               {
-                   MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
-               }
-               else
-                   rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
             decimal num;
             bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), // cached
             out num);
@@ -414,7 +373,6 @@ namespace FoodShop
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            // This is working!
             string sql = "DELETE FROM Employee WHERE EmployeeID = " + index + ";";
             MessageBox.Show(db.deleteRecord(sql));
         }

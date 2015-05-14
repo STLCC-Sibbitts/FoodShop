@@ -34,7 +34,6 @@ namespace FoodShop
             {
                 value = "no";
             }
-            //        else value = colValue.ToString();
             return value;
         }
 
@@ -43,10 +42,8 @@ namespace FoodShop
         {
             string name;
             if (text.Length <= 20)
-                //employee.employeeLast = txt_lastName.Text;
                 name = text;
             else
-                //employee.employeeLast = txt_lastName.Text.Substring(0, 20);
                 name = text.Substring(0, 20);
             return name;
         }
@@ -55,14 +52,6 @@ namespace FoodShop
         // Validate rate of pay
         public static decimal validateRateOfPay(string pay)
         {
-            /*   if (decimal.Parse(pay) < 0)
-               {
-                   MessageBox.Show("The pay rate cannot be less than zero. Please enter a valid rate of pay.");
-               }
-               else
-                   rateOfPay = decimal.Parse(txt_rateOfPay.Text); */
-
-
             decimal num;
             bool isValid = decimal.TryParse(pay, NumberStyles.Currency, CultureInfo.GetCultureInfo("en-US"), out num);
             return num;

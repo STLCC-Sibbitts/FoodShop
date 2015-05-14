@@ -16,8 +16,6 @@ namespace FoodShop
         // Create a DBServices instance
         DBServices db = new DBServices();
 
-        //    string conString;
-        //    string testString = "";
         int currentComboIndex = 0;
         Boolean isUpdate = false;
 
@@ -68,78 +66,25 @@ namespace FoodShop
         }
 
 
-        // When the save button is clicked, create a new customer object with the data entered
-        // by the user.
-        /*     private void btn_save_Click_1(object sender, EventArgs e)
-             {
-                 int customerNumber = 0;
-                 // Check if there's an existing customerID
-                 if (!string.IsNullOrWhiteSpace(txt_customerID.Text))
-                 {
-                     customerNumber = int.Parse(txt_customerID.Text);
-                 }
-
-                 string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
-                 string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
-                 string gender = "male";
-                 string eMail = ValidationUtility.stringValidator(txt_email.Text);
-                 string telephone = ValidationUtility.stringValidator(txt_phone.Text);
-                 DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
-                 DateTime birthMonthDay = ValidationUtility.getDateTime(dtm_enrollDate);
-
-                 // Create new employee object, and initialize it
-                 var newName = new Customer(customerNumber, lastName, firstName, gender, eMail, telephone, birthMonthDay, frequentEnrollDate);
-
-                 // Decide whether to insert new data or update an existing record, then show status
-                 if (newName.customerID == 0)
-                 {
-                     MessageBox.Show(db.addNewData(newName));
-                 }
-                 else
-                 {
-                     MessageBox.Show(db.updateData(newName));
-                 }   
-             }
-     */
-        // Add customer record to the database
-        /*        public void insertCustomer(Customer cust)   // This can be deleted
-                {
-                    // create an instance of the employee
-                    string sqlInsert = "INSERT INTO Employees (customerLast, employeeFirst, hireDate, positionID, shiftID, salary, fullTime, hourly, isActive) VALUES (" +
-                        "'" + cust.customerLast + "'" + ", " +
-                        "'" + cust.customerFirst + "'" + ", " +
-                        "'" + cust.gender + "'" + ", " +
-                        "'" + cust.eMail + "'" + ", " +
-                        "'" + cust.telephone + "'" + ", " +
-                        "'" + cust.birthMonthDay + "'" + ", " +
-                        "'" + cust.frequentEnrollDate + "'" + ", " +
-                        "'" + 1 + "'" + ");";
-                } */
-
-
+        
         // Retrieve values for the grid.
         public void sqlGetTable()
         {
             string sqlSelect = "SELECT * FROM Customer;";
             DataTable dataTable = new DataTable();
-            //dataTable = dbs.ExecuteSqlReturnTable(sqlSelect);  // This can be deleted
             dataTable = db.ExecuteSqlReturnTable(sqlSelect);
             foreach (DataRow row in dataTable.Rows)
             {
                 int id = Convert.ToInt16(row["CustomerID"]);
                 string lastName = row["CustomerLast"].ToString();
                 string firstName = row["CustomerFirst"].ToString();
-                //string gender = row["Gender"].ToString();
                 int genderid = Convert.ToInt16(row["Gender"]);
                 // Get the gender enum description
                 string description = ((Gender)genderid).ToString();
-                //MessageBox.Show(description);
                 string email = row["Email"].ToString();
                 string phone = row["Telephone"].ToString();
-                //string birthday = row["BirthMonthDay"].ToString();
                 string birthday = row["BirthMoDay"].ToString();
                 string enrollDate = row["FrequentEnrollDate"].ToString();
-                //grd_Customers.Rows.Add(id, lastName, firstName, gender, email, phone, birthday, enrollDate);
                 grd_Customers.Rows.Add(id, lastName, firstName, description, email, phone, birthday, enrollDate);
             }
         }
@@ -151,59 +96,16 @@ namespace FoodShop
                 return Convert.ToInt16(row[colName]);
             else
                 return -1;
-        }
+        }     
 
-        /*
-        // Populate the edit customer tab fields with the results of a sql query.
-        private void btn_select_Click(object sender, EventArgs e)
-        {
-            isUpdate = true;
-            int rowIndex;
-            string sqlQuery;
-
-            DataTable dataTable = new DataTable();
-
-            // sqlGetTable();
-            rowIndex = grd_Customers.CurrentCell.RowIndex;
-            int columnIndex = 0;
-            // Revised: This returns the value (ID) given column index and row index
-            int index = (int)grd_Customers[columnIndex, rowIndex].Value;
-            //sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
-            sqlQuery = "SELECT * FROM Customer WHERE CustomerID = " + index + ";";
-            dataTable = db.ExecuteSqlReturnTable(sqlQuery);
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                int id = Convert.ToInt16(row["CustomerID"]);
-                string lastName = row["CustomerLast"].ToString();
-                string firstName = row["CustomerFirst"].ToString();
-                string gender = row["Gender"].ToString();
-                string email = row["Email"].ToString();
-                string phone = row["Telephone"].ToString();
-                int birthday = Convert.ToInt16(row["BirthMoDay"]);
-                DateTime enrollDate = Convert.ToDateTime(row["FrequentEnrollDate"]);
-                MessageBox.Show(id.ToString());
-                txt_firstName.Text = firstName;
-                txt_lastName.Text = lastName;
-                txt_email.Text = email;
-                txt_phone.Text = phone;
-                cmb_birthMonth.SelectedIndex = birthday;
-                dtm_enrollDate.Value = enrollDate;
-
-                tab_Customer.SelectTab(tab_manageCustomers);
-            }
-        }
-        */
         // Position drop down menu
         private void cmb_position_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //    string ID = cmb_position.SelectedValue.ToString();
         }
 
         // Menu drop down menu
         private void cmb_shift_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //btn_save.Enabled = true;
         }
 
         public Gender getGenderID()
@@ -263,7 +165,6 @@ namespace FoodShop
 
             string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
             string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
-            //string gender = "male";
             int gender = Convert.ToInt16(getGenderID()); //TODO: figure out a way to match the button and the enum gender value
             string eMail = ValidationUtility.stringValidator(txt_email.Text);
             string telephone = ValidationUtility.stringValidator(txt_phone.Text);
@@ -294,19 +195,7 @@ namespace FoodShop
             this.Hide();
         }
 
-/*        private void btn_exitApplication_Click_1(object sender, EventArgs e)
-        {
-            MainMenu.ActiveForm.Disposed += new EventHandler(closeMenu);
-        }
 
-        private void closeMenu(object sender, EventArgs e)
-        {
-            MainMenu menu = new MainMenu();
-
-            if(menu != null)
-                MainMenu.ActiveForm.Dispose();
-        } 
-*/
         private void btn_exitToMenu_Click_1(object sender, EventArgs e)
         {
             this.Hide();
@@ -326,7 +215,6 @@ namespace FoodShop
             int columnIndex = 0;
             // Revised: This returns the value (ID) given column index and row index
             index = (int)grd_Customers[columnIndex, rowIndex].Value;
-            //sqlQuery = "SELECT * FROM Customers WHERE CustomerID = " + index + ";";
             sqlQuery = "SELECT * FROM Customer WHERE CustomerID = " + index + ";";
             dataTable = db.ExecuteSqlReturnTable(sqlQuery);
 
@@ -338,12 +226,9 @@ namespace FoodShop
                 string gender = row["Gender"].ToString();
                 int genderid = Convert.ToInt16(row["Gender"]);
                 // Get the gender enum description
-                //string description = ((Gender)genderid).ToString();
                 string email = row["Email"].ToString();
                 string phone = row["Telephone"].ToString();
-                //int birthday = Convert.ToInt16(row["BirthMoDay"]);
                 int birthday = (int)DateTime.Now.Month;
-                //DateTime enrollDate = Convert.ToDateTime(row["FrequentEnrollDate"]);
                 DateTime enrollDate = DateTime.Now;
                 txt_firstName.Text = firstName;
                 txt_lastName.Text = lastName;
@@ -352,11 +237,11 @@ namespace FoodShop
                 txt_customerID.Text = id.ToString();
                 //Get gender type
                 getGenderType(genderid);
-                //cmb_birthMonth.SelectedIndex = birthday;
                 dtm_enrollDate.Value = enrollDate;
                 tab_Customer.SelectTab(tab_manageCustomers);
             }
         }
+
         // Method to check the gender radio button based on genderid from database
         private void getGenderType(int genderID)
         {
@@ -380,21 +265,4 @@ namespace FoodShop
             MessageBox.Show(db.deleteRecord(sql));
         }
     }
-
-
-    // Content items for the combo box
- /*   public class Item
-    {
-        public string Name;
-        public int Value;
-        public Item(string name, int value)
-        {
-            Name = name; Value = value;
-        }
-        public override string ToString()
-        {
-            // Generates the text shown in the combo box
-            return Name;
-        }
-    } */
 }
