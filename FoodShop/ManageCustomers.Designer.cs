@@ -301,7 +301,7 @@
             // rdo_male
             // 
             this.rdo_male.AutoSize = true;
-            this.rdo_male.Location = new System.Drawing.Point(25, 80);
+            this.rdo_male.Location = new System.Drawing.Point(25, 37);
             this.rdo_male.Name = "rdo_male";
             this.rdo_male.Size = new System.Drawing.Size(48, 17);
             this.rdo_male.TabIndex = 1;
@@ -312,7 +312,7 @@
             // rdo_female
             // 
             this.rdo_female.AutoSize = true;
-            this.rdo_female.Location = new System.Drawing.Point(25, 38);
+            this.rdo_female.Location = new System.Drawing.Point(25, 82);
             this.rdo_female.Name = "rdo_female";
             this.rdo_female.Size = new System.Drawing.Size(59, 17);
             this.rdo_female.TabIndex = 0;

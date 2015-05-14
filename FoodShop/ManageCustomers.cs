@@ -364,10 +364,10 @@ namespace FoodShop
             switch (genderID)
             {
                 case 0:
-                    rdo_female.Checked = true;
+                    rdo_male.Checked = true;
                     break;
                 case 1:
-                    rdo_male.Checked = true;
+                    rdo_female.Checked = true;
                     break;
                 default:
                     rdo_private.Checked = true;
