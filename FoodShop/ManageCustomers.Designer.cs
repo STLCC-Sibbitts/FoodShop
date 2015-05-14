@@ -412,6 +412,7 @@
             this.txt_customerID.Name = "txt_customerID";
             this.txt_customerID.Size = new System.Drawing.Size(100, 20);
             this.txt_customerID.TabIndex = 4;
+            this.txt_customerID.Visible = false;
             // 
             // txt_lastName
             // 

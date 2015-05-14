@@ -130,13 +130,18 @@ namespace FoodShop
                 int id = Convert.ToInt16(row["CustomerID"]);
                 string lastName = row["CustomerLast"].ToString();
                 string firstName = row["CustomerFirst"].ToString();
-                string gender = row["Gender"].ToString();
+                //string gender = row["Gender"].ToString();
+                int genderid = Convert.ToInt16(row["Gender"]);
+                // Get the gender enum description
+                string description = ((Gender)genderid).ToString();
+                //MessageBox.Show(description);
                 string email = row["Email"].ToString();
                 string phone = row["Telephone"].ToString();
                 //string birthday = row["BirthMonthDay"].ToString();
                 string birthday = row["BirthMoDay"].ToString();
                 string enrollDate = row["FrequentEnrollDate"].ToString();
-                grd_Customers.Rows.Add(id, lastName, firstName, gender, email, phone, birthday, enrollDate);
+                //grd_Customers.Rows.Add(id, lastName, firstName, gender, email, phone, birthday, enrollDate);
+                grd_Customers.Rows.Add(id, lastName, firstName, description, email, phone, birthday, enrollDate);
             }
         }
 
@@ -204,15 +209,15 @@ namespace FoodShop
 
 
         // REVISED: employee's shift type (full or part-time).
-        public int getShiftType()
+        public int getGenderID()
         {
-            int type = 0;
+            int type = (int)Gender.Undeclared;
             foreach (RadioButton rb in this.gbx_gender.Controls)
             {
-                if (rdo_female.Checked)
-                    type = 1;
+                if (rdo_male.Checked)
+                    type = (int)Gender.Male;
                 else if (rdo_female.Checked)
-                    type = 2;
+                    type = (int)Gender.Female;
             }
             return type;
         }
@@ -262,7 +267,7 @@ namespace FoodShop
             string lastName = ValidationUtility.stringValidator(txt_lastName.Text);
             string firstName = ValidationUtility.stringValidator(txt_firstName.Text);
             //string gender = "male";
-            Gender gender = Gender.Female; //TODO: figure out a way to match the button and the enum gender value
+            Gender gender = getGenderID(); //TODO: figure out a way to match the button and the enum gender value
             string eMail = ValidationUtility.stringValidator(txt_email.Text);
             string telephone = ValidationUtility.stringValidator(txt_phone.Text);
             DateTime frequentEnrollDate = ValidationUtility.getDateTime(dtm_enrollDate);
@@ -334,6 +339,9 @@ namespace FoodShop
                 string lastName = row["CustomerLast"].ToString();
                 string firstName = row["CustomerFirst"].ToString();
                 string gender = row["Gender"].ToString();
+                int genderid = Convert.ToInt16(row["Gender"]);
+                // Get the gender enum description
+                //string description = ((Gender)genderid).ToString();
                 string email = row["Email"].ToString();
                 string phone = row["Telephone"].ToString();
                 //int birthday = Convert.ToInt16(row["BirthMoDay"]);
@@ -345,10 +353,28 @@ namespace FoodShop
                 txt_email.Text = email;
                 txt_phone.Text = phone;
                 txt_customerID.Text = id.ToString();
+                //Get gender type
+                getGenderType(genderid);
                 //cmb_birthMonth.SelectedIndex = birthday;
                 dtm_enrollDate.Value = enrollDate;
                 /// Gender??
                 tab_Customer.SelectTab(tab_manageCustomers);
+            }
+        }
+
+        private void getGenderType(int genderID)
+        {
+            switch (genderID)
+            {
+                case 1:
+                    rdo_female.Checked = true;
+                    break;
+                case 2:
+                    rdo_male.Checked = true;
+                    break;
+                default:
+                    rdo_private.Checked = true;
+                    break;
             }
         }
 
