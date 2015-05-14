@@ -358,7 +358,7 @@ namespace FoodShop
                 tab_Customer.SelectTab(tab_manageCustomers);
             }
         }
-
+        // Method to check the gender radio button based on genderid from database
         private void getGenderType(int genderID)
         {
             switch (genderID)
